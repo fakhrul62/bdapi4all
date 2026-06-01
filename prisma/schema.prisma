@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Division {
+  id        Int        @id @default(autoincrement())
+  name_en   String
+  name_bn   String
+  lat       Float?
+  lng       Float?
+  districts District[]
+
+  @@map("divisions")
+}
+
+model District {
+  id          Int       @id @default(autoincrement())
+  division_id Int
+  name_en     String
+  name_bn     String
+  lat         Float?
+  lng         Float?
+  division    Division  @relation(fields: [division_id], references: [id])
+  upazilas    Upazila[]
+
+  @@index([division_id])
+  @@map("districts")
+}
+
+model Upazila {
+  id          Int       @id @default(autoincrement())
+  district_id Int
+  name_en     String
+  name_bn     String
+  lat         Float?
+  lng         Float?
+  district    District  @relation(fields: [district_id], references: [id])
+  unions      Union[]
+
+  @@index([district_id])
+  @@map("upazilas")
+}
+
+model Union {
+  id         Int     @id @default(autoincrement())
+  upazila_id Int
+  name_en    String
+  name_bn    String
+  upazila    Upazila @relation(fields: [upazila_id], references: [id])
+
+  @@index([upazila_id])
+  @@map("unions")
+}
+
+model Postcode {
+  id          Int    @id @default(autoincrement())
+  district_id Int
+  upazila_id  Int
+  postcode    String
+
+  @@index([district_id])
+  @@index([upazila_id])
+  @@index([postcode])
+  @@map("postcodes")
+}
+
+model Holiday {
+  id      Int      @id @default(autoincrement())
+  date    DateTime
+  name_en String
+  name_bn String
+  type    String
+
+  @@index([date])
+  @@map("holidays")
+}
+
+model ExchangeRate {
+  id            Int      @id @default(autoincrement())
+  currency_code String
+  currency_name String
+  buying_rate   Float
+  selling_rate  Float
+  date          DateTime @db.Date
+
+  @@index([currency_code])
+  @@index([date])
+  @@unique([currency_code, date])
+  @@map("exchange_rates")
+}
+
+model ApiUsageLog {
+  id               Int      @id @default(autoincrement())
+  endpoint         String
+  ip_hash          String
+  response_time_ms Int
+  status_code      Int
+  created_at       DateTime @default(now())
+
+  @@index([endpoint])
+  @@index([created_at])
+  @@map("api_usage_logs")
+}

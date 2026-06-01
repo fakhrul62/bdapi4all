@@ -1,0 +1,65 @@
+export default function DocsPage() {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <h1 className="scroll-m-20 font-heading text-4xl font-extrabold tracking-tight">
+          Introduction
+        </h1>
+        <p className="text-lg text-muted-foreground">
+          Use BDApi4All to fetch Bangladesh geo data, prayer times, holidays, exchange rates, validators, and Bengali utilities from one consistent REST API.
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="scroll-m-20 border-b border-border/50 pb-2 text-3xl font-semibold tracking-tight font-heading mt-10">
+          Base URL
+        </h2>
+        <p className="leading-7">
+          All API requests should be prefixed with the following base URL:
+        </p>
+        <div className="rounded-md bg-muted/50 p-4 border border-border/50">
+          <code className="text-sm font-mono text-primary font-bold">https://bdapi4all.vercel.app/api/v1</code>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="scroll-m-20 border-b border-border/50 pb-2 text-3xl font-semibold tracking-tight font-heading mt-10">
+          Standard Response Format
+        </h2>
+        <p className="leading-7">
+          Every response follows a strict, predictable JSON format, making it easy to parse and handle errors.
+        </p>
+        
+        <h3 className="text-xl font-semibold mt-4">Success Response</h3>
+        <div className="rounded-md bg-[#0d1117] p-4 overflow-x-auto border border-border/50 shadow-sm">
+          <pre className="text-sm font-mono text-gray-300">
+            <code>{`{
+  "success": true,
+  "version": "v1",
+  "timestamp": "2025-01-15T10:30:00Z",
+  "data": {
+    // Requested resource
+  }
+}`}</code>
+          </pre>
+        </div>
+
+        <h3 className="text-xl font-semibold mt-6">Error Response</h3>
+        <div className="rounded-md bg-[#0d1117] p-4 overflow-x-auto border border-border/50 shadow-sm">
+          <pre className="text-sm font-mono text-gray-300">
+            <code>{`{
+  "success": false,
+  "version": "v1",
+  "timestamp": "2025-01-15T10:30:00Z",
+  "error": {
+    "code": "NOT_FOUND",
+    "message": "Resource not found",
+    "docs": "https://bdapi.dev/docs/errors"
+  }
+}`}</code>
+          </pre>
+        </div>
+      </div>
+    </div>
+  )
+}

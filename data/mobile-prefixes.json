@@ -1,0 +1,9 @@
+[
+  { "prefix": "013", "operator": "Grameenphone", "brand": "GP Skitto" },
+  { "prefix": "014", "operator": "Banglalink", "brand": "Banglalink" },
+  { "prefix": "015", "operator": "Teletalk", "brand": "Teletalk" },
+  { "prefix": "016", "operator": "Airtel", "brand": "Airtel" },
+  { "prefix": "017", "operator": "Grameenphone", "brand": "Grameenphone" },
+  { "prefix": "018", "operator": "Robi", "brand": "Robi" },
+  { "prefix": "019", "operator": "Banglalink", "brand": "Banglalink" }
+]

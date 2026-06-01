@@ -1,0 +1,32 @@
+[
+  {
+    "date": "2026-02-21",
+    "name_en": "Shaheed Day and International Mother Language Day",
+    "name_bn": "শহীদ দিবস ও আন্তর্জাতিক মাতৃভাষা দিবস",
+    "type": "national"
+  },
+  {
+    "date": "2026-03-26",
+    "name_en": "Independence Day",
+    "name_bn": "স্বাধীনতা দিবস",
+    "type": "national"
+  },
+  {
+    "date": "2026-04-14",
+    "name_en": "Bengali New Year",
+    "name_bn": "বাংলা নববর্ষ",
+    "type": "cultural"
+  },
+  {
+    "date": "2026-05-01",
+    "name_en": "May Day",
+    "name_bn": "মে দিবস",
+    "type": "national"
+  },
+  {
+    "date": "2026-12-16",
+    "name_en": "Victory Day",
+    "name_bn": "বিজয় দিবস",
+    "type": "national"
+  }
+]

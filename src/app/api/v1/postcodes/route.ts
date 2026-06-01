@@ -1,0 +1,43 @@
+import { z } from "zod";
+import { CACHE_TTL, withCache } from "@/lib/cache";
+import { prisma } from "@/lib/db";
+import { handleApi } from "@/lib/api-handler";
+import { optionsResponse } from "@/lib/response";
+import { optionalIdSchema, parseSearchParams } from "@/lib/validators";
+
+export const runtime = "nodejs";
+
+const querySchema = z.object({
+  district_id: optionalIdSchema,
+  upazila_id: optionalIdSchema,
+  postcode: z.string().regex(/^\d{4}$/).optional(),
+});
+
+export async function GET(request: Request) {
+  return handleApi(request, async () => {
+    const query = parseSearchParams(request, querySchema);
+    const { data } = await withCache(
+      `geo:postcodes:${query.district_id ?? ""}:${query.upazila_id ?? ""}:${query.postcode ?? ""}`,
+      CACHE_TTL.geo,
+      () =>
+        prisma.postcode.findMany({
+          where: {
+            district_id: query.district_id,
+            upazila_id: query.upazila_id,
+            postcode: query.postcode,
+          },
+          orderBy: { postcode: "asc" },
+          take: 500,
+        }),
+    );
+
+    return {
+      data,
+      cacheControl: "public, s-maxage=86400, stale-while-revalidate=43200",
+    };
+  });
+}
+
+export function OPTIONS() {
+  return optionsResponse();
+}
