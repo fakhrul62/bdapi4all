@@ -1,3 +1,5 @@
+import { encyclopediaEndpointDefinitions } from "@/lib/encyclopedia-content";
+
 export type EndpointParameter = {
   name: string;
   label: string;
@@ -25,7 +27,7 @@ export type EndpointDefinition = {
 export const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://bdapi4all.vercel.app/api/v1";
 
-export const endpointDefinitions: EndpointDefinition[] = [
+const coreEndpointDefinitions: EndpointDefinition[] = [
   {
     slug: "divisions",
     group: "Geo & Location",
@@ -420,6 +422,11 @@ export const endpointDefinitions: EndpointDefinition[] = [
     sampleResponse: { original: "bangladesh", transliterated: "বাংলাদেশ" },
     recipes: ["Prototype Bengali text input helpers"],
   },
+];
+
+export const endpointDefinitions: EndpointDefinition[] = [
+  ...coreEndpointDefinitions,
+  ...encyclopediaEndpointDefinitions,
 ];
 
 export const endpointGroups = Array.from(

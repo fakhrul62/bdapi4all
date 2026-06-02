@@ -44,6 +44,64 @@ const navGroups = [
       { title: "Developer Tools", href: "/tools" },
     ],
   },
+  {
+    title: "Nature",
+    links: [
+      { title: "Rivers", href: "/docs/rivers" },
+      { title: "Seasons", href: "/docs/seasons" },
+      { title: "Animals", href: "/docs/animals" },
+      { title: "Flowers", href: "/docs/flowers" },
+      { title: "Trees", href: "/docs/trees" },
+    ],
+  },
+  {
+    title: "Culture",
+    links: [
+      { title: "Festivals", href: "/docs/festivals" },
+      { title: "Traditional Foods", href: "/docs/traditional-foods" },
+      { title: "Traditional Clothing", href: "/docs/traditional-clothing" },
+      { title: "Traditional Music", href: "/docs/traditional-music" },
+      { title: "Traditional Crafts", href: "/docs/traditional-crafts" },
+    ],
+  },
+  {
+    title: "History",
+    links: [
+      { title: "Historical Periods", href: "/docs/historical-periods" },
+      { title: "Historical Events", href: "/docs/historical-events" },
+      { title: "Historical Places", href: "/docs/historical-places" },
+    ],
+  },
+  {
+    title: "Politics",
+    links: [
+      { title: "Political Leaders", href: "/docs/political-leaders" },
+      { title: "Political Parties", href: "/docs/political-parties" },
+    ],
+  },
+  {
+    title: "Literature",
+    links: [
+      { title: "Authors", href: "/docs/authors" },
+      { title: "Books", href: "/docs/books" },
+    ],
+  },
+  {
+    title: "Sports",
+    links: [
+      { title: "Sports Categories", href: "/docs/sports-categories" },
+      { title: "Players", href: "/docs/players" },
+      { title: "National Teams", href: "/docs/national-teams" },
+    ],
+  },
+  {
+    title: "Notable People",
+    links: [
+      { title: "Scientists", href: "/docs/scientists" },
+      { title: "Artists", href: "/docs/artists" },
+      { title: "Freedom Fighters", href: "/docs/freedom-fighters" },
+    ],
+  },
 ]
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {

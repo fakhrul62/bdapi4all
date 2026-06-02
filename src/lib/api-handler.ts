@@ -5,6 +5,7 @@ import { logApiUsage } from "@/lib/usage-log";
 
 type HandlerResult<T> = {
   data: T;
+  meta?: Record<string, unknown>;
   cacheControl?: string;
 };
 
@@ -40,6 +41,7 @@ export async function handleApi<T>(
       responseTimeMs: Date.now() - startedAt,
       rateLimitRemaining: limit.remaining,
       cacheControl: result.cacheControl,
+      meta: result.meta,
     });
     logApiUsage({
       endpoint: pathname,

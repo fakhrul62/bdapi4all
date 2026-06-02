@@ -7,6 +7,7 @@ export const CACHE_TTL = {
   exchange: 60 * 60,
   validators: 60 * 10,
   utilities: 60 * 60,
+  encyclopedia: 60 * 60 * 24,
   status: 60,
 } as const;
 

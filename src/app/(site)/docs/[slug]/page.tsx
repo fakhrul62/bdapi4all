@@ -13,6 +13,16 @@ export default async function EndpointDocPage({
   const { slug } = await params;
   const endpoint = findEndpoint(slug) ?? fallbackEndpoint();
   const samples = codeSamples(endpoint);
+  const exampleMeta = endpoint.parameters.some((parameter) => parameter.name === "page")
+    ? {
+        pagination: {
+          page: 1,
+          limit: 20,
+          total: Array.isArray(endpoint.sampleResponse) ? endpoint.sampleResponse.length : 1,
+          total_pages: 1,
+        },
+      }
+    : undefined;
 
   return (
     <div className="space-y-8">
@@ -108,6 +118,7 @@ export default async function EndpointDocPage({
             version: "v1",
             timestamp: "2026-06-02T00:00:00.000Z",
             data: endpoint.sampleResponse,
+            ...(exampleMeta ? { meta: exampleMeta } : {}),
           }, null, 2)}</code>
         </pre>
       </section>

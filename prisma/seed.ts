@@ -2,6 +2,31 @@ import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { config } from "dotenv";
 import holidays from "../data/holidays.json";
+import {
+  animals,
+  artists,
+  authors,
+  books,
+  festivals,
+  flowers,
+  freedomFighters,
+  historicalEvents,
+  historicalPeriods,
+  historicalPlaces,
+  nationalTeams,
+  players,
+  politicalLeaders,
+  politicalParties,
+  rivers,
+  scientists,
+  seasons,
+  sportsCategories,
+  traditionalClothing,
+  traditionalCrafts,
+  traditionalFoods,
+  traditionalMusic,
+  trees,
+} from "./encyclopedia-seed-data";
 
 config({ path: ".env.local" });
 config();
@@ -87,6 +112,29 @@ async function main() {
     fetchTable<UnionSource>("unions/unions.json"),
   ]);
 
+  await prisma.book.deleteMany();
+  await prisma.player.deleteMany();
+  await prisma.nationalTeam.deleteMany();
+  await prisma.historicalPlace.deleteMany();
+  await prisma.historicalEvent.deleteMany();
+  await prisma.politicalLeader.deleteMany();
+  await prisma.author.deleteMany();
+  await prisma.sportsCategory.deleteMany();
+  await prisma.historicalPeriod.deleteMany();
+  await prisma.politicalParty.deleteMany();
+  await prisma.freedomFighter.deleteMany();
+  await prisma.artist.deleteMany();
+  await prisma.scientist.deleteMany();
+  await prisma.traditionalCraft.deleteMany();
+  await prisma.traditionalMusic.deleteMany();
+  await prisma.traditionalClothing.deleteMany();
+  await prisma.traditionalFood.deleteMany();
+  await prisma.festival.deleteMany();
+  await prisma.tree.deleteMany();
+  await prisma.flower.deleteMany();
+  await prisma.animal.deleteMany();
+  await prisma.season.deleteMany();
+  await prisma.river.deleteMany();
   await prisma.union.deleteMany();
   await prisma.upazila.deleteMany();
   await prisma.district.deleteMany();
@@ -143,15 +191,67 @@ async function main() {
     })),
   });
 
+  await prisma.river.createMany({ data: rivers });
+  await prisma.season.createMany({ data: seasons });
+  await prisma.animal.createMany({ data: animals });
+  await prisma.flower.createMany({ data: flowers });
+  await prisma.tree.createMany({ data: trees });
+  await prisma.festival.createMany({ data: festivals });
+  await prisma.traditionalFood.createMany({ data: traditionalFoods });
+  await prisma.traditionalClothing.createMany({ data: traditionalClothing });
+  await prisma.traditionalMusic.createMany({ data: traditionalMusic });
+  await prisma.traditionalCraft.createMany({ data: traditionalCrafts });
+  await prisma.historicalPeriod.createMany({ data: historicalPeriods });
+  await prisma.historicalEvent.createMany({ data: historicalEvents });
+  await prisma.historicalPlace.createMany({ data: historicalPlaces });
+  await prisma.politicalParty.createMany({ data: politicalParties });
+  await prisma.politicalLeader.createMany({ data: politicalLeaders });
+  await prisma.author.createMany({
+    data: authors.map(({ primaryWork, ...author }) => {
+      void primaryWork;
+      return author;
+    }),
+  });
+  await prisma.book.createMany({ data: books });
+  await prisma.sportsCategory.createMany({ data: sportsCategories });
+  await prisma.player.createMany({ data: players });
+  await prisma.nationalTeam.createMany({ data: nationalTeams });
+  await prisma.scientist.createMany({ data: scientists });
+  await prisma.artist.createMany({ data: artists });
+  await prisma.freedomFighter.createMany({ data: freedomFighters });
+
   await prisma.$executeRawUnsafe(`
     SELECT setval(pg_get_serial_sequence('divisions', 'id'), COALESCE((SELECT MAX(id) FROM divisions), 1), true);
     SELECT setval(pg_get_serial_sequence('districts', 'id'), COALESCE((SELECT MAX(id) FROM districts), 1), true);
     SELECT setval(pg_get_serial_sequence('upazilas', 'id'), COALESCE((SELECT MAX(id) FROM upazilas), 1), true);
     SELECT setval(pg_get_serial_sequence('unions', 'id'), COALESCE((SELECT MAX(id) FROM unions), 1), true);
+    SELECT setval(pg_get_serial_sequence('rivers', 'id'), COALESCE((SELECT MAX(id) FROM rivers), 1), true);
+    SELECT setval(pg_get_serial_sequence('seasons', 'id'), COALESCE((SELECT MAX(id) FROM seasons), 1), true);
+    SELECT setval(pg_get_serial_sequence('animals', 'id'), COALESCE((SELECT MAX(id) FROM animals), 1), true);
+    SELECT setval(pg_get_serial_sequence('flowers', 'id'), COALESCE((SELECT MAX(id) FROM flowers), 1), true);
+    SELECT setval(pg_get_serial_sequence('trees', 'id'), COALESCE((SELECT MAX(id) FROM trees), 1), true);
+    SELECT setval(pg_get_serial_sequence('festivals', 'id'), COALESCE((SELECT MAX(id) FROM festivals), 1), true);
+    SELECT setval(pg_get_serial_sequence('traditional_foods', 'id'), COALESCE((SELECT MAX(id) FROM traditional_foods), 1), true);
+    SELECT setval(pg_get_serial_sequence('traditional_clothing', 'id'), COALESCE((SELECT MAX(id) FROM traditional_clothing), 1), true);
+    SELECT setval(pg_get_serial_sequence('traditional_music', 'id'), COALESCE((SELECT MAX(id) FROM traditional_music), 1), true);
+    SELECT setval(pg_get_serial_sequence('traditional_crafts', 'id'), COALESCE((SELECT MAX(id) FROM traditional_crafts), 1), true);
+    SELECT setval(pg_get_serial_sequence('historical_periods', 'id'), COALESCE((SELECT MAX(id) FROM historical_periods), 1), true);
+    SELECT setval(pg_get_serial_sequence('historical_events', 'id'), COALESCE((SELECT MAX(id) FROM historical_events), 1), true);
+    SELECT setval(pg_get_serial_sequence('historical_places', 'id'), COALESCE((SELECT MAX(id) FROM historical_places), 1), true);
+    SELECT setval(pg_get_serial_sequence('political_parties', 'id'), COALESCE((SELECT MAX(id) FROM political_parties), 1), true);
+    SELECT setval(pg_get_serial_sequence('political_leaders', 'id'), COALESCE((SELECT MAX(id) FROM political_leaders), 1), true);
+    SELECT setval(pg_get_serial_sequence('authors', 'id'), COALESCE((SELECT MAX(id) FROM authors), 1), true);
+    SELECT setval(pg_get_serial_sequence('books', 'id'), COALESCE((SELECT MAX(id) FROM books), 1), true);
+    SELECT setval(pg_get_serial_sequence('sports_categories', 'id'), COALESCE((SELECT MAX(id) FROM sports_categories), 1), true);
+    SELECT setval(pg_get_serial_sequence('players', 'id'), COALESCE((SELECT MAX(id) FROM players), 1), true);
+    SELECT setval(pg_get_serial_sequence('national_teams', 'id'), COALESCE((SELECT MAX(id) FROM national_teams), 1), true);
+    SELECT setval(pg_get_serial_sequence('scientists', 'id'), COALESCE((SELECT MAX(id) FROM scientists), 1), true);
+    SELECT setval(pg_get_serial_sequence('artists', 'id'), COALESCE((SELECT MAX(id) FROM artists), 1), true);
+    SELECT setval(pg_get_serial_sequence('freedom_fighters', 'id'), COALESCE((SELECT MAX(id) FROM freedom_fighters), 1), true);
   `);
 
   console.log(
-    `Seeded ${divisions.length} divisions, ${districts.length} districts, ${upazilas.length} upazilas, ${unions.length} unions, and ${holidays.length} holidays.`,
+    `Seeded ${divisions.length} divisions, ${districts.length} districts, ${upazilas.length} upazilas, ${unions.length} unions, ${holidays.length} holidays, and ${rivers.length + seasons.length + animals.length + flowers.length + trees.length + festivals.length + traditionalFoods.length + traditionalClothing.length + traditionalMusic.length + traditionalCrafts.length + historicalPeriods.length + historicalEvents.length + historicalPlaces.length + politicalParties.length + politicalLeaders.length + authors.length + books.length + sportsCategories.length + players.length + nationalTeams.length + scientists.length + artists.length + freedomFighters.length} encyclopedia records.`,
   );
 }
 

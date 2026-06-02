@@ -19,6 +19,7 @@ type ApiResponseInit = ResponseInit & {
   responseTimeMs?: number;
   rateLimitRemaining?: number;
   cacheControl?: string;
+  meta?: Record<string, unknown>;
 };
 
 const API_VERSION = "v1";
@@ -46,6 +47,7 @@ export function successResponse<T>(data: T, init?: ApiResponseInit) {
       version: API_VERSION,
       timestamp: new Date().toISOString(),
       data,
+      ...(init?.meta ? { meta: init.meta } : {}),
     },
     {
       ...init,

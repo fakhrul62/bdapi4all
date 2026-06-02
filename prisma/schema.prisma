@@ -26,9 +26,607 @@ model District {
   lng         Float?
   division    Division  @relation(fields: [division_id], references: [id])
   upazilas    Upazila[]
+  historical_places HistoricalPlace[]
 
   @@index([division_id])
   @@map("districts")
+}
+
+model River {
+  id             Int      @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean  @default(false)
+  needs_image    Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  length_km      Float?
+  origin         String?
+  flows_through  String[]
+  outflow        String?
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@map("rivers")
+}
+
+model Season {
+  id                   Int      @id @default(autoincrement())
+  name_en              String
+  name_bn              String
+  description_en       String
+  description_bn       String
+  image_url            String?
+  source               String
+  source_url           String?
+  verified             Boolean  @default(false)
+  needs_image          Boolean  @default(false)
+  created_at           DateTime @default(now())
+  updated_at           DateTime @updatedAt
+  bangla_name          String
+  months_en            String
+  months_bn            String
+  characteristics      String
+  associated_festivals String[]
+  crops                String[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@map("seasons")
+}
+
+model Animal {
+  id                  Int      @id @default(autoincrement())
+  name_en             String
+  name_bn             String
+  description_en      String
+  description_bn      String
+  image_url           String?
+  source              String
+  source_url          String?
+  verified            Boolean  @default(false)
+  needs_image         Boolean  @default(false)
+  created_at          DateTime @default(now())
+  updated_at          DateTime @updatedAt
+  scientific_name     String?
+  category            String
+  habitat             String?
+  conservation_status String?
+  is_national_animal  Boolean  @default(false)
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([category])
+  @@index([conservation_status])
+  @@map("animals")
+}
+
+model Flower {
+  id                 Int      @id @default(autoincrement())
+  name_en            String
+  name_bn            String
+  description_en     String
+  description_bn     String
+  image_url          String?
+  source             String
+  source_url         String?
+  verified           Boolean  @default(false)
+  needs_image        Boolean  @default(false)
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+  scientific_name    String?
+  blooming_season    String?
+  is_national_flower Boolean  @default(false)
+  fragrance          String?
+  colors             String[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@map("flowers")
+}
+
+model Tree {
+  id               Int      @id @default(autoincrement())
+  name_en          String
+  name_bn          String
+  description_en   String
+  description_bn   String
+  image_url        String?
+  source           String
+  source_url       String?
+  verified         Boolean  @default(false)
+  needs_image      Boolean  @default(false)
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+  scientific_name  String?
+  is_national_tree Boolean  @default(false)
+  regions_found    String[]
+  uses             String[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@map("trees")
+}
+
+model Festival {
+  id             Int      @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean  @default(false)
+  needs_image    Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  type           String
+  religion       String?
+  date_or_period String?
+  traditions     String[]
+  foods          String[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([type])
+  @@map("festivals")
+}
+
+model TraditionalFood {
+  id             Int      @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean  @default(false)
+  needs_image    Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  category       String
+  region         String?
+  ingredients    String[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([category])
+  @@map("traditional_foods")
+}
+
+model TraditionalClothing {
+  id             Int      @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean  @default(false)
+  needs_image    Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  gender         String
+  occasion       String?
+  region         String?
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([gender])
+  @@map("traditional_clothing")
+}
+
+model TraditionalMusic {
+  id             Int      @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean  @default(false)
+  needs_image    Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  type           String
+  instruments    String[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([type])
+  @@map("traditional_music")
+}
+
+model TraditionalCraft {
+  id             Int      @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean  @default(false)
+  needs_image    Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  region         String?
+  materials      String[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@map("traditional_crafts")
+}
+
+model HistoricalPeriod {
+  id             Int               @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean           @default(false)
+  needs_image    Boolean           @default(false)
+  created_at     DateTime          @default(now())
+  updated_at     DateTime          @updatedAt
+  start_year     Int?
+  end_year       Int?
+  era            String
+  key_events     String[]
+  events         HistoricalEvent[]
+  places         HistoricalPlace[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([era])
+  @@map("historical_periods")
+}
+
+model HistoricalEvent {
+  id             Int               @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean           @default(false)
+  needs_image    Boolean           @default(false)
+  created_at     DateTime          @default(now())
+  updated_at     DateTime          @updatedAt
+  date           DateTime?
+  year           Int?
+  period_id      Int?
+  category       String
+  significance   String?
+  period         HistoricalPeriod? @relation(fields: [period_id], references: [id])
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([year])
+  @@index([category])
+  @@index([period_id])
+  @@map("historical_events")
+}
+
+model HistoricalPlace {
+  id             Int               @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean           @default(false)
+  needs_image    Boolean           @default(false)
+  created_at     DateTime          @default(now())
+  updated_at     DateTime          @updatedAt
+  location       String?
+  district_id    Int?
+  period_id      Int?
+  type           String
+  built_year     Int?
+  built_by       String?
+  district       District?         @relation(fields: [district_id], references: [id])
+  period         HistoricalPeriod? @relation(fields: [period_id], references: [id])
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([district_id])
+  @@index([period_id])
+  @@index([type])
+  @@map("historical_places")
+}
+
+model PoliticalParty {
+  id             Int               @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean           @default(false)
+  needs_image    Boolean           @default(false)
+  created_at     DateTime          @default(now())
+  updated_at     DateTime          @updatedAt
+  founded_year   Int?
+  founder        String?
+  ideology       String?
+  is_active      Boolean           @default(false)
+  leaders        PoliticalLeader[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([is_active])
+  @@map("political_parties")
+}
+
+model PoliticalLeader {
+  id             Int             @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean         @default(false)
+  needs_image    Boolean         @default(false)
+  created_at     DateTime        @default(now())
+  updated_at     DateTime        @updatedAt
+  born           DateTime?
+  died           DateTime?
+  birth_place    String?
+  party_id       Int?
+  role           String
+  era            String
+  tenure_start   DateTime?
+  tenure_end     DateTime?
+  achievements   String[]
+  party          PoliticalParty? @relation(fields: [party_id], references: [id])
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([role])
+  @@index([party_id])
+  @@index([era])
+  @@map("political_leaders")
+}
+
+model Author {
+  id             Int      @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean  @default(false)
+  needs_image    Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  born           DateTime?
+  died           DateTime?
+  birth_place    String?
+  genres         String[]
+  era            String
+  bio_en         String?
+  bio_bn         String?
+  awards         String[]
+  books          Book[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([era])
+  @@map("authors")
+}
+
+model Book {
+  id              Int      @id @default(autoincrement())
+  name_en         String
+  name_bn         String
+  description_en  String
+  description_bn  String
+  image_url       String?
+  source          String
+  source_url      String?
+  verified        Boolean  @default(false)
+  needs_image     Boolean  @default(false)
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  title_en        String
+  title_bn        String?
+  author_id       Int
+  published_year  Int?
+  publisher       String?
+  isbn            String?
+  genre           String
+  century         String
+  language        String
+  cover_image_url String?
+  cover_source    String?
+  author          Author   @relation(fields: [author_id], references: [id])
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([author_id])
+  @@index([genre])
+  @@index([century])
+  @@index([language])
+  @@map("books")
+}
+
+model SportsCategory {
+  id              Int            @id @default(autoincrement())
+  name_en         String
+  name_bn         String
+  description_en  String
+  description_bn  String
+  image_url       String?
+  source          String
+  source_url      String?
+  verified        Boolean        @default(false)
+  needs_image     Boolean        @default(false)
+  created_at      DateTime       @default(now())
+  updated_at      DateTime       @updatedAt
+  type            String
+  players         Player[]
+  national_teams  NationalTeam[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([type])
+  @@map("sports_categories")
+}
+
+model Player {
+  id               Int            @id @default(autoincrement())
+  name_en          String
+  name_bn          String
+  description_en   String
+  description_bn   String
+  image_url        String?
+  source           String
+  source_url       String?
+  verified         Boolean        @default(false)
+  needs_image      Boolean        @default(false)
+  created_at       DateTime       @default(now())
+  updated_at       DateTime       @updatedAt
+  born             DateTime?
+  birth_place      String?
+  sport_id         Int
+  position_or_role String?
+  national_team    String?
+  active_years     String?
+  career_stats     Json?
+  achievements     String[]
+  is_legend        Boolean        @default(false)
+  sport            SportsCategory @relation(fields: [sport_id], references: [id])
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([sport_id])
+  @@index([is_legend])
+  @@map("players")
+}
+
+model NationalTeam {
+  id                 Int            @id @default(autoincrement())
+  name_en            String
+  name_bn            String
+  description_en     String
+  description_bn     String
+  image_url          String?
+  source             String
+  source_url         String?
+  verified           Boolean        @default(false)
+  needs_image        Boolean        @default(false)
+  created_at         DateTime       @default(now())
+  updated_at         DateTime       @updatedAt
+  sport_id           Int
+  founded_year       Int?
+  governing_body     String?
+  major_achievements String[]
+  current_ranking    String?
+  sport              SportsCategory @relation(fields: [sport_id], references: [id])
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([sport_id])
+  @@map("national_teams")
+}
+
+model Scientist {
+  id             Int      @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean  @default(false)
+  needs_image    Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  born           DateTime?
+  died           DateTime?
+  field          String?
+  institutions   String[]
+  achievements   String[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([field])
+  @@map("scientists")
+}
+
+model Artist {
+  id             Int      @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean  @default(false)
+  needs_image    Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  born           DateTime?
+  died           DateTime?
+  medium         String
+  notable_works  String[]
+  awards         String[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([medium])
+  @@map("artists")
+}
+
+model FreedomFighter {
+  id             Int      @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean  @default(false)
+  needs_image    Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  born           DateTime?
+  died           DateTime?
+  district       String?
+  role           String?
+  sector         String?
+  awarded_title  String?
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([district])
+  @@index([sector])
+  @@map("freedom_fighters")
 }
 
 model Upazila {
