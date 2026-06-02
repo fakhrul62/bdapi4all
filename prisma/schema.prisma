@@ -703,3 +703,20 @@ model ApiUsageLog {
   @@index([created_at])
   @@map("api_usage_logs")
 }
+
+model EnrichmentRun {
+  id            Int      @id @default(autoincrement())
+  status        String
+  category      String?
+  processed     Int      @default(0)
+  verified      Int      @default(0)
+  images_found  Int      @default(0)
+  errors        String[]
+  started_at    DateTime @default(now())
+  finished_at   DateTime?
+
+  @@index([status])
+  @@index([category])
+  @@index([started_at])
+  @@map("enrichment_runs")
+}
