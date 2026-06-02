@@ -17,7 +17,7 @@ const categories = [
   { slug: "political-leaders", title: "Political Leaders", group: "Politics", description: "Political leaders from Bengal's historical phases to modern Bangladesh.", filters: ["role", "party_id", "era"], sample: { id: 18, name_en: "Sheikh Hasina", role: "prime_minister", era: "post-independence" } },
   { slug: "political-parties", title: "Political Parties", group: "Politics", description: "Major political parties and organizations.", sample: { id: 1, name_en: "Bangladesh Awami League", is_active: true } },
   { slug: "authors", title: "Authors", group: "Literature", description: "Bangladeshi and Bengali literary figures.", filters: ["genre", "era"], sample: { id: 8, name_en: "Kazi Nazrul Islam", genres: ["poetry"], era: "modern" } },
-  { slug: "books", title: "Find Books", group: "Literature", description: "Search books by title, then narrow results by author, genre, century, or language.", filters: ["q", "author_id", "genre", "language", "century"], sample: { id: 8, title_en: "Bidrohi", title_bn: "Bidrohi", author_id: 8, genre: "poetry", language: "bengali" }, primaryOnly: true },
+  { slug: "books", title: "All Books", group: "Literature", description: "Returns all books by default. Use the separate book endpoints when you want author or category filtering.", sample: { id: 8, title_en: "Bidrohi", title_bn: "Bidrohi", author_id: 8, genre: "poetry", language: "bengali" }, primaryOnly: true },
   { slug: "sports-categories", title: "Sports Categories", group: "Sports", description: "Sports represented in Bangladesh data.", sample: { id: 1, name_en: "Cricket", type: "team" } },
   { slug: "players", title: "Players", group: "Sports", description: "Major players from cricket, football, kabaddi, archery, and chess.", filters: ["sport", "is_legend"], sample: { id: 1, name_en: "Shakib Al Hasan", sport_id: 1, is_legend: true } },
   { slug: "national-teams", title: "National Teams", group: "Sports", description: "Bangladesh national teams by sport.", sample: { id: 1, name_en: "Bangladesh Men's Cricket Team", sport_id: 1 } },
@@ -28,7 +28,7 @@ const categories = [
 
 const filterDescriptions: Record<string, string> = {
   author_id: "Filter by author id.",
-  category: "Filter by category.",
+  category: "Book category such as poetry, novel, essay, or history.",
   century: "Filter by century such as 20th.",
   conservation_status: "Filter by conservation status.",
   era: "Filter by historical or literary era.",
@@ -60,6 +60,60 @@ const filterExamples: Record<string, string> = {
   q: "Bidrohi",
 };
 
+const bookEndpoints: EndpointDefinition[] = [
+  {
+    slug: "books-by-author",
+    group: "Literature",
+    title: "Books by Author",
+    method: "GET",
+    path: "/books/by-author",
+    summary: "List books for one author.",
+    description: "Returns books by author_id. Use /api/v1/authors first if you need to find an author's id.",
+    cacheTtl: "24 hours",
+    parameters: [
+      { name: "author_id", label: "Author ID", type: "integer", location: "query", required: true, description: "Author id.", example: "8" },
+      { name: "page", label: "Page", type: "integer", location: "query", required: false, description: "Page number. Defaults to 1.", example: "1" },
+      { name: "limit", label: "Limit", type: "integer", location: "query", required: false, description: "Records per page. Defaults to 20 and maxes at 100.", example: "20" },
+    ],
+    sampleResponse: [{ id: 8, title_en: "Bidrohi", author_id: 8, genre: "poetry", language: "bengali" }],
+    recipes: ["Show all works for a selected author"],
+  },
+  {
+    slug: "books-by-category",
+    group: "Literature",
+    title: "Books by Category",
+    method: "GET",
+    path: "/books/by-category",
+    summary: "List books in one category.",
+    description: "Returns books by category. Category maps to the book genre field, for example poetry, novel, essay, history, children, or science.",
+    cacheTtl: "24 hours",
+    parameters: [
+      { name: "category", label: "Category", type: "string", location: "query", required: true, description: "Book category or genre.", example: "poetry" },
+      { name: "page", label: "Page", type: "integer", location: "query", required: false, description: "Page number. Defaults to 1.", example: "1" },
+      { name: "limit", label: "Limit", type: "integer", location: "query", required: false, description: "Records per page. Defaults to 20 and maxes at 100.", example: "20" },
+    ],
+    sampleResponse: [{ id: 8, title_en: "Bidrohi", author_id: 8, genre: "poetry", language: "bengali" }],
+    recipes: ["Browse poetry, novels, essays, history books, and children's books"],
+  },
+  {
+    slug: "author-books",
+    group: "Literature",
+    title: "Author Books",
+    method: "GET",
+    path: "/authors/{id}/books",
+    summary: "List books for one author id.",
+    description: "A clean author-specific route for fetching books after selecting an author.",
+    cacheTtl: "24 hours",
+    parameters: [
+      { name: "id", label: "Author ID", type: "integer", location: "path", required: true, description: "Author id.", example: "8" },
+      { name: "page", label: "Page", type: "integer", location: "query", required: false, description: "Page number. Defaults to 1.", example: "1" },
+      { name: "limit", label: "Limit", type: "integer", location: "query", required: false, description: "Records per page. Defaults to 20 and maxes at 100.", example: "20" },
+    ],
+    sampleResponse: [{ id: 8, title_en: "Bidrohi", author_id: 8, genre: "poetry", language: "bengali" }],
+    recipes: ["Build an author profile page with that author's books"],
+  },
+];
+
 function filterParam(name: string) {
   return {
     name,
@@ -85,13 +139,13 @@ export const encyclopediaEndpointDefinitions: EndpointDefinition[] = categories.
     title: category.title,
     method: "GET",
     path: `/${category.slug}`,
-    summary: category.slug === "books" ? "Find books by title and filters." : `List ${category.title.toLowerCase()}.`,
+    summary: category.slug === "books" ? "List all books." : `List ${category.title.toLowerCase()}.`,
     description: category.description,
     cacheTtl: "24 hours",
     parameters: listParams,
     sampleResponse: [category.sample],
     recipes: category.slug === "books"
-      ? ["Search by title with q=Bidrohi", "Filter Bengali poetry with genre=poetry&language=bengali"]
+      ? ["Load all books by default", "Use Books by Author or Books by Category for focused filtering"]
       : [`Browse ${category.title.toLowerCase()}`, `Search by name with /${category.slug}/search?q=`],
   };
 
@@ -135,3 +189,5 @@ export const encyclopediaEndpointDefinitions: EndpointDefinition[] = categories.
     },
   ];
 });
+
+encyclopediaEndpointDefinitions.push(...bookEndpoints);

@@ -83,7 +83,10 @@ const navGroups = [
     title: "Literature",
     links: [
       { title: "Authors", href: "/docs/authors" },
-      { title: "Books", href: "/docs/books" },
+      { title: "All Books", href: "/docs/books" },
+      { title: "Books by Author", href: "/docs/books-by-author" },
+      { title: "Books by Category", href: "/docs/books-by-category" },
+      { title: "Author Books", href: "/docs/author-books" },
     ],
   },
   {
