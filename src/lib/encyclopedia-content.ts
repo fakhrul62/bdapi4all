@@ -17,7 +17,7 @@ const categories = [
   { slug: "political-leaders", title: "Political Leaders", group: "Politics", description: "Political leaders from Bengal's historical phases to modern Bangladesh.", filters: ["role", "party_id", "era"], sample: { id: 18, name_en: "Sheikh Hasina", role: "prime_minister", era: "post-independence" } },
   { slug: "political-parties", title: "Political Parties", group: "Politics", description: "Major political parties and organizations.", sample: { id: 1, name_en: "Bangladesh Awami League", is_active: true } },
   { slug: "authors", title: "Authors", group: "Literature", description: "Bangladeshi and Bengali literary figures.", filters: ["genre", "era"], sample: { id: 8, name_en: "Kazi Nazrul Islam", genres: ["poetry"], era: "modern" } },
-  { slug: "books", title: "Books", group: "Literature", description: "Books and literary works connected to seeded authors.", filters: ["author_id", "genre", "century", "language"], sample: { id: 8, title_en: "Bidrohi", genre: "poetry", language: "bengali" } },
+  { slug: "books", title: "Find Books", group: "Literature", description: "Search books by title, then narrow results by author, genre, century, or language.", filters: ["q", "author_id", "genre", "language", "century"], sample: { id: 8, title_en: "Bidrohi", title_bn: "Bidrohi", author_id: 8, genre: "poetry", language: "bengali" }, primaryOnly: true },
   { slug: "sports-categories", title: "Sports Categories", group: "Sports", description: "Sports represented in Bangladesh data.", sample: { id: 1, name_en: "Cricket", type: "team" } },
   { slug: "players", title: "Players", group: "Sports", description: "Major players from cricket, football, kabaddi, archery, and chess.", filters: ["sport", "is_legend"], sample: { id: 1, name_en: "Shakib Al Hasan", sport_id: 1, is_legend: true } },
   { slug: "national-teams", title: "National Teams", group: "Sports", description: "Bangladesh national teams by sport.", sample: { id: 1, name_en: "Bangladesh Men's Cricket Team", sport_id: 1 } },
@@ -40,6 +40,7 @@ const filterDescriptions: Record<string, string> = {
   role: "Filter by role.",
   sport: "Filter by sport id or sport name.",
   year: "Filter by event year.",
+  q: "Search by book title or Bengali title.",
 };
 
 const filterExamples: Record<string, string> = {
@@ -56,6 +57,7 @@ const filterExamples: Record<string, string> = {
   role: "prime_minister",
   sport: "cricket",
   year: "1971",
+  q: "Bidrohi",
 };
 
 function filterParam(name: string) {
@@ -77,20 +79,28 @@ export const encyclopediaEndpointDefinitions: EndpointDefinition[] = categories.
     ...(category.filters ?? []).map(filterParam),
   ];
 
+  const primaryEndpoint: EndpointDefinition = {
+    slug: category.slug,
+    group: category.group,
+    title: category.title,
+    method: "GET",
+    path: `/${category.slug}`,
+    summary: category.slug === "books" ? "Find books by title and filters." : `List ${category.title.toLowerCase()}.`,
+    description: category.description,
+    cacheTtl: "24 hours",
+    parameters: listParams,
+    sampleResponse: [category.sample],
+    recipes: category.slug === "books"
+      ? ["Search by title with q=Bidrohi", "Filter Bengali poetry with genre=poetry&language=bengali"]
+      : [`Browse ${category.title.toLowerCase()}`, `Search by name with /${category.slug}/search?q=`],
+  };
+
+  if (category.primaryOnly) {
+    return [primaryEndpoint];
+  }
+
   return [
-    {
-      slug: category.slug,
-      group: category.group,
-      title: category.title,
-      method: "GET",
-      path: `/${category.slug}`,
-      summary: `List ${category.title.toLowerCase()}.`,
-      description: category.description,
-      cacheTtl: "24 hours",
-      parameters: listParams,
-      sampleResponse: [category.sample],
-      recipes: [`Browse ${category.title.toLowerCase()}`, `Search by name with /${category.slug}/search?q=`],
-    },
+    primaryEndpoint,
     {
       slug: `${category.slug}-detail`,
       group: category.group,

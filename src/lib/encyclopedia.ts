@@ -86,6 +86,22 @@ function parseInteger(value: string) {
 
 function buildWhere(category: EncyclopediaCategory, searchParams: URLSearchParams) {
   const where: Record<string, unknown> = {};
+  const q = searchParams.get("q")?.trim();
+
+  if (q) {
+    where.OR = [
+      { name_en: { contains: q, mode: "insensitive" } },
+      { name_bn: { contains: q } },
+    ];
+
+    if (category.slug === "books") {
+      where.OR = [
+        ...(where.OR as Array<Record<string, unknown>>),
+        { title_en: { contains: q, mode: "insensitive" } },
+        { title_bn: { contains: q } },
+      ];
+    }
+  }
 
   for (const filter of category.filters) {
     const value = searchParams.get(filter.query);
