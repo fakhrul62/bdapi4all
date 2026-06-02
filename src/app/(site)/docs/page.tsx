@@ -10,6 +10,20 @@ export default function DocsPage() {
         </p>
       </div>
 
+      <div className="grid gap-4 md:grid-cols-2">
+        {[
+          ["API Explorer", "/playground", "Run every endpoint live with generated request URLs and code samples."],
+          ["Data Browser", "/data", "Search geo IDs and copy JSON rows for your own app."],
+          ["OpenAPI", "/openapi.json", "Import the full API spec into Swagger, Postman, Insomnia, or generators."],
+          ["Collections", "/collections", "Download Postman, Insomnia, and VS Code REST request files."],
+        ].map(([title, href, text]) => (
+          <a key={href} href={href} className="rounded-lg border border-border/50 bg-card p-4 hover:border-primary/60">
+            <h2 className="font-heading text-xl font-bold">{title}</h2>
+            <p className="mt-2 text-sm text-muted-foreground">{text}</p>
+          </a>
+        ))}
+      </div>
+
       <div className="space-y-4">
         <h2 className="scroll-m-20 border-b border-border/50 pb-2 text-3xl font-semibold tracking-tight font-heading mt-10">
           Base URL
@@ -38,7 +52,9 @@ export default function DocsPage() {
   "version": "v1",
   "timestamp": "2025-01-15T10:30:00Z",
   "data": {
-    // Requested resource
+    "id": 47,
+    "name_en": "Dhaka",
+    "name_bn": "ঢাকা"
   }
 }`}</code>
           </pre>
@@ -54,7 +70,7 @@ export default function DocsPage() {
   "error": {
     "code": "NOT_FOUND",
     "message": "Resource not found",
-    "docs": "https://bdapi.dev/docs/errors"
+    "docs": "https://bdapi4all.vercel.app/docs/errors#not_found"
   }
 }`}</code>
           </pre>

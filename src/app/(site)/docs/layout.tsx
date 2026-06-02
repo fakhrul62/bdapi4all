@@ -5,8 +5,14 @@ const navGroups = [
     title: "Getting Started",
     links: [
       { title: "Introduction", href: "/docs" },
+      { title: "API Explorer", href: "/playground" },
+      { title: "Data Browser", href: "/data" },
+      { title: "Cookbook", href: "/cookbook" },
       { title: "Authentication", href: "/docs/authentication" },
       { title: "Errors", href: "/docs/errors" },
+      { title: "Rate Limits", href: "/limits" },
+      { title: "Collections", href: "/collections" },
+      { title: "Sources", href: "/sources" },
     ],
   },
   {
@@ -27,6 +33,7 @@ const navGroups = [
       { title: "Holidays", href: "/docs/holidays" },
       { title: "Exchange Rates", href: "/docs/exchange-rates" },
       { title: "Mobile Operators", href: "/docs/mobile" },
+      { title: "Exchange History", href: "/docs/exchange-rate-history" },
     ],
   },
   {
@@ -34,6 +41,7 @@ const navGroups = [
     links: [
       { title: "Validators", href: "/docs/validators" },
       { title: "Bangla Utils", href: "/docs/bn-utils" },
+      { title: "Developer Tools", href: "/tools" },
     ],
   },
 ]

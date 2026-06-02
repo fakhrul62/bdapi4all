@@ -12,6 +12,19 @@ export default function ChangelogPage() {
         "Mobile Operator Validator",
       ],
       fixes: [],
+    },
+    {
+      version: "v1.1.0",
+      date: "June 2, 2026",
+      title: "Developer Portal Expansion",
+      description: "Added OpenAPI, API collections, live explorer, data browser, cookbook, tools, live status checks, source transparency, and rate-limit documentation.",
+      features: [
+        "OpenAPI 3.1 spec and Postman/Insomnia/VS Code REST exports",
+        "Endpoint-specific API Explorer with code snippets",
+        "Interactive Bangladesh geo data browser",
+        "Developer cookbook and standalone API tools",
+      ],
+      fixes: ["Completed production backend wiring and Vercel deployment"],
     }
   ]
 

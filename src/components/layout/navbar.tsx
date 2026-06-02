@@ -25,6 +25,24 @@ export function Navbar() {
               Playground
             </Link>
             <Link
+              href="/data"
+              className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            >
+              Data
+            </Link>
+            <Link
+              href="/cookbook"
+              className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            >
+              Cookbook
+            </Link>
+            <Link
+              href="/tools"
+              className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            >
+              Tools
+            </Link>
+            <Link
               href="/status"
               className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >

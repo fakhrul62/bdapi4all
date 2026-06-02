@@ -23,6 +23,20 @@ export function Footer() {
           >
             Docs
           </Link>
+          {" "}â€¢{" "}
+          <Link
+            href="/openapi.json"
+            className="font-medium underline underline-offset-4 hover:text-primary"
+          >
+            OpenAPI
+          </Link>
+          {" "}â€¢{" "}
+          <Link
+            href="/collections"
+            className="font-medium underline underline-offset-4 hover:text-primary"
+          >
+            Collections
+          </Link>
         </p>
       </div>
     </footer>
