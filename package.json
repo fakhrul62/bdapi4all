@@ -12,7 +12,9 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio",
     "data:bulk-expand": "tsx scripts/bulk-expand-encyclopedia.ts",
-    "data:normalize": "tsx scripts/normalize-encyclopedia-data.ts"
+    "data:normalize": "tsx scripts/normalize-encyclopedia-data.ts",
+    "data:bn-map": "tsx scripts/enrich-bengali-and-mapping.ts",
+    "data:search-import": "tsx scripts/search-import-encyclopedia.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

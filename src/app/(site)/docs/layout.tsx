@@ -27,6 +27,16 @@ const navGroups = [
     ],
   },
   {
+    title: "Discovery",
+    links: [
+      { title: "Global Search", href: "/docs/search" },
+      { title: "People Search", href: "/docs/people-search" },
+      { title: "Places by District", href: "/docs/historical-places-by-district" },
+      { title: "Rivers by District", href: "/docs/rivers-by-district" },
+      { title: "Foods by Region", href: "/docs/foods-by-region" },
+    ],
+  },
+  {
     title: "Services",
     links: [
       { title: "Prayer Times", href: "/docs/prayer-times" },
@@ -88,6 +98,7 @@ const navGroups = [
     links: [
       { title: "Authors", href: "/docs/authors" },
       { title: "All Books", href: "/docs/books" },
+      { title: "Book Search", href: "/docs/books-search" },
       { title: "Books by Author", href: "/docs/books-by-author" },
       { title: "Books by Category", href: "/docs/books-by-category" },
       { title: "Author Books", href: "/docs/author-books" },

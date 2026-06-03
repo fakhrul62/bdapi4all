@@ -95,8 +95,6 @@ async function normalizeBaseFields(categorySlug: string, delegate: DynamicDelega
       OR: [
         { name_bn: { contains: "à" } },
         { description_bn: { contains: "à" } },
-        { name_bn: { contains: "�" } },
-        { description_bn: { contains: "�" } },
       ],
     },
     take: 1000,

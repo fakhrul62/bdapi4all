@@ -29,6 +29,31 @@ const sources = [
     cadence: "Updated when BTRC/operator prefix allocation changes.",
     note: "Covers 013-019 Bangladesh mobile prefixes.",
   },
+  {
+    name: "Bangladesh encyclopedia",
+    source: "Wikipedia, Bengali Wikipedia, curated seed data, and admin-reviewed enrichment",
+    cadence: "Expanded by import scripts and checked by weekly data-quality cron.",
+    note: "Records expose source, source_url, verified, and needs_image so developers can decide how strict their app should be.",
+  },
+];
+
+const transparency = [
+  {
+    label: "verified: true",
+    text: "The record has a source-backed URL from an enrichment/import pipeline or admin review. It is still open to correction if a better official source appears.",
+  },
+  {
+    label: "verified: false",
+    text: "The record is useful as seed/reference data, but it needs manual review before being treated as authoritative.",
+  },
+  {
+    label: "source",
+    text: "Identifies where the record came from, such as wikipedia, wikipedia_search, google_books, open_library, curated_seed, or ai_generated.",
+  },
+  {
+    label: "needs_image",
+    text: "True means no confirmed reusable image URL is attached yet. The API does not invent image URLs.",
+  },
 ];
 
 export default function SourcesPage() {
@@ -60,6 +85,22 @@ export default function SourcesPage() {
           </section>
         ))}
       </div>
+
+      <section className="mt-10 rounded-lg border border-border/50 bg-card p-5">
+        <h2 className="font-heading text-2xl font-bold">Verified vs Unverified</h2>
+        <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
+          BDApi4All is transparent by design. Every encyclopedia record carries review fields so apps can show only verified records,
+          include unverified records with a badge, or build their own moderation workflow.
+        </p>
+        <dl className="mt-5 grid gap-4 md:grid-cols-2">
+          {transparency.map((item) => (
+            <div key={item.label} className="rounded-md bg-muted/50 p-4">
+              <dt className="font-mono text-sm font-semibold text-primary">{item.label}</dt>
+              <dd className="mt-2 text-sm text-muted-foreground">{item.text}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
     </div>
   );
 }
