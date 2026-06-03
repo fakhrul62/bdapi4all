@@ -1,9 +1,15 @@
-import { requireAdmin } from "@/lib/admin-auth";
-import { adminRecentRuns, adminSummary } from "@/lib/admin-records";
+import { requireAdminResponse } from "@/lib/admin-auth";
+import { adminQualitySummary, adminRecentActivity, adminRecentRuns, adminSummary } from "@/lib/admin-records";
 import { successResponse } from "@/lib/response";
 
 export async function GET(request: Request) {
-  await requireAdmin(request);
-  const [summary, runs] = await Promise.all([adminSummary(), adminRecentRuns()]);
-  return successResponse({ summary, runs });
+  const unauthorized = await requireAdminResponse(request);
+  if (unauthorized) return unauthorized;
+  const [summary, runs, activity, quality] = await Promise.all([
+    adminSummary(),
+    adminRecentRuns(),
+    adminRecentActivity(),
+    adminQualitySummary(),
+  ]);
+  return successResponse({ summary, runs, activity, quality });
 }

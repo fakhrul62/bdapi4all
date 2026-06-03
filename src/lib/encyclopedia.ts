@@ -74,6 +74,10 @@ function getDelegate(category: EncyclopediaCategory) {
   return (prisma as unknown as Record<string, ModelDelegate>)[category.model];
 }
 
+export function getEncyclopediaDelegate(category: EncyclopediaCategory) {
+  return getDelegate(category);
+}
+
 function parseBoolean(value: string) {
   if (value === "true") return true;
   if (value === "false") return false;
@@ -209,12 +213,20 @@ export async function searchEncyclopediaRecords(category: EncyclopediaCategory, 
 
   const { page, limit } = paginationSchema.parse(Object.fromEntries(url.searchParams));
   const skip = (page - 1) * limit;
-  const where = {
+  const where: Record<string, unknown> = {
     OR: [
       { name_en: { contains: q, mode: "insensitive" } },
       { name_bn: { contains: q } },
     ],
   };
+
+  if (category.slug === "books") {
+    where.OR = [
+      ...(where.OR as Array<Record<string, unknown>>),
+      { title_en: { contains: q, mode: "insensitive" } },
+      { title_bn: { contains: q } },
+    ];
+  }
   const delegate = getDelegate(category);
 
   return withCache(cacheKey(category, "search", url.searchParams), CACHE_TTL.encyclopedia, async () => {

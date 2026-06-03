@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { requireAdmin } from "@/lib/admin-auth";
+import { requireAdminResponse } from "@/lib/admin-auth";
 import { adminListRecords } from "@/lib/admin-records";
 import { successResponse } from "@/lib/response";
 
@@ -12,7 +12,8 @@ const querySchema = z.object({
 });
 
 export async function GET(request: Request) {
-  await requireAdmin(request);
+  const unauthorized = await requireAdminResponse(request);
+  if (unauthorized) return unauthorized;
   const url = new URL(request.url);
   const query = querySchema.parse(Object.fromEntries(url.searchParams));
   const result = await adminListRecords({

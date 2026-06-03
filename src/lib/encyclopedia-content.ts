@@ -66,6 +66,23 @@ const filterExamples: Record<string, string> = {
 
 const bookEndpoints: EndpointDefinition[] = [
   {
+    slug: "books-search",
+    group: "Literature",
+    title: "Book Search",
+    method: "GET",
+    path: "/books/search",
+    summary: "Search books by title.",
+    description: "Searches book title fields and returns matching books with author details.",
+    cacheTtl: "24 hours",
+    parameters: [
+      { name: "q", label: "Search query", type: "string", location: "query", required: true, description: "Book title search text.", example: "Bidrohi" },
+      { name: "page", label: "Page", type: "integer", location: "query", required: false, description: "Page number. Defaults to 1.", example: "1" },
+      { name: "limit", label: "Limit", type: "integer", location: "query", required: false, description: "Records per page. Defaults to 20 and maxes at 100.", example: "20" },
+    ],
+    sampleResponse: [{ id: 8, title_en: "Bidrohi", author_id: 8, genre: "poetry", language: "bengali" }],
+    recipes: ["Find books without knowing the author id"],
+  },
+  {
     slug: "books-by-author",
     group: "Literature",
     title: "Books by Author",
@@ -115,6 +132,96 @@ const bookEndpoints: EndpointDefinition[] = [
     ],
     sampleResponse: [{ id: 8, title_en: "Bidrohi", author_id: 8, genre: "poetry", language: "bengali" }],
     recipes: ["Build an author profile page with that author's books"],
+  },
+];
+
+const discoveryEndpoints: EndpointDefinition[] = [
+  {
+    slug: "search",
+    group: "Discovery",
+    title: "Global Search",
+    method: "GET",
+    path: "/search",
+    summary: "Search across the Bangladesh encyclopedia.",
+    description: "Searches all encyclopedia categories and returns normalized results with category metadata.",
+    cacheTtl: "24 hours",
+    parameters: [
+      { name: "q", label: "Search query", type: "string", location: "query", required: true, description: "Search text.", example: "Padma" },
+      { name: "category", label: "Category", type: "string", location: "query", required: false, description: "Optional category slug such as rivers, books, or players.", example: "rivers" },
+      { name: "page", label: "Page", type: "integer", location: "query", required: false, description: "Page number. Defaults to 1.", example: "1" },
+      { name: "limit", label: "Limit", type: "integer", location: "query", required: false, description: "Records per page. Defaults to 20 and maxes at 100.", example: "20" },
+    ],
+    sampleResponse: [{ category: "rivers", category_title: "Rivers", id: 1, name_en: "Padma", verified: true }],
+    recipes: ["Build one search box for the full API", "Autocomplete mixed Bangladesh facts"],
+  },
+  {
+    slug: "people-search",
+    group: "Discovery",
+    title: "People Search",
+    method: "GET",
+    path: "/people/search",
+    summary: "Search notable people categories.",
+    description: "Searches authors, players, political leaders, scientists, artists, and freedom fighters.",
+    cacheTtl: "24 hours",
+    parameters: [
+      { name: "q", label: "Search query", type: "string", location: "query", required: true, description: "Person name or keyword.", example: "Shakib" },
+      { name: "page", label: "Page", type: "integer", location: "query", required: false, description: "Page number. Defaults to 1.", example: "1" },
+      { name: "limit", label: "Limit", type: "integer", location: "query", required: false, description: "Records per page. Defaults to 20 and maxes at 100.", example: "20" },
+    ],
+    sampleResponse: [{ category: "players", id: 1, name_en: "Shakib Al Hasan", verified: true }],
+    recipes: ["Power a people finder", "Search creators, leaders, and athletes together"],
+  },
+  {
+    slug: "historical-places-by-district",
+    group: "Discovery",
+    title: "Places by District",
+    method: "GET",
+    path: "/historical-places/by-district",
+    summary: "Find historical places in a district.",
+    description: "Returns historical places matched by district_id or district English name.",
+    cacheTtl: "24 hours",
+    parameters: [
+      { name: "district_id", label: "District ID", type: "integer", location: "query", required: false, description: "District id.", example: "47" },
+      { name: "district", label: "District", type: "string", location: "query", required: false, description: "District English name.", example: "Dhaka" },
+      { name: "page", label: "Page", type: "integer", location: "query", required: false, description: "Page number. Defaults to 1.", example: "1" },
+      { name: "limit", label: "Limit", type: "integer", location: "query", required: false, description: "Records per page. Defaults to 20 and maxes at 100.", example: "20" },
+    ],
+    sampleResponse: [{ id: 4, name_en: "Lalbagh Fort", location: "Dhaka", type: "fort" }],
+    recipes: ["Show district heritage lists", "Build travel/history pages"],
+  },
+  {
+    slug: "rivers-by-district",
+    group: "Discovery",
+    title: "Rivers by District",
+    method: "GET",
+    path: "/rivers/by-district",
+    summary: "Find rivers connected to a district.",
+    description: "Searches river route fields and descriptions for a district name.",
+    cacheTtl: "24 hours",
+    parameters: [
+      { name: "district", label: "District", type: "string", location: "query", required: true, description: "District English name.", example: "Dhaka" },
+      { name: "page", label: "Page", type: "integer", location: "query", required: false, description: "Page number. Defaults to 1.", example: "1" },
+      { name: "limit", label: "Limit", type: "integer", location: "query", required: false, description: "Records per page. Defaults to 20 and maxes at 100.", example: "20" },
+    ],
+    sampleResponse: [{ id: 1, name_en: "Padma", outflow: "Meghna" }],
+    recipes: ["Build district waterway views"],
+  },
+  {
+    slug: "foods-by-region",
+    group: "Discovery",
+    title: "Foods by Region",
+    method: "GET",
+    path: "/foods/by-region",
+    summary: "Find traditional foods by region.",
+    description: "Searches traditional food region and description fields.",
+    cacheTtl: "24 hours",
+    parameters: [
+      { name: "region", label: "Region", type: "string", location: "query", required: true, description: "Region or district name.", example: "Dhaka" },
+      { name: "page", label: "Page", type: "integer", location: "query", required: false, description: "Page number. Defaults to 1.", example: "1" },
+      { name: "limit", label: "Limit", type: "integer", location: "query", required: false, description: "Records per page. Defaults to 20 and maxes at 100.", example: "20" },
+    ],
+    sampleResponse: [{ id: 1, name_en: "Bakarkhani", region: "Dhaka", category: "snack" }],
+    recipes: ["Build regional food lists"],
   },
 ];
 
@@ -194,4 +301,4 @@ export const encyclopediaEndpointDefinitions: EndpointDefinition[] = categories.
   ];
 });
 
-encyclopediaEndpointDefinitions.push(...bookEndpoints);
+encyclopediaEndpointDefinitions.push(...bookEndpoints, ...discoveryEndpoints);

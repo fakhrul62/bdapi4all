@@ -48,9 +48,8 @@ export async function isAdminRequest(request?: Request) {
   return cookieStore.get(COOKIE_NAME)?.value === expectedDigest();
 }
 
-export async function requireAdmin(request?: Request) {
-  if (await isAdminRequest(request)) return;
-  throw new Response(
+export async function adminUnauthorizedResponse() {
+  return new Response(
     JSON.stringify({
       success: false,
       version: "v1",
@@ -66,4 +65,14 @@ export async function requireAdmin(request?: Request) {
       headers: { "Content-Type": "application/json" },
     },
   );
+}
+
+export async function requireAdminResponse(request?: Request) {
+  if (await isAdminRequest(request)) return null;
+  return adminUnauthorizedResponse();
+}
+
+export async function requireAdmin(request?: Request) {
+  const response = await requireAdminResponse(request);
+  if (response) throw response;
 }

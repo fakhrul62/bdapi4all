@@ -3,6 +3,14 @@
     {
       "path": "/api/cron/exchange-rates",
       "schedule": "0 0 * * *"
+    },
+    {
+      "path": "/api/cron/encyclopedia-enrichment",
+      "schedule": "0 19 * * 6"
+    },
+    {
+      "path": "/api/cron/data-quality",
+      "schedule": "30 19 * * 6"
     }
   ]
 }

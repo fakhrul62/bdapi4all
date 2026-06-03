@@ -808,3 +808,35 @@ model EnrichmentRun {
   @@index([started_at])
   @@map("enrichment_runs")
 }
+
+model AdminActivityLog {
+  id         Int      @id @default(autoincrement())
+  action     String
+  category   String?
+  record_id  Int?
+  details    Json?
+  created_at DateTime @default(now())
+
+  @@index([action])
+  @@index([category])
+  @@index([created_at])
+  @@map("admin_activity_logs")
+}
+
+model DataQualityIssue {
+  id         Int       @id @default(autoincrement())
+  category   String
+  record_id  Int
+  issue_type String
+  message    String
+  severity   String    @default("medium")
+  resolved   Boolean   @default(false)
+  created_at DateTime  @default(now())
+  resolved_at DateTime?
+
+  @@unique([category, record_id, issue_type])
+  @@index([category])
+  @@index([issue_type])
+  @@index([resolved])
+  @@map("data_quality_issues")
+}
