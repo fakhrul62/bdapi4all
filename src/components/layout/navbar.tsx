@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/layout/theme-toggle"
 
 export function Navbar() {
   return (
@@ -58,6 +59,7 @@ export function Navbar() {
         </div>
         <div className="flex items-center justify-end space-x-4">
           <nav className="flex items-center space-x-2">
+            <ThemeToggle />
             <Link href="https://github.com/fakhrul62/bdapi4all" target="_blank" rel="noreferrer">
               <Button variant="outline" size="sm" className="hidden md:flex font-medium">
                 Star on GitHub
