@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { config } from "dotenv";
 import holidays from "../data/holidays.json";
+import { spices } from "./spices-seed-data";
 import {
   animals,
   artists,
@@ -128,6 +129,7 @@ async function main() {
   await prisma.traditionalCraft.deleteMany();
   await prisma.traditionalMusic.deleteMany();
   await prisma.traditionalClothing.deleteMany();
+  await prisma.spice.deleteMany();
   await prisma.traditionalFood.deleteMany();
   await prisma.festival.deleteMany();
   await prisma.tree.deleteMany();
@@ -198,6 +200,7 @@ async function main() {
   await prisma.tree.createMany({ data: trees });
   await prisma.festival.createMany({ data: festivals });
   await prisma.traditionalFood.createMany({ data: traditionalFoods });
+  await prisma.spice.createMany({ data: spices });
   await prisma.traditionalClothing.createMany({ data: traditionalClothing });
   await prisma.traditionalMusic.createMany({ data: traditionalMusic });
   await prisma.traditionalCraft.createMany({ data: traditionalCrafts });
@@ -232,6 +235,7 @@ async function main() {
     SELECT setval(pg_get_serial_sequence('trees', 'id'), COALESCE((SELECT MAX(id) FROM trees), 1), true);
     SELECT setval(pg_get_serial_sequence('festivals', 'id'), COALESCE((SELECT MAX(id) FROM festivals), 1), true);
     SELECT setval(pg_get_serial_sequence('traditional_foods', 'id'), COALESCE((SELECT MAX(id) FROM traditional_foods), 1), true);
+    SELECT setval(pg_get_serial_sequence('spices', 'id'), COALESCE((SELECT MAX(id) FROM spices), 1), true);
     SELECT setval(pg_get_serial_sequence('traditional_clothing', 'id'), COALESCE((SELECT MAX(id) FROM traditional_clothing), 1), true);
     SELECT setval(pg_get_serial_sequence('traditional_music', 'id'), COALESCE((SELECT MAX(id) FROM traditional_music), 1), true);
     SELECT setval(pg_get_serial_sequence('traditional_crafts', 'id'), COALESCE((SELECT MAX(id) FROM traditional_crafts), 1), true);
@@ -251,7 +255,7 @@ async function main() {
   `);
 
   console.log(
-    `Seeded ${divisions.length} divisions, ${districts.length} districts, ${upazilas.length} upazilas, ${unions.length} unions, ${holidays.length} holidays, and ${rivers.length + seasons.length + animals.length + flowers.length + trees.length + festivals.length + traditionalFoods.length + traditionalClothing.length + traditionalMusic.length + traditionalCrafts.length + historicalPeriods.length + historicalEvents.length + historicalPlaces.length + politicalParties.length + politicalLeaders.length + authors.length + books.length + sportsCategories.length + players.length + nationalTeams.length + scientists.length + artists.length + freedomFighters.length} encyclopedia records.`,
+    `Seeded ${divisions.length} divisions, ${districts.length} districts, ${upazilas.length} upazilas, ${unions.length} unions, ${holidays.length} holidays, and ${rivers.length + seasons.length + animals.length + flowers.length + trees.length + festivals.length + traditionalFoods.length + spices.length + traditionalClothing.length + traditionalMusic.length + traditionalCrafts.length + historicalPeriods.length + historicalEvents.length + historicalPlaces.length + politicalParties.length + politicalLeaders.length + authors.length + books.length + sportsCategories.length + players.length + nationalTeams.length + scientists.length + artists.length + freedomFighters.length} encyclopedia records.`,
   );
 }
 

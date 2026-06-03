@@ -73,6 +73,7 @@ const navGroups = [
     links: [
       { title: "Festivals", href: "/docs/festivals" },
       { title: "Traditional Foods", href: "/docs/traditional-foods" },
+      { title: "Spices & Masala", href: "/docs/spices" },
       { title: "Traditional Clothing", href: "/docs/traditional-clothing" },
       { title: "Traditional Music", href: "/docs/traditional-music" },
       { title: "Traditional Crafts", href: "/docs/traditional-crafts" },

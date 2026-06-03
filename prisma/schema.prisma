@@ -289,6 +289,35 @@ model TraditionalFood {
   @@map("traditional_foods")
 }
 
+model Spice {
+  id             Int      @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean  @default(false)
+  needs_image    Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  scientific_name String?
+  category       String
+  form           String[]
+  flavor_profile String[]
+  common_uses    String[]
+  regions_found  String[]
+  is_blend       Boolean  @default(false)
+  ingredients    String[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@index([category])
+  @@index([is_blend])
+  @@map("spices")
+}
+
 model TraditionalClothing {
   id             Int      @id @default(autoincrement())
   name_en        String

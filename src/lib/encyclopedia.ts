@@ -41,6 +41,7 @@ export const encyclopediaCategories: EncyclopediaCategory[] = [
   { slug: "trees", model: "tree", title: "Trees", group: "Nature", description: "Trees and plants important to Bangladesh.", filters: baseFilters },
   { slug: "festivals", model: "festival", title: "Festivals", group: "Culture", description: "Religious, cultural, and national festivals.", filters: baseFilters },
   { slug: "traditional-foods", model: "traditionalFood", title: "Traditional Foods", group: "Culture", description: "Traditional foods, sweets, snacks, and drinks.", filters: baseFilters },
+  { slug: "spices", model: "spice", title: "Spices & Masala", group: "Culture", description: "Spices, herbs, aromatics, seeds, and masala blends used in Bangladesh.", filters: [{ query: "category", type: "string" }, { query: "is_blend", type: "boolean" }] },
   { slug: "traditional-clothing", model: "traditionalClothing", title: "Traditional Clothing", group: "Culture", description: "Traditional garments and textile items.", filters: baseFilters },
   { slug: "traditional-music", model: "traditionalMusic", title: "Traditional Music", group: "Culture", description: "Folk, Baul, Rabindra, Nazrul, and classical music categories.", filters: baseFilters },
   { slug: "traditional-crafts", model: "traditionalCraft", title: "Traditional Crafts", group: "Culture", description: "Craft traditions and regional materials.", filters: baseFilters },

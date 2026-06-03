@@ -14,7 +14,8 @@
     "data:bulk-expand": "tsx scripts/bulk-expand-encyclopedia.ts",
     "data:normalize": "tsx scripts/normalize-encyclopedia-data.ts",
     "data:bn-map": "tsx scripts/enrich-bengali-and-mapping.ts",
-    "data:search-import": "tsx scripts/search-import-encyclopedia.ts"
+    "data:search-import": "tsx scripts/search-import-encyclopedia.ts",
+    "data:seed-spices": "tsx scripts/seed-spices.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
