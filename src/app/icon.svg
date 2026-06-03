@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="BDApi4All">
+  <defs>
+    <linearGradient id="tile" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1b5fff"/>
+      <stop offset="1" stop-color="#0a2f8f"/>
+    </linearGradient>
+    <linearGradient id="node" x1="18" y1="16" x2="46" y2="48" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7c9e7a"/>
+      <stop offset="1" stop-color="#2f7d46"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#tile)"/>
+  <circle cx="34" cy="30" r="19" fill="url(#node)" opacity=".95"/>
+  <path d="M46 24h6M46 36h6M12 30h7" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="53" cy="24" r="4" fill="#ffffff"/>
+  <circle cx="53" cy="36" r="4" fill="#ffffff"/>
+  <circle cx="11" cy="30" r="4" fill="#ffffff"/>
+  <text x="32" y="38" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="800" letter-spacing="0" fill="#ffffff">BD</text>
+  <path d="M17 49h30" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+</svg>
