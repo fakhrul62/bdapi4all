@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { CheckCircle2, ImageOff, Loader2, LogOut, Play, Save, Search, ShieldCheck } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { CheckCircle2, Download, ImageOff, Loader2, LogOut, Play, Save, Search, ShieldCheck, Trash2 } from "lucide-react";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 type CategorySummary = {
   slug: string;
@@ -23,6 +24,19 @@ type Run = {
   images_found: number;
   started_at: string;
   finished_at: string | null;
+};
+
+type Activity = {
+  id: number;
+  action: string;
+  category: string | null;
+  record_id: number | null;
+  created_at: string;
+};
+
+type QualityRow = {
+  category: string;
+  open_issues: number;
 };
 
 type RecordItem = {
@@ -71,10 +85,13 @@ export function AdminDashboard({ initialAuthenticated }: { initialAuthenticated:
   const [secret, setSecret] = useState("");
   const [summary, setSummary] = useState<CategorySummary[]>([]);
   const [runs, setRuns] = useState<Run[]>([]);
+  const [activity, setActivity] = useState<Activity[]>([]);
+  const [quality, setQuality] = useState<QualityRow[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("rivers");
   const [status, setStatus] = useState("unverified");
   const [q, setQ] = useState("");
   const [records, setRecords] = useState<RecordItem[]>([]);
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -85,9 +102,11 @@ export function AdminDashboard({ initialAuthenticated }: { initialAuthenticated:
   );
 
   async function loadSummary() {
-    const payload = await api<{ summary: CategorySummary[]; runs: Run[] }>("/api/admin/summary");
+    const payload = await api<{ summary: CategorySummary[]; runs: Run[]; activity: Activity[]; quality: QualityRow[] }>("/api/admin/summary");
     setSummary(payload.data.summary);
     setRuns(payload.data.runs);
+    setActivity(payload.data.activity);
+    setQuality(payload.data.quality);
     if (!payload.data.summary.some((item) => item.slug === selectedCategory)) {
       setSelectedCategory(payload.data.summary[0]?.slug ?? "rivers");
     }
@@ -117,10 +136,12 @@ export function AdminDashboard({ initialAuthenticated }: { initialAuthenticated:
     let cancelled = false;
     async function run() {
       try {
-        const payload = await api<{ summary: CategorySummary[]; runs: Run[] }>("/api/admin/summary");
+        const payload = await api<{ summary: CategorySummary[]; runs: Run[]; activity: Activity[]; quality: QualityRow[] }>("/api/admin/summary");
         if (cancelled) return;
         setSummary(payload.data.summary);
         setRuns(payload.data.runs);
+        setActivity(payload.data.activity);
+        setQuality(payload.data.quality);
         if (!payload.data.summary.some((item) => item.slug === selectedCategory)) {
           setSelectedCategory(payload.data.summary[0]?.slug ?? "rivers");
         }
@@ -149,6 +170,7 @@ export function AdminDashboard({ initialAuthenticated }: { initialAuthenticated:
         const payload = await api<RecordItem[]>(`/api/admin/records?${search.toString()}`);
         if (cancelled) return;
         setRecords(payload.data);
+        setSelectedIds([]);
         setPage(payload.meta?.pagination?.page ?? 1);
         setTotalPages(payload.meta?.pagination?.total_pages ?? 1);
       } finally {
@@ -221,8 +243,65 @@ export function AdminDashboard({ initialAuthenticated }: { initialAuthenticated:
     }
   }
 
+  async function bulkAction(action: "verify" | "unverify" | "mark_needs_image" | "clear_needs_image") {
+    if (!selectedIds.length) return;
+    setLoading(true);
+    setMessage("");
+    try {
+      const payload = await api<{ count: number }>("/api/admin/records/bulk", {
+        method: "POST",
+        body: JSON.stringify({ category: selectedCategory, ids: selectedIds, action }),
+      });
+      setMessage(`Updated ${payload.data.count} records.`);
+      await loadSummary();
+      await loadRecords(page);
+      setSelectedIds([]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function deleteRecord(id: number) {
+    if (!window.confirm(`Delete record #${id}?`)) return;
+    await api(`/api/admin/records/${selectedCategory}/${id}`, { method: "DELETE" });
+    setMessage(`Deleted #${id}.`);
+    await loadSummary();
+    await loadRecords(page);
+  }
+
+  async function deleteSelected() {
+    if (!selectedIds.length) return;
+    if (!window.confirm(`Delete ${selectedIds.length} selected records?`)) return;
+    setLoading(true);
+    try {
+      for (const id of selectedIds) {
+        await api(`/api/admin/records/${selectedCategory}/${id}`, { method: "DELETE" });
+      }
+      setMessage(`Deleted ${selectedIds.length} records.`);
+      await loadSummary();
+      await loadRecords(page);
+      setSelectedIds([]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function scanDuplicates() {
+    setLoading(true);
+    try {
+      const payload = await api<Array<{ name: string; count: number }>>(`/api/admin/records/duplicates?category=${selectedCategory}`);
+      setMessage(payload.data.length ? `${payload.data.length} duplicate name groups found.` : "No duplicate name groups found.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   function updateRecord(id: number, patch: Partial<RecordItem>) {
     setRecords((current) => current.map((record) => (record.id === id ? { ...record, ...patch } : record)));
+  }
+
+  function toggleSelected(id: number) {
+    setSelectedIds((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
   }
 
   if (!authenticated) {
@@ -272,6 +351,13 @@ export function AdminDashboard({ initialAuthenticated }: { initialAuthenticated:
             {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Play className="h-4 w-4" />}
             Enrich Selected
           </Button>
+          <a
+            href={`/api/admin/records/export?category=${selectedCategory}&format=csv`}
+            className={cn(buttonVariants({ variant: "outline" }), "gap-2")}
+          >
+            <Download className="h-4 w-4" />
+            Export CSV
+          </a>
           <Button variant="outline" size="icon" onClick={logout} aria-label="Sign out">
             <LogOut className="h-4 w-4" />
           </Button>
@@ -350,6 +436,18 @@ export function AdminDashboard({ initialAuthenticated }: { initialAuthenticated:
           </div>
 
           <div className="rounded-lg border border-border/50 bg-card p-3">
+            <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Open issues</div>
+            <div className="mt-2 space-y-2 text-xs">
+              {quality.length ? quality.slice(0, 8).map((item) => (
+                <div key={item.category} className="flex justify-between rounded-md bg-muted/50 p-2">
+                  <span>{item.category}</span>
+                  <span className="font-semibold">{item.open_issues}</span>
+                </div>
+              )) : <div className="text-muted-foreground">No tracked issues.</div>}
+            </div>
+          </div>
+
+          <div className="rounded-lg border border-border/50 bg-card p-3">
             <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Recent runs</div>
             <div className="mt-2 space-y-2">
               {runs.slice(0, 5).map((run) => (
@@ -360,20 +458,54 @@ export function AdminDashboard({ initialAuthenticated }: { initialAuthenticated:
               ))}
             </div>
           </div>
+
+          <div className="rounded-lg border border-border/50 bg-card p-3">
+            <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Recent activity</div>
+            <div className="mt-2 space-y-2">
+              {activity.slice(0, 5).map((item) => (
+                <div key={item.id} className="rounded-md bg-muted/50 p-2 text-xs">
+                  <div className="font-medium">{item.action}</div>
+                  <div className="text-muted-foreground">{item.category ?? "system"}{item.record_id ? ` #${item.record_id}` : ""}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </aside>
 
         <section className="space-y-4">
           {message && <div className="rounded-md border border-primary/30 bg-primary/10 px-3 py-2 text-sm text-primary">{message}</div>}
+          <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border/50 bg-card p-3">
+            <div className="text-sm text-muted-foreground">{selectedIds.length} selected</div>
+            <div className="flex flex-wrap gap-2">
+              <Button variant="outline" size="sm" onClick={() => bulkAction("verify")} disabled={!selectedIds.length || loading}>Verify</Button>
+              <Button variant="outline" size="sm" onClick={() => bulkAction("unverify")} disabled={!selectedIds.length || loading}>Unverify</Button>
+              <Button variant="outline" size="sm" onClick={() => bulkAction("mark_needs_image")} disabled={!selectedIds.length || loading}>Needs image</Button>
+              <Button variant="outline" size="sm" onClick={scanDuplicates} disabled={loading}>Find duplicates</Button>
+              <Button variant="outline" size="sm" className="gap-2 text-red-600" onClick={deleteSelected} disabled={!selectedIds.length || loading}>
+                <Trash2 className="h-4 w-4" />
+                Delete
+              </Button>
+            </div>
+          </div>
           {records.map((record) => (
             <article key={record.id} className="rounded-lg border border-border/50 bg-card p-4">
               <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
-                <div>
+                <div className="flex min-w-0 gap-3">
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.includes(record.id)}
+                    onChange={() => toggleSelected(record.id)}
+                    className="mt-2 h-4 w-4 accent-primary"
+                    aria-label={`Select record ${record.id}`}
+                  />
+                  <div className="min-w-0">
                   <div className="font-mono text-xs text-muted-foreground">#{record.id}</div>
                   <input
                     value={record.name_en}
                     onChange={(event) => updateRecord(record.id, { name_en: event.target.value })}
                     className="mt-1 w-full rounded-md border border-transparent bg-transparent text-xl font-semibold outline-none focus:border-input focus:bg-background focus:px-2"
                   />
+                  </div>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <button
@@ -393,6 +525,13 @@ export function AdminDashboard({ initialAuthenticated }: { initialAuthenticated:
                   >
                     <ImageOff className="h-3.5 w-3.5" />
                     {record.needs_image ? "Needs image" : "Image ok"}
+                  </button>
+                  <button
+                    onClick={() => deleteRecord(record.id)}
+                    className="inline-flex items-center gap-1 rounded-full bg-red-500/10 px-2 py-1 text-xs text-red-600"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                    Delete
                   </button>
                 </div>
               </div>
