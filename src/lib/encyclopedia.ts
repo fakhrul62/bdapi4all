@@ -31,6 +31,10 @@ const baseFilters: FilterDefinition[] = [];
 
 export const encyclopediaCategories: EncyclopediaCategory[] = [
   { slug: "rivers", model: "river", title: "Rivers", group: "Nature", description: "Rivers and waterways of Bangladesh.", filters: baseFilters },
+  { slug: "canals", model: "canal", title: "Canals", group: "Nature", description: "Canals and engineered waterways of Bangladesh.", filters: baseFilters },
+  { slug: "haors", model: "haor", title: "Haors", group: "Nature", description: "Large wetland basins and haor systems of Bangladesh.", filters: baseFilters },
+  { slug: "forests", model: "forest", title: "Forests", group: "Nature", description: "Forests, mangroves, and protected forest areas of Bangladesh.", filters: baseFilters },
+  { slug: "islands", model: "island", title: "Islands", group: "Nature", description: "River, coastal, and offshore islands of Bangladesh.", filters: baseFilters },
   { slug: "seasons", model: "season", title: "Seasons", group: "Nature", description: "The six Bangla seasons and their characteristics.", filters: baseFilters },
   { slug: "animals", model: "animal", title: "Animals", group: "Nature", description: "Notable animals, birds, reptiles, fish, and insects of Bangladesh.", filters: [{ query: "category", type: "string" }, { query: "conservation_status", type: "string" }] },
   { slug: "flowers", model: "flower", title: "Flowers", group: "Nature", description: "Flowers and flowering plants associated with Bangladesh.", filters: baseFilters },

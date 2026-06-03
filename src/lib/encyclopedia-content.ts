@@ -1,6 +1,10 @@
 import type { EndpointDefinition } from "@/lib/developer-content";
 
 const categories = [
+  { slug: "canals", title: "Canals", group: "Nature", description: "Canals and engineered waterways of Bangladesh.", sample: { id: 1, name_en: "Dhanmondi Lake Canal", location: "Dhaka", districts: ["Dhaka"] } },
+  { slug: "haors", title: "Haors", group: "Nature", description: "Large wetland basins and haor systems of Bangladesh.", sample: { id: 1, name_en: "Hakaluki Haor", location: "Sylhet Division", districts: ["Moulvibazar", "Sylhet"] } },
+  { slug: "forests", title: "Forests", group: "Nature", description: "Forests, mangroves, and protected forest areas of Bangladesh.", sample: { id: 1, name_en: "Sundarbans", forest_type: "mangrove", districts: ["Khulna", "Bagerhat", "Satkhira"] } },
+  { slug: "islands", title: "Islands", group: "Nature", description: "River, coastal, and offshore islands of Bangladesh.", sample: { id: 1, name_en: "Saint Martin's Island", waterbody: "Bay of Bengal", districts: ["Cox's Bazar"] } },
   { slug: "rivers", title: "Rivers", group: "Nature", description: "Rivers and waterways of Bangladesh.", sample: { id: 1, name_en: "Padma", name_bn: "পদ্মা", length_km: 120, outflow: "Meghna" } },
   { slug: "seasons", title: "Seasons", group: "Nature", description: "The six Bangla seasons and their characteristics.", sample: { id: 1, name_en: "Summer", bangla_name: "গ্রীষ্ম", months_en: "Baishakh-Jaishtha" } },
   { slug: "animals", title: "Animals", group: "Nature", description: "Animals, birds, reptiles, fish, and insects of Bangladesh.", filters: ["category", "conservation_status"], sample: { id: 1, name_en: "Royal Bengal Tiger", category: "mammal", is_national_animal: true } },

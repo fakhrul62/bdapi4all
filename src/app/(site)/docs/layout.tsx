@@ -48,6 +48,10 @@ const navGroups = [
     title: "Nature",
     links: [
       { title: "Rivers", href: "/docs/rivers" },
+      { title: "Canals", href: "/docs/canals" },
+      { title: "Haors", href: "/docs/haors" },
+      { title: "Forests", href: "/docs/forests" },
+      { title: "Islands", href: "/docs/islands" },
       { title: "Seasons", href: "/docs/seasons" },
       { title: "Animals", href: "/docs/animals" },
       { title: "Flowers", href: "/docs/flowers" },

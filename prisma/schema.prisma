@@ -55,6 +55,94 @@ model River {
   @@map("rivers")
 }
 
+model Canal {
+  id             Int      @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean  @default(false)
+  needs_image    Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  location       String?
+  connects       String[]
+  districts      String[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@map("canals")
+}
+
+model Haor {
+  id             Int      @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean  @default(false)
+  needs_image    Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  location       String?
+  districts      String[]
+  area_sq_km     Float?
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@map("haors")
+}
+
+model Forest {
+  id             Int      @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean  @default(false)
+  needs_image    Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  location       String?
+  forest_type    String?
+  districts      String[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@map("forests")
+}
+
+model Island {
+  id             Int      @id @default(autoincrement())
+  name_en        String
+  name_bn        String
+  description_en String
+  description_bn String
+  image_url      String?
+  source         String
+  source_url     String?
+  verified       Boolean  @default(false)
+  needs_image    Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  location       String?
+  waterbody      String?
+  districts      String[]
+
+  @@index([name_en])
+  @@index([name_bn])
+  @@map("islands")
+}
+
 model Season {
   id                   Int      @id @default(autoincrement())
   name_en              String
