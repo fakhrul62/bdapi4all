@@ -77,6 +77,29 @@ export default function DocsPage() {
           </pre>
         </div>
       </div>
+
+      <div className="space-y-4">
+        <h2 className="scroll-m-20 border-b border-border/50 pb-2 text-3xl font-semibold tracking-tight font-heading mt-10">
+          Query Controls
+        </h2>
+        <p className="leading-7">
+          Encyclopedia list and search endpoints support payload shaping and multi-field sorting.
+        </p>
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="rounded-md border border-border/50 bg-card p-4">
+            <h3 className="font-semibold">Sparse fields</h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Use <code className="font-mono text-primary">fields=id,name_en,verified</code> to return only the top-level fields your app needs.
+            </p>
+          </div>
+          <div className="rounded-md border border-border/50 bg-card p-4">
+            <h3 className="font-semibold">Multi-field sort</h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Use <code className="font-mono text-primary">sort=name_en,-updated_at</code> for ascending name and descending update time.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

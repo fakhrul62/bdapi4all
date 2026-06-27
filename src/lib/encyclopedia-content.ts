@@ -67,6 +67,11 @@ const filterExamples: Record<string, string> = {
   q: "Bidrohi",
 };
 
+const queryControlParams = [
+  { name: "fields", label: "Fields", type: "string" as const, location: "query" as const, required: false, description: "Comma-separated top-level fields to return, such as id,name_en,verified.", example: "id,name_en,verified" },
+  { name: "sort", label: "Sort", type: "string" as const, location: "query" as const, required: false, description: "Comma-separated sort fields. Prefix a field with - for descending order, such as name_en,-updated_at.", example: "name_en,-updated_at" },
+];
+
 const bookEndpoints: EndpointDefinition[] = [
   {
     slug: "books-search",
@@ -244,6 +249,7 @@ export const encyclopediaEndpointDefinitions: EndpointDefinition[] = categories.
   const listParams = [
     { name: "page", label: "Page", type: "integer" as const, location: "query" as const, required: false, description: "Page number. Defaults to 1.", example: "1" },
     { name: "limit", label: "Limit", type: "integer" as const, location: "query" as const, required: false, description: "Records per page. Defaults to 20 and maxes at 100.", example: "20" },
+    ...queryControlParams,
     ...(category.filters ?? []).map(filterParam),
   ];
 
@@ -297,6 +303,7 @@ export const encyclopediaEndpointDefinitions: EndpointDefinition[] = categories.
         { name: "q", label: "Search query", type: "string", location: "query", required: true, description: "Search text.", example: String(category.sample.name_en ?? category.sample.title_en ?? "Bangladesh") },
         { name: "page", label: "Page", type: "integer", location: "query", required: false, description: "Page number. Defaults to 1.", example: "1" },
         { name: "limit", label: "Limit", type: "integer", location: "query", required: false, description: "Records per page. Defaults to 20 and maxes at 100.", example: "20" },
+        ...queryControlParams,
       ],
       sampleResponse: [category.sample],
       recipes: [`Autocomplete ${category.title.toLowerCase()} by English or Bengali name`],

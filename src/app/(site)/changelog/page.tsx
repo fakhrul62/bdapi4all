@@ -9,6 +9,7 @@ export default function ChangelogPage() {
         "Added a roadmap page grouped by query ergonomics, tooling, SDKs, events, data platform, and enterprise features",
         "Linked the roadmap from Docs and the main navigation",
         "Documented the immediate implementation order for shared query helpers and SDK foundations",
+        "Added sparse fieldsets and multi-field sorting to encyclopedia list and search endpoints",
       ],
       fixes: [],
     },

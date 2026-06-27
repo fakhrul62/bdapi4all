@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { CACHE_TTL, withCache } from "@/lib/cache";
 import { prisma } from "@/lib/db";
+import { parseFields, parseSort, projectItems } from "@/lib/query";
 import { errorResponse } from "@/lib/response";
 
 type ModelDelegate = {
@@ -66,6 +67,16 @@ const paginationSchema = z.object({
   page: z.coerce.number().int().min(1).default(1),
   limit: z.coerce.number().int().min(1).max(100).default(20),
 });
+
+const commonSortableFields = new Set([
+  "id",
+  "name_en",
+  "name_bn",
+  "verified",
+  "needs_image",
+  "created_at",
+  "updated_at",
+]);
 
 export function getEncyclopediaCategory(slug: string) {
   return categoryBySlug.get(slug);
@@ -136,6 +147,23 @@ function buildWhere(category: EncyclopediaCategory, searchParams: URLSearchParam
   return where;
 }
 
+function sortableFields(category: EncyclopediaCategory) {
+  const fields = new Set(commonSortableFields);
+
+  for (const filter of category.filters) {
+    const field = filter.field ?? filter.query;
+    if (field !== "genres" && filter.type !== "sport") fields.add(field);
+  }
+
+  if (category.slug === "books") {
+    fields.add("title_en");
+    fields.add("title_bn");
+    fields.add("published_year");
+  }
+
+  return fields;
+}
+
 function cacheKey(category: EncyclopediaCategory, suffix: string, searchParams?: URLSearchParams) {
   const query = searchParams?.toString();
   return `encyclopedia:${category.slug}:${suffix}${query ? `:${query}` : ""}`;
@@ -155,6 +183,8 @@ export async function listEncyclopediaRecords(category: EncyclopediaCategory, re
   const { page, limit } = paginationSchema.parse(Object.fromEntries(url.searchParams));
   const skip = (page - 1) * limit;
   const where = buildWhere(category, url.searchParams);
+  const fields = parseFields(url.searchParams);
+  const sort = parseSort(url.searchParams, sortableFields(category));
   const delegate = getDelegate(category);
 
   return withCache(cacheKey(category, "list", url.searchParams), CACHE_TTL.encyclopedia, async () => {
@@ -163,14 +193,14 @@ export async function listEncyclopediaRecords(category: EncyclopediaCategory, re
         where,
         skip,
         take: limit,
-        orderBy: { id: "asc" },
+        orderBy: sort.orderBy,
         ...(category.include ? { include: category.include } : {}),
       }),
       delegate.count({ where }),
     ]);
 
     return {
-      items,
+      items: projectItems(items, fields),
       meta: {
         pagination: {
           page,
@@ -179,6 +209,8 @@ export async function listEncyclopediaRecords(category: EncyclopediaCategory, re
           total_pages: Math.ceil(total / limit),
         },
         filters: Object.fromEntries(url.searchParams),
+        sort: sort.selections,
+        ...(fields ? { fields } : {}),
       },
     };
   });
@@ -214,6 +246,8 @@ export async function searchEncyclopediaRecords(category: EncyclopediaCategory, 
 
   const { page, limit } = paginationSchema.parse(Object.fromEntries(url.searchParams));
   const skip = (page - 1) * limit;
+  const fields = parseFields(url.searchParams);
+  const sort = parseSort(url.searchParams, sortableFields(category));
   const where: Record<string, unknown> = {
     OR: [
       { name_en: { contains: q, mode: "insensitive" } },
@@ -236,14 +270,14 @@ export async function searchEncyclopediaRecords(category: EncyclopediaCategory, 
         where,
         skip,
         take: limit,
-        orderBy: { id: "asc" },
+        orderBy: sort.orderBy,
         ...(category.include ? { include: category.include } : {}),
       }),
       delegate.count({ where }),
     ]);
 
     return {
-      items,
+      items: projectItems(items, fields),
       meta: {
         pagination: {
           page,
@@ -252,6 +286,8 @@ export async function searchEncyclopediaRecords(category: EncyclopediaCategory, 
           total_pages: Math.ceil(total / limit),
         },
         query: q,
+        sort: sort.selections,
+        ...(fields ? { fields } : {}),
       },
     };
   });
