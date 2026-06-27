@@ -51,6 +51,7 @@ export default function DocsPage() {
             <code>{`{
   "success": true,
   "version": "v1",
+  "request_id": "6f52e18d-1c2b-4f7f-a9d3-0aaec9cf70a1",
   "timestamp": "2025-01-15T10:30:00Z",
   "data": {
     "id": 47,
@@ -67,6 +68,7 @@ export default function DocsPage() {
             <code>{`{
   "success": false,
   "version": "v1",
+  "request_id": "6f52e18d-1c2b-4f7f-a9d3-0aaec9cf70a1",
   "timestamp": "2025-01-15T10:30:00Z",
   "error": {
     "code": "NOT_FOUND",
@@ -76,6 +78,15 @@ export default function DocsPage() {
 }`}</code>
           </pre>
         </div>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="scroll-m-20 border-b border-border/50 pb-2 text-3xl font-semibold tracking-tight font-heading mt-10">
+          Request Tracking
+        </h2>
+        <p className="leading-7">
+          Handled API responses include a <code className="font-mono text-primary">request_id</code> value and matching <code className="font-mono text-primary">X-Request-ID</code> header. Send your own header to keep the same ID through client, proxy, and API logs.
+        </p>
       </div>
 
       <div className="space-y-4">

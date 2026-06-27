@@ -3,20 +3,22 @@ import { API_BASE_URL, endpointDefinitions } from "@/lib/developer-content";
 const schemas = {
   ApiSuccess: {
     type: "object",
-    required: ["success", "version", "timestamp", "data"],
+    required: ["success", "version", "request_id", "timestamp", "data"],
     properties: {
       success: { type: "boolean", example: true },
       version: { type: "string", example: "v1" },
+      request_id: { type: "string", format: "uuid", example: "6f52e18d-1c2b-4f7f-a9d3-0aaec9cf70a1" },
       timestamp: { type: "string", format: "date-time" },
       data: {},
     },
   },
   ApiError: {
     type: "object",
-    required: ["success", "version", "timestamp", "error"],
+    required: ["success", "version", "request_id", "timestamp", "error"],
     properties: {
       success: { type: "boolean", example: false },
       version: { type: "string", example: "v1" },
+      request_id: { type: "string", format: "uuid", example: "6f52e18d-1c2b-4f7f-a9d3-0aaec9cf70a1" },
       timestamp: { type: "string", format: "date-time" },
       error: {
         type: "object",
@@ -76,6 +78,7 @@ export function createOpenApiDocument() {
                     example: {
                       success: true,
                       version: "v1",
+                      request_id: "6f52e18d-1c2b-4f7f-a9d3-0aaec9cf70a1",
                       timestamp: "2026-06-02T00:00:00.000Z",
                       data: endpoint.sampleResponse,
                     },

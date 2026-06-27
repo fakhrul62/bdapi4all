@@ -116,6 +116,7 @@ export default async function EndpointDocPage({
           <code>{JSON.stringify({
             success: true,
             version: "v1",
+            request_id: "6f52e18d-1c2b-4f7f-a9d3-0aaec9cf70a1",
             timestamp: "2026-06-02T00:00:00.000Z",
             data: endpoint.sampleResponse,
             ...(exampleMeta ? { meta: exampleMeta } : {}),

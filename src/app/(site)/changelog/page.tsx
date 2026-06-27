@@ -10,6 +10,7 @@ export default function ChangelogPage() {
         "Linked the roadmap from Docs and the main navigation",
         "Documented the immediate implementation order for shared query helpers and SDK foundations",
         "Added sparse fieldsets and multi-field sorting to encyclopedia list and search endpoints",
+        "Added request_id payload values and X-Request-ID headers for handled API responses",
       ],
       fixes: [],
     },
