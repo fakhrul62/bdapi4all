@@ -16,6 +16,7 @@ export default function DocsPage() {
           ["Data Browser", "/data", "Search geo IDs and copy JSON rows for your own app."],
           ["OpenAPI", "/openapi.json", "Import the full API spec into Swagger, Postman, Insomnia, or generators."],
           ["Collections", "/collections", "Download Postman, Insomnia, and VS Code REST request files."],
+          ["Roadmap", "/roadmap", "Track the platform plan broken into small developer-focused milestones."],
         ].map(([title, href, text]) => (
           <a key={href} href={href} className="rounded-lg border border-border/50 bg-card p-4 hover:border-primary/60">
             <h2 className="font-heading text-xl font-bold">{title}</h2>

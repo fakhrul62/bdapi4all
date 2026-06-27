@@ -1,6 +1,18 @@
 export default function ChangelogPage() {
   const releases = [
     {
+      version: "v1.2.0",
+      date: "June 28, 2026",
+      title: "Developer Platform Roadmap",
+      description: "Converted the expanded developer feature wishlist into small implementation phases and published the roadmap in the developer portal.",
+      features: [
+        "Added a roadmap page grouped by query ergonomics, tooling, SDKs, events, data platform, and enterprise features",
+        "Linked the roadmap from Docs and the main navigation",
+        "Documented the immediate implementation order for shared query helpers and SDK foundations",
+      ],
+      fixes: [],
+    },
+    {
       version: "v1.0.0",
       date: "May 23, 2026",
       title: "Initial Release of BDApi4All (Phase 1)",

@@ -44,6 +44,12 @@ export function Navbar() {
               Tools
             </Link>
             <Link
+              href="/roadmap"
+              className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            >
+              Roadmap
+            </Link>
+            <Link
               href="/status"
               className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
