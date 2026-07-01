@@ -1,91 +1,255 @@
 import Link from "next/link";
-import { Database, FileJson, FlaskConical, SearchCode, TerminalSquare, Wrench } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  CalendarDays,
+  CheckCircle2,
+  Clock3,
+  Code2,
+  Database,
+  FileJson,
+  Globe2,
+  Languages,
+  MapPin,
+  Phone,
+  Search,
+  ShieldCheck,
+  TerminalSquare,
+  Wrench,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+const featuredApis = [
+  {
+    title: "Prayer Times",
+    group: "Prayer Times",
+    href: "/docs/prayer-times",
+    path: "GET /api/v1/prayer-times?district_id=47",
+    text: "Daily salah times from district IDs or coordinates, with Asia/Dhaka timezone handling built in.",
+    icon: Clock3,
+    accent: "text-emerald-600 bg-emerald-500/10 border-emerald-500/20",
+  },
+  {
+    title: "Next Holiday",
+    group: "Holidays",
+    href: "/docs/holiday-next",
+    path: "GET /api/v1/holidays/next",
+    text: "Show the next national, public, or cultural holiday without maintaining a calendar yourself.",
+    icon: CalendarDays,
+    accent: "text-rose-600 bg-rose-500/10 border-rose-500/20",
+  },
+  {
+    title: "Mobile Operator",
+    group: "Mobile",
+    href: "/docs/mobile-operator",
+    path: "GET /api/v1/mobile/operator?number=017...",
+    text: "Detect Bangladeshi operators and validate number prefixes for signup, CRM, and support flows.",
+    icon: Phone,
+    accent: "text-sky-600 bg-sky-500/10 border-sky-500/20",
+  },
+  {
+    title: "Exchange Rates",
+    group: "Exchange Rates",
+    href: "/docs/exchange-rates",
+    path: "GET /api/v1/exchange-rates",
+    text: "Fetch BDT exchange-rate data for widgets, remittance tools, commerce, and finance dashboards.",
+    icon: Globe2,
+    accent: "text-amber-600 bg-amber-500/10 border-amber-500/20",
+  },
+  {
+    title: "Bengali Utilities",
+    group: "Bengali Utilities",
+    href: "/docs/bn-transliterate",
+    path: "GET /api/v1/bn/transliterate?text=bangladesh",
+    text: "Convert digits and run basic transliteration for forms that need Bengali-friendly output.",
+    icon: Languages,
+    accent: "text-fuchsia-600 bg-fuchsia-500/10 border-fuchsia-500/20",
+  },
+  {
+    title: "Geo Lookup",
+    group: "Geo & Location",
+    href: "/docs/geocode",
+    path: "GET /api/v1/geocode?district=Dhaka",
+    text: "Resolve Bangladesh districts and upazilas into coordinates for maps, search, and location UX.",
+    icon: MapPin,
+    accent: "text-lime-700 bg-lime-500/10 border-lime-500/20",
+  },
+];
+
 const developerLinks = [
-  { title: "API Explorer", href: "/playground", icon: TerminalSquare, text: "Run live requests, inspect headers, and copy code." },
-  { title: "Data Browser", href: "/data", icon: Database, text: "Search geo IDs and copy row JSON." },
-  { title: "OpenAPI", href: "/openapi.json", icon: FileJson, text: "Import into Postman, Insomnia, or Swagger tools." },
-  { title: "Cookbook", href: "/cookbook", icon: SearchCode, text: "Practical examples for common Bangladesh app flows." },
-  { title: "Tools", href: "/tools", icon: Wrench, text: "Validators, operator lookup, geocode, and Bengali utilities." },
-  { title: "Status", href: "/status", icon: FlaskConical, text: "Live endpoint health checks and response timing." },
+  { title: "API Explorer", href: "/playground", icon: TerminalSquare, text: "Run requests, inspect responses, and copy URLs." },
+  { title: "Docs", href: "/docs", icon: BookOpen, text: "Endpoint guides, parameters, samples, and recipes." },
+  { title: "Data Browser", href: "/data", icon: Database, text: "Find IDs for divisions, districts, upazilas, and unions." },
+  { title: "Collections", href: "/collections", icon: FileJson, text: "Postman, Insomnia, and VS Code REST files." },
+  { title: "Tools", href: "/tools", icon: Wrench, text: "Validators, operator lookup, geocode, and Bengali helpers." },
+  { title: "Global Search", href: "/docs/search", icon: Search, text: "Search people, books, places, rivers, foods, and more." },
+];
+
+const stats = [
+  ["8", "Divisions"],
+  ["64", "Districts"],
+  ["494", "Upazilas"],
+  ["4,540", "Unions"],
+];
+
+const requestSamples = [
+  "curl https://bdapi4all.vercel.app/api/v1/holidays/next",
+  "curl https://bdapi4all.vercel.app/api/v1/mobile/operator?number=01700000000",
+  "curl https://bdapi4all.vercel.app/api/v1/prayer-times?district_id=47",
 ];
 
 export default function LandingPage() {
   return (
-    <div className="px-4 py-12 sm:px-6 lg:px-8">
-      <section className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_520px] lg:items-center">
-        <div>
-          <div className="mb-4 inline-flex rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
-            Free Bangladesh API for developers
-          </div>
-          <h1 className="font-heading text-4xl font-extrabold tracking-tight text-foreground md:text-6xl">
-            Build Bangladesh-aware apps faster.
-          </h1>
-          <p className="mt-6 max-w-2xl text-xl leading-relaxed text-muted-foreground">
-            BDApi4All provides geo data, prayer times, holidays, exchange rates, mobile operators, validators, and Bengali utilities through one consistent REST API.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="/playground">
-              <Button size="lg" className="w-full text-primary-foreground sm:w-auto">
-                Try API Explorer
-              </Button>
-            </Link>
-            <Link href="/data">
-              <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                Browse Data IDs
-              </Button>
-            </Link>
-          </div>
-        </div>
+    <div className="overflow-hidden">
+      <section className="border-b border-border/50 bg-background">
+        <div className="mx-auto grid min-h-[calc(100svh-3.5rem)] max-w-7xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_520px] lg:items-center lg:px-8">
+          <div className="max-w-3xl">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-lg border border-primary/25 bg-primary/10 px-3 py-1.5 text-sm font-semibold text-primary">
+              <CheckCircle2 className="size-4" />
+              Free Bangladesh API for serious local products
+            </div>
+            <h1 className="font-heading text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+              Bangladesh data, ready for your next request.
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
+              BDApi4All brings geo data, prayer times, holidays, exchange rates, mobile operators, validators, Bengali utilities, and searchable Bangladesh knowledge into one consistent REST API.
+            </p>
 
-        <div className="overflow-hidden rounded-lg border border-border/50 bg-card shadow-sm">
-          <div className="flex items-center justify-between border-b border-border/50 bg-muted/50 px-4 py-3">
-            <code className="font-mono text-xs text-muted-foreground">GET /api/v1/districts?division_id=6</code>
-            <span className="rounded-full bg-green-500/15 px-2 py-1 text-xs font-semibold text-green-600">200 OK</span>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href="/playground">
+                <Button size="lg" className="h-11 w-full gap-2 px-4 text-primary-foreground sm:w-auto">
+                  <TerminalSquare className="size-4" />
+                  Try API Explorer
+                </Button>
+              </Link>
+              <Link href="/docs">
+                <Button variant="outline" size="lg" className="h-11 w-full gap-2 px-4 sm:w-auto">
+                  <BookOpen className="size-4" />
+                  Read Docs
+                </Button>
+              </Link>
+            </div>
+
+            <div className="mt-10 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
+              {stats.map(([value, label]) => (
+                <div key={label} className="rounded-lg border border-border/60 bg-card p-4">
+                  <div className="font-heading text-2xl font-extrabold text-primary">{value}</div>
+                  <div className="mt-1 text-sm text-muted-foreground">{label}</div>
+                </div>
+              ))}
+            </div>
           </div>
-          <pre className="overflow-auto bg-[#0d1117] p-5 text-sm text-green-300">
-            <code>{`{
+
+          <div className="rounded-lg border border-border/60 bg-card shadow-sm">
+            <div className="flex items-center justify-between border-b border-border/60 px-4 py-3">
+              <div className="flex items-center gap-2 text-sm font-semibold">
+                <Code2 className="size-4 text-primary" />
+                Live-style API console
+              </div>
+              <span className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-2 py-1 text-xs font-bold text-emerald-600">
+                200 OK
+              </span>
+            </div>
+            <div className="space-y-2 border-b border-border/60 bg-muted/30 p-4">
+              {requestSamples.map((sample) => (
+                <code key={sample} className="block overflow-x-auto rounded-md border border-border/60 bg-background px-3 py-2 text-xs text-muted-foreground">
+                  {sample}
+                </code>
+              ))}
+            </div>
+            <pre className="overflow-auto bg-[#0d1117] p-5 text-sm leading-6 text-emerald-200">
+              <code>{`{
   "success": true,
   "version": "v1",
-  "timestamp": "2026-06-02T00:00:00.000Z",
-  "data": [
-    {
-      "id": 47,
-      "division_id": 6,
-      "name_en": "Dhaka",
-      "name_bn": "ঢাকা",
-      "lat": 23.7115253,
-      "lng": 90.4111451
-    }
-  ]
+  "request_id": "bdapi_7Yk29",
+  "timestamp": "2026-06-30T18:00:00.000Z",
+  "data": {
+    "date": "2026-12-16",
+    "name_en": "Victory Day",
+    "name_bn": "বিজয় দিবস",
+    "type": "national"
+  }
 }`}</code>
-          </pre>
+            </pre>
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto mt-14 grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {developerLinks.map((item) => (
-          <Link key={item.href} href={item.href} className="rounded-lg border border-border/50 bg-card p-5 transition-colors hover:border-primary/60">
-            <item.icon className="h-5 w-5 text-primary" />
-            <h2 className="mt-4 font-heading text-xl font-bold">{item.title}</h2>
-            <p className="mt-2 text-sm text-muted-foreground">{item.text}</p>
-          </Link>
-        ))}
+      <section className="bg-muted/25 px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-normal text-primary">Featured APIs</p>
+              <h2 className="mt-2 font-heading text-3xl font-extrabold tracking-tight sm:text-4xl">
+                Intriguing endpoints worth trying first
+              </h2>
+            </div>
+            <Link href="/docs" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+              View every endpoint
+              <ArrowRight className="size-4" />
+            </Link>
+          </div>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {featuredApis.map((api) => (
+              <Link key={api.href} href={api.href} className="group rounded-lg border border-border/60 bg-card p-5 transition-colors hover:border-primary/60">
+                <div className="flex items-start justify-between gap-4">
+                  <div className={`rounded-lg border p-2 ${api.accent}`}>
+                    <api.icon className="size-5" />
+                  </div>
+                  <span className="rounded-lg bg-muted px-2 py-1 text-xs font-semibold text-muted-foreground">
+                    {api.group}
+                  </span>
+                </div>
+                <h3 className="mt-5 font-heading text-xl font-bold">{api.title}</h3>
+                <code className="mt-3 block overflow-x-auto rounded-md bg-muted/70 px-3 py-2 text-xs text-primary">
+                  {api.path}
+                </code>
+                <p className="mt-4 text-sm leading-6 text-muted-foreground">{api.text}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <section className="mx-auto mt-14 grid max-w-7xl gap-4 md:grid-cols-4">
-        {[
-          ["25+", "Endpoints"],
-          ["64", "Districts"],
-          ["494", "Upazilas"],
-          ["4540", "Unions"],
-        ].map(([value, label]) => (
-          <div key={label} className="rounded-lg border border-border/50 bg-card p-5">
-            <div className="font-heading text-3xl font-extrabold text-primary">{value}</div>
-            <div className="mt-1 text-sm text-muted-foreground">{label}</div>
+      <section className="px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[360px_minmax(0,1fr)]">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-normal text-primary">Developer workflow</p>
+            <h2 className="mt-2 font-heading text-3xl font-extrabold tracking-tight">
+              From idea to shipped integration
+            </h2>
+            <p className="mt-4 leading-7 text-muted-foreground">
+              Start with live requests, copy stable data IDs, import the OpenAPI spec, and keep response handling predictable across your app.
+            </p>
           </div>
-        ))}
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {developerLinks.map((item) => (
+              <Link key={item.href} href={item.href} className="rounded-lg border border-border/60 bg-card p-5 transition-colors hover:border-primary/60">
+                <item.icon className="size-5 text-primary" />
+                <h3 className="mt-4 font-heading text-xl font-bold">{item.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.text}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-border/50 bg-card px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
+          {[
+            ["One response shape", "Every handled response includes success, version, request_id, timestamp, and either data or a structured error."],
+            ["Bangladesh-first coverage", "Administrative geography, Bengali text helpers, national dates, people, books, foods, rivers, and local validation rules live together."],
+            ["Import-friendly", "OpenAPI, Postman, Insomnia, and VS Code REST collections are ready when you want codegen or team sharing."],
+          ].map(([title, text]) => (
+            <div key={title} className="rounded-lg border border-border/60 bg-background p-5">
+              <ShieldCheck className="size-5 text-primary" />
+              <h3 className="mt-4 font-heading text-xl font-bold">{title}</h3>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   );
