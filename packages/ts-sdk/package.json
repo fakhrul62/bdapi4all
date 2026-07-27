@@ -1,0 +1,18 @@
+{
+  "name": "@bdapi4all/sdk",
+  "version": "1.0.0",
+  "description": "Official TypeScript SDK for BDApi4All - free Bangladesh REST API",
+  "license": "MIT",
+  "type": "module",
+  "main": "index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./react": "./react.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "typescript": "^5"
+  }
+}

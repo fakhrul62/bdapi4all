@@ -1,0 +1,16 @@
+{
+  "name": "@bdapi4all/cli",
+  "version": "1.0.0",
+  "description": "CLI for BDApi4All - query, validate, and mock Bangladesh API data",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "bdapi": "./cli.ts"
+  },
+  "scripts": {
+    "start": "tsx cli.ts"
+  },
+  "dependencies": {
+    "tsx": "^4.22.4"
+  }
+}
