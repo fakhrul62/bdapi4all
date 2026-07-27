@@ -17,9 +17,6 @@ export async function GET() {
 
   const stream = new ReadableStream({
     async start(controller) {
-      let heartbeat: ReturnType<typeof setInterval>;
-      let timeout: ReturnType<typeof setTimeout>;
-
       const send = (event: string, data: unknown) => {
         try {
           controller.enqueue(
@@ -27,16 +24,6 @@ export async function GET() {
           );
         } catch {
           // controller may be closed
-        }
-      };
-
-      const cleanup = () => {
-        if (heartbeat) clearInterval(heartbeat);
-        if (timeout) clearTimeout(timeout);
-        try {
-          controller.close();
-        } catch {
-          // already closed
         }
       };
 
@@ -90,11 +77,18 @@ export async function GET() {
         // enrichment_runs table may not exist in all environments
       }
 
-      heartbeat = setInterval(() => {
+      const heartbeat = setInterval(() => {
         send("heartbeat", { timestamp: new Date().toISOString() });
       }, 15000);
 
-      timeout = setTimeout(cleanup, 5 * 60 * 1000);
+      setTimeout(() => {
+        clearInterval(heartbeat);
+        try {
+          controller.close();
+        } catch {
+          // already closed
+        }
+      }, 5 * 60 * 1000);
     },
 
     cancel() {

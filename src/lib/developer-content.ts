@@ -447,6 +447,22 @@ const coreEndpointDefinitions: EndpointDefinition[] = [
     recipes: ["Mock API responses in tests", "Offline development without database"],
   },
   {
+    slug: "export",
+    group: "Data Platform",
+    title: "Bulk Export",
+    method: "GET",
+    path: "/export",
+    summary: "Bulk export data in JSON, CSV, or XML.",
+    description: "Export any encyclopedia category or geo endpoint in bulk. Supports JSON, CSV, and XML formats with downloadable file responses.",
+    cacheTtl: "1 hour",
+    parameters: [
+      { name: "category", label: "Category", type: "string", location: "query", required: true, description: "Data category to export (e.g. rivers, districts, spices).", example: "rivers" },
+      { name: "format", label: "Format", type: "string", location: "query", required: false, description: "Export format: json, csv, or xml (default json).", example: "csv" },
+    ],
+    sampleResponse: { category: "rivers", count: 50, format: "json" },
+    recipes: ["Download data snapshots", "Import into spreadsheets or databases", "Sync data to external systems"],
+  },
+  {
     slug: "health",
     group: "Operations",
     title: "Health Check",
