@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { errorResponse } from "@/lib/response";
 
 const MAX_SORT_FIELDS = 5;
@@ -98,4 +99,24 @@ export function projectItems<T>(items: T[], fields?: string[]) {
   }
 
   return items.map((item) => pickFields(item, fields));
+}
+
+const paginationSchema = z.object({
+  page: z.coerce.number().int().min(1).default(1),
+  limit: z.coerce.number().int().min(1).max(100).default(20),
+});
+
+export function parsePagination(searchParams: URLSearchParams) {
+  return paginationSchema.parse(Object.fromEntries(searchParams));
+}
+
+export function buildPaginationMeta(page: number, limit: number, total: number) {
+  return {
+    pagination: {
+      page,
+      limit,
+      total,
+      total_pages: Math.ceil(total / limit),
+    },
+  };
 }

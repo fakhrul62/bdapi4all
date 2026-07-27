@@ -4,6 +4,13 @@ import { prisma } from "@/lib/db";
 import { handleApi } from "@/lib/api-handler";
 import { optionsResponse } from "@/lib/response";
 import { optionalIdSchema, parseSearchParams } from "@/lib/validators";
+import {
+  buildPaginationMeta,
+  parseFields,
+  parsePagination,
+  parseSort,
+  projectItems,
+} from "@/lib/query";
 
 export const runtime = "nodejs";
 
@@ -11,19 +18,35 @@ const querySchema = z.object({
   division_id: optionalIdSchema,
 });
 
+const sortableFields = new Set(["id", "name_en", "name_bn", "division_id"]);
+
 export async function GET(request: Request) {
   return handleApi(request, async () => {
     const query = parseSearchParams(request, querySchema);
-    const cacheKey = `geo:districts:${query.division_id ?? "all"}`;
-    const { data } = await withCache(cacheKey, CACHE_TTL.geo, () =>
-      prisma.district.findMany({
-        where: query.division_id ? { division_id: query.division_id } : undefined,
-        orderBy: { name_en: "asc" },
-      }),
-    );
+    const url = new URL(request.url);
+    const { page, limit } = parsePagination(url.searchParams);
+    const skip = (page - 1) * limit;
+    const fields = parseFields(url.searchParams);
+    const sort = parseSort(url.searchParams, sortableFields);
+    const where = query.division_id ? { division_id: query.division_id } : undefined;
+    const cacheKey = `geo:districts:list:${url.searchParams.toString()}`;
+
+    const { data } = await withCache(cacheKey, CACHE_TTL.geo, async () => {
+      const [items, total] = await Promise.all([
+        prisma.district.findMany({
+          where,
+          skip,
+          take: limit,
+          orderBy: sort.orderBy,
+        }),
+        prisma.district.count({ where }),
+      ]);
+      return { items: projectItems(items, fields), total };
+    });
 
     return {
-      data,
+      data: data.items,
+      meta: buildPaginationMeta(page, limit, data.total),
       cacheControl: "public, s-maxage=86400, stale-while-revalidate=43200",
     };
   });
