@@ -27,6 +27,17 @@ export type EndpointDefinition = {
 export const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://bdapi4all.vercel.app/api/v1";
 
+const paginationParameters: EndpointParameter[] = [
+  { name: "page", label: "Page", type: "integer", location: "query", required: false, description: "Page number for pagination (default 1).", example: "1" },
+  { name: "limit", label: "Limit", type: "integer", location: "query", required: false, description: "Items per page, max 100 (default 20).", example: "20" },
+  { name: "fields", label: "Fields", type: "string", location: "query", required: false, description: "Comma-separated sparse fieldset selection.", example: "id,name_en" },
+  { name: "sort", label: "Sort", type: "string", location: "query", required: false, description: "Comma-separated sort fields, prefix with - for descending.", example: "-name_en" },
+];
+
+function listEndpointParameters(base: EndpointParameter[]): EndpointParameter[] {
+  return [...base, ...paginationParameters];
+}
+
 const coreEndpointDefinitions: EndpointDefinition[] = [
   {
     slug: "divisions",
@@ -35,9 +46,9 @@ const coreEndpointDefinitions: EndpointDefinition[] = [
     method: "GET",
     path: "/divisions",
     summary: "List all 8 divisions.",
-    description: "Returns every administrative division in Bangladesh with English/Bengali names and coordinates.",
+    description: "Returns every administrative division in Bangladesh with English/Bengali names and coordinates. Supports pagination, sparse fieldsets, and sorting.",
     cacheTtl: "24 hours",
-    parameters: [],
+    parameters: listEndpointParameters([]),
     sampleResponse: [{ id: 6, name_en: "Dhaka", name_bn: "ঢাকা", lat: 23.8103, lng: 90.4125 }],
     recipes: ["Build a division dropdown", "Browse Bangladesh administrative hierarchy"],
   },
@@ -63,11 +74,11 @@ const coreEndpointDefinitions: EndpointDefinition[] = [
     method: "GET",
     path: "/districts",
     summary: "List all 64 districts.",
-    description: "Returns districts, optionally filtered by division_id.",
+    description: "Returns district records, optionally filtered by division_id. Supports pagination, sparse fieldsets, and sorting.",
     cacheTtl: "24 hours",
-    parameters: [
+    parameters: listEndpointParameters([
       { name: "division_id", label: "Division ID", type: "integer", location: "query", required: false, description: "Filter districts by division.", example: "6" },
-    ],
+    ]),
     sampleResponse: [{ id: 47, division_id: 6, name_en: "Dhaka", name_bn: "ঢাকা", lat: 23.7115253, lng: 90.4111451 }],
     recipes: ["Build a district dropdown", "Find district ids for prayer-time requests"],
   },
@@ -93,11 +104,11 @@ const coreEndpointDefinitions: EndpointDefinition[] = [
     method: "GET",
     path: "/upazilas",
     summary: "List upazilas.",
-    description: "Returns all upazilas or only upazilas under a district.",
+    description: "Returns all upazilas or only upazilas under a district. Supports pagination, sparse fieldsets, and sorting.",
     cacheTtl: "24 hours",
-    parameters: [
+    parameters: listEndpointParameters([
       { name: "district_id", label: "District ID", type: "integer", location: "query", required: false, description: "Filter by district.", example: "47" },
-    ],
+    ]),
     sampleResponse: [{ id: 302, district_id: 47, name_en: "Dhamrai", name_bn: "ধামরাই" }],
     recipes: ["Build dependent district/upazila selects"],
   },
@@ -123,11 +134,11 @@ const coreEndpointDefinitions: EndpointDefinition[] = [
     method: "GET",
     path: "/unions",
     summary: "List unions.",
-    description: "Returns unions, optionally filtered by upazila_id. Unfiltered requests are capped for performance.",
+    description: "Returns unions, optionally filtered by upazila_id. Supports pagination, sparse fieldsets, and sorting.",
     cacheTtl: "24 hours",
-    parameters: [
+    parameters: listEndpointParameters([
       { name: "upazila_id", label: "Upazila ID", type: "integer", location: "query", required: false, description: "Filter by upazila.", example: "302" },
-    ],
+    ]),
     sampleResponse: [{ id: 2794, upazila_id: 302, name_en: "Dhamrai", name_bn: "ধামরাই" }],
     recipes: ["Build full Bangladesh address forms"],
   },
@@ -421,6 +432,34 @@ const coreEndpointDefinitions: EndpointDefinition[] = [
     ],
     sampleResponse: { original: "bangladesh", transliterated: "বাংলাদেশ" },
     recipes: ["Prototype Bengali text input helpers"],
+  },
+  {
+    slug: "fixtures",
+    group: "Developer Tools",
+    title: "Fixtures",
+    method: "GET",
+    path: "/fixtures",
+    summary: "Download sample response fixtures for all endpoints.",
+    description: "Returns canned sample responses for every endpoint. Useful for offline development, CI testing, and mocking.",
+    cacheTtl: "1 hour",
+    parameters: [],
+    sampleResponse: { total: 50, endpoints: [] },
+    recipes: ["Mock API responses in tests", "Offline development without database"],
+  },
+  {
+    slug: "fixture",
+    group: "Developer Tools",
+    title: "Single Fixture",
+    method: "GET",
+    path: "/fixtures/{slug}",
+    summary: "Download a sample fixture for one endpoint.",
+    description: "Returns a downloadable JSON fixture for a specific endpoint slug.",
+    cacheTtl: "1 hour",
+    parameters: [
+      { name: "slug", label: "Endpoint Slug", type: "string", location: "path", required: true, description: "Endpoint slug from the fixtures list.", example: "divisions" },
+    ],
+    sampleResponse: { id: 6, name_en: "Dhaka", name_bn: "ঢাকা" },
+    recipes: ["Download a single endpoint fixture"],
   },
 ];
 

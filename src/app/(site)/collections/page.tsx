@@ -19,6 +19,11 @@ const collections = [
     href: "/collections/bdapi4all.http",
     description: "Plain HTTP request file for VS Code REST Client and JetBrains IDEs.",
   },
+  {
+    title: "Response Fixtures",
+    href: "/api/v1/fixtures",
+    description: "Downloadable sample JSON responses for every endpoint. Use for offline development, CI testing, and mocking.",
+  },
 ];
 
 export default function CollectionsPage() {
