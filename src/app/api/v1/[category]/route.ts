@@ -30,7 +30,7 @@ export async function GET(
     return {
       data: data.items,
       meta: data.meta,
-      cacheControl: "public, s-maxage=86400, stale-while-revalidate=3600",
+      cacheControl: "public, s-maxage=300, stale-while-revalidate=60",
     };
   });
 }
