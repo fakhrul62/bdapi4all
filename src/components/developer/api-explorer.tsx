@@ -47,6 +47,53 @@ export function ApiExplorer() {
 
   const endpointCount = grouped.reduce((sum, group) => sum + group.endpoints.length, 0);
 
+  const availableFields = useMemo(() => {
+    if (selected.availableFields && selected.availableFields.length > 0) {
+      return selected.availableFields;
+    }
+    const sample = Array.isArray(selected.sampleResponse) ? selected.sampleResponse[0] : selected.sampleResponse;
+    const sampleKeys = sample && typeof sample === "object" ? Object.keys(sample) : [];
+    const defaults = ["id", "name_en", "name_bn", "verified", "needs_image", "created_at", "updated_at"];
+    return Array.from(new Set([...defaults, ...sampleKeys])).filter(
+      (k) => typeof k === "string" && !k.includes(" ")
+    );
+  }, [selected]);
+
+  const availableSorts = useMemo(() => {
+    const baseFields = availableFields.filter((f) =>
+      ["name_en", "title_en", "updated_at", "created_at", "id", "year", "published_year", "area_sq_km", "length_km"].includes(f)
+    );
+    const options: string[] = [];
+    (baseFields.length > 0 ? baseFields : ["name_en", "updated_at", "created_at", "id"]).forEach((f) => {
+      options.push(f, `-${f}`);
+    });
+    return options;
+  }, [availableFields]);
+
+  function toggleFieldChoice(fieldName: string) {
+    const currentStr = values["fields"] ?? "";
+    const currentList = currentStr.split(",").map((s) => s.trim()).filter(Boolean);
+    let newList: string[];
+    if (currentList.includes(fieldName)) {
+      newList = currentList.filter((item) => item !== fieldName);
+    } else {
+      newList = [...currentList, fieldName];
+    }
+    updateValue("fields", newList.join(","));
+  }
+
+  function toggleSortChoice(sortName: string) {
+    const currentStr = values["sort"] ?? "";
+    const currentList = currentStr.split(",").map((s) => s.trim()).filter(Boolean);
+    let newList: string[];
+    if (currentList.includes(sortName)) {
+      newList = currentList.filter((item) => item !== sortName);
+    } else {
+      newList = [...currentList, sortName];
+    }
+    updateValue("sort", newList.join(","));
+  }
+
   function updateValue(name: string, value: string) {
     setValuesBySlug((current) => ({
       ...current,
@@ -191,24 +238,81 @@ export function ApiExplorer() {
               <div>
                 <div className="mb-2 text-sm font-semibold">Parameters</div>
                 {selected.parameters.length ? (
-                  <div className="space-y-3">
-                    {selected.parameters.map((param) => (
-                      <label key={param.name} className="block">
-                        <span className="mb-1 flex items-center justify-between text-sm">
-                          <span>{param.label}</span>
-                          <span className="font-mono text-xs text-muted-foreground">
-                            {param.location}{param.required ? " required" : ""}
+                  <div className="space-y-4">
+                    {selected.parameters.map((param) => {
+                      const isFields = param.name === "fields";
+                      const isSort = param.name === "sort";
+                      const currentVal = values[param.name] ?? "";
+                      const selectedItems = currentVal.split(",").map((s) => s.trim()).filter(Boolean);
+
+                      return (
+                        <label key={param.name} className="block">
+                          <span className="mb-1 flex items-center justify-between text-sm">
+                            <span>{param.label}</span>
+                            <span className="font-mono text-xs text-muted-foreground">
+                              {param.location}{param.required ? " required" : ""}
+                            </span>
                           </span>
-                        </span>
-                        <input
-                          value={values[param.name] ?? ""}
-                          onChange={(event) => updateValue(param.name, event.target.value)}
-                          className="h-10 w-full rounded-md border border-input bg-background px-3 font-mono text-sm outline-none focus:border-primary"
-                          placeholder={param.example}
-                        />
-                        <span className="mt-1 block text-xs text-muted-foreground">{param.description}</span>
-                      </label>
-                    ))}
+                          <input
+                            value={currentVal}
+                            onChange={(event) => updateValue(param.name, event.target.value)}
+                            className="h-10 w-full rounded-md border border-input bg-background px-3 font-mono text-sm outline-none focus:border-primary"
+                            placeholder={param.example}
+                          />
+                          <span className="mt-1 block text-xs text-muted-foreground">{param.description}</span>
+
+                          {isFields && (
+                            <div className="mt-2 space-y-1.5 rounded-md border border-border/50 bg-muted/20 p-2.5">
+                              <div className="text-xs font-semibold text-muted-foreground">Available fields to choose:</div>
+                              <div className="flex flex-wrap gap-1.5">
+                                {availableFields.map((f) => {
+                                  const active = selectedItems.includes(f);
+                                  return (
+                                    <button
+                                      key={f}
+                                      type="button"
+                                      onClick={() => toggleFieldChoice(f)}
+                                      className={`rounded-md border px-2 py-0.5 font-mono text-xs transition-colors ${
+                                        active
+                                          ? "border-primary bg-primary/20 text-primary font-semibold"
+                                          : "border-border/60 bg-background/80 text-muted-foreground hover:border-primary/60 hover:text-foreground"
+                                      }`}
+                                    >
+                                      {active ? `✓ ${f}` : `+ ${f}`}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          )}
+
+                          {isSort && (
+                            <div className="mt-2 space-y-1.5 rounded-md border border-border/50 bg-muted/20 p-2.5">
+                              <div className="text-xs font-semibold text-muted-foreground">Available sort fields to choose:</div>
+                              <div className="flex flex-wrap gap-1.5">
+                                {availableSorts.map((s) => {
+                                  const active = selectedItems.includes(s);
+                                  return (
+                                    <button
+                                      key={s}
+                                      type="button"
+                                      onClick={() => toggleSortChoice(s)}
+                                      className={`rounded-md border px-2 py-0.5 font-mono text-xs transition-colors ${
+                                        active
+                                          ? "border-primary bg-primary/20 text-primary font-semibold"
+                                          : "border-border/60 bg-background/80 text-muted-foreground hover:border-primary/60 hover:text-foreground"
+                                      }`}
+                                    >
+                                      {active ? `✓ ${s}` : `+ ${s}`}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          )}
+                        </label>
+                      );
+                    })}
                   </div>
                 ) : (
                   <p className="text-sm text-muted-foreground">No parameters required.</p>
@@ -217,11 +321,11 @@ export function ApiExplorer() {
 
               <div>
                 <div className="mb-2 text-sm font-semibold">Request URL</div>
-                <div className="flex gap-2">
-                  <code className="min-w-0 flex-1 rounded-md border border-border/50 bg-muted/40 px-3 py-2 text-xs">
+                <div className="flex items-start gap-2 min-w-0">
+                  <code className="min-w-0 flex-1 overflow-x-auto rounded-md border border-border/50 bg-muted/40 px-3 py-2 font-mono text-xs break-all whitespace-pre-wrap">
                     {url}
                   </code>
-                  <Button variant="outline" size="icon" onClick={() => copy(url)} aria-label="Copy URL">
+                  <Button variant="outline" size="icon" onClick={() => copy(url)} aria-label="Copy URL" className="shrink-0">
                     <Copy className="h-4 w-4" />
                   </Button>
                 </div>

@@ -245,6 +245,37 @@ function filterParam(name: string) {
   };
 }
 
+export const categoryFieldsMap: Record<string, string[]> = {
+  canals: ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "location", "connects", "districts", "source", "source_url", "created_at", "updated_at"],
+  haors: ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "location", "districts", "area_sq_km", "source", "source_url", "created_at", "updated_at"],
+  forests: ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "location", "forest_type", "districts", "source", "source_url", "created_at", "updated_at"],
+  islands: ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "location", "waterbody", "districts", "source", "source_url", "created_at", "updated_at"],
+  rivers: ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "length_km", "origin", "flows_through", "outflow", "source", "source_url", "created_at", "updated_at"],
+  seasons: ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "bangla_name", "months_en", "months_bn", "characteristics", "associated_festivals", "crops", "source", "created_at", "updated_at"],
+  animals: ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "scientific_name", "category", "habitat", "conservation_status", "is_national_animal", "source", "created_at", "updated_at"],
+  flowers: ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "scientific_name", "blooming_season", "is_national_flower", "fragrance", "colors", "source", "created_at", "updated_at"],
+  trees: ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "scientific_name", "is_national_tree", "regions_found", "uses", "source", "created_at", "updated_at"],
+  festivals: ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "type", "religion", "date_or_period", "traditions", "foods", "source", "created_at", "updated_at"],
+  "traditional-foods": ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "category", "region", "ingredients", "source", "created_at", "updated_at"],
+  spices: ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "scientific_name", "category", "form", "flavor_profile", "common_uses", "regions_found", "is_blend", "ingredients", "source", "created_at", "updated_at"],
+  "traditional-clothing": ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "gender", "occasion", "region", "source", "created_at", "updated_at"],
+  "traditional-music": ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "type", "instruments", "source", "created_at", "updated_at"],
+  "traditional-crafts": ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "region", "materials", "source", "created_at", "updated_at"],
+  "historical-periods": ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "start_year", "end_year", "era", "key_events", "source", "created_at", "updated_at"],
+  "historical-events": ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "date", "year", "period_id", "category", "significance", "source", "created_at", "updated_at"],
+  "historical-places": ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "location", "district_id", "period_id", "type", "built_year", "built_by", "source", "created_at", "updated_at"],
+  "political-leaders": ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "born", "died", "birth_place", "party_id", "role", "era", "tenure_start", "tenure_end", "achievements", "source", "created_at", "updated_at"],
+  "political-parties": ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "founded_year", "founder", "ideology", "is_active", "source", "created_at", "updated_at"],
+  authors: ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "born", "died", "birth_place", "genres", "era", "bio_en", "bio_bn", "awards", "source", "created_at", "updated_at"],
+  books: ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "title_en", "title_bn", "author_id", "published_year", "publisher", "isbn", "genre", "century", "language", "cover_image_url", "source", "created_at", "updated_at"],
+  "sports-categories": ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "type", "source", "created_at", "updated_at"],
+  players: ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "born", "birth_place", "sport_id", "position_or_role", "national_team", "active_years", "career_stats", "achievements", "is_legend", "source", "created_at", "updated_at"],
+  "national-teams": ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "sport_id", "founded_year", "governing_body", "major_achievements", "current_ranking", "source", "created_at", "updated_at"],
+  scientists: ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "born", "died", "field", "institutions", "achievements", "source", "created_at", "updated_at"],
+  artists: ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "born", "died", "medium", "notable_works", "awards", "source", "created_at", "updated_at"],
+  "freedom-fighters": ["id", "name_en", "name_bn", "description_en", "description_bn", "verified", "needs_image", "born", "died", "district", "role", "sector", "awarded_title", "source", "created_at", "updated_at"],
+};
+
 export const encyclopediaEndpointDefinitions: EndpointDefinition[] = categories.flatMap((category) => {
   const listParams = [
     { name: "page", label: "Page", type: "integer" as const, location: "query" as const, required: false, description: "Page number. Defaults to 1.", example: "1" },
@@ -263,6 +294,7 @@ export const encyclopediaEndpointDefinitions: EndpointDefinition[] = categories.
     description: category.description,
     cacheTtl: "24 hours",
     parameters: listParams,
+    availableFields: categoryFieldsMap[category.slug] ?? ["id", "name_en", "name_bn", "verified", "created_at", "updated_at"],
     sampleResponse: [category.sample],
     recipes: category.slug === "books"
       ? ["Load all books by default", "Use Books by Author or Books by Category for focused filtering"]

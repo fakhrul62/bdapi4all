@@ -20,6 +20,7 @@ export type EndpointDefinition = {
   description: string;
   cacheTtl: string;
   parameters: EndpointParameter[];
+  availableFields?: string[];
   sampleResponse: unknown;
   recipes: string[];
 };
