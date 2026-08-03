@@ -54,7 +54,7 @@ function base(page: PageSeed) {
     image_url: page.imageUrl,
     source: "wikipedia",
     source_url: page.pageUrl,
-    verified: true,
+    verified: false,
     needs_image: !page.imageUrl,
   };
 }
