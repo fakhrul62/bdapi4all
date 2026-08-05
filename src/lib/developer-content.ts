@@ -545,6 +545,13 @@ export function findEndpoint(slug: string) {
   return endpointDefinitions.find((endpoint) => endpoint.slug === slug);
 }
 
+export function getApiBaseUrl() {
+  if (typeof window !== "undefined") {
+    return `${window.location.origin}/api/v1`;
+  }
+  return API_BASE_URL;
+}
+
 export function buildUrl(endpoint: EndpointDefinition, values: Record<string, string>) {
   let path = endpoint.path;
   for (const parameter of endpoint.parameters.filter((item) => item.location === "path")) {
@@ -553,11 +560,12 @@ export function buildUrl(endpoint: EndpointDefinition, values: Record<string, st
 
   const search = new URLSearchParams();
   for (const parameter of endpoint.parameters.filter((item) => item.location === "query")) {
-    const value = values[parameter.name];
+    const value = values[parameter.name] || (parameter.required ? parameter.example : "");
     if (value) search.set(parameter.name, value);
   }
 
-  return `${API_BASE_URL}${path}${search.toString() ? `?${search.toString()}` : ""}`;
+  const baseUrl = getApiBaseUrl();
+  return `${baseUrl}${path}${search.toString() ? `?${search.toString()}` : ""}`;
 }
 
 export function codeSamples(endpoint: EndpointDefinition) {
