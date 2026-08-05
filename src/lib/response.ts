@@ -56,7 +56,6 @@ export function successResponse<T>(data: T, init?: ApiResponseInit) {
     {
       success: true,
       version: API_VERSION,
-      request_id: requestId,
       timestamp: new Date().toISOString(),
       data,
       ...(init?.meta ? { meta: init.meta } : {}),
@@ -83,7 +82,6 @@ export function errorResponse(
     {
       success: false,
       version: API_VERSION,
-      request_id: requestId,
       timestamp: new Date().toISOString(),
       error: {
         code,

@@ -188,7 +188,6 @@ export default function LandingPage() {
               <code>{`{
   "success": true,
   "version": "v1",
-  "request_id": "bdapi_7Yk29",
   "timestamp": "2026-06-30T18:00:00.000Z",
   "data": {
     "date": "2026-12-16",
