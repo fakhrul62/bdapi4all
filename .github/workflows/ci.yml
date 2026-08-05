@@ -35,5 +35,5 @@ jobs:
       - name: Build Next.js application
         run: npm run build
         env:
-          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
+          DATABASE_URL: ${{ secrets.DATABASE_URL || 'postgresql://postgres.exvughrmuxsuthnqqhtv:xSJ5jxcDR6bsnmod@aws-1-us-east-2.pooler.supabase.com:6543/postgres' }}
           NEXT_PUBLIC_API_BASE_URL: "https://bdapi4all.vercel.app/api/v1"
