@@ -61,6 +61,12 @@ export function Navbar() {
             >
               Changelog
             </Link>
+            <Link
+              href="/dashboard"
+              className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            >
+              API Keys
+            </Link>
           </nav>
         </div>
         <div className="flex items-center justify-end space-x-4">

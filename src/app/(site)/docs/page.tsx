@@ -51,7 +51,6 @@ export default function DocsPage() {
             <code>{`{
   "success": true,
   "version": "v1",
-  "request_id": "6f52e18d-1c2b-4f7f-a9d3-0aaec9cf70a1",
   "timestamp": "2025-01-15T10:30:00Z",
   "data": {
     "id": 47,
@@ -68,7 +67,6 @@ export default function DocsPage() {
             <code>{`{
   "success": false,
   "version": "v1",
-  "request_id": "6f52e18d-1c2b-4f7f-a9d3-0aaec9cf70a1",
   "timestamp": "2025-01-15T10:30:00Z",
   "error": {
     "code": "NOT_FOUND",
@@ -85,8 +83,30 @@ export default function DocsPage() {
           Request Tracking
         </h2>
         <p className="leading-7">
-          Handled API responses include a <code className="font-mono text-primary">request_id</code> value and matching <code className="font-mono text-primary">X-Request-ID</code> header. Send your own header to keep the same ID through client, proxy, and API logs.
+          Responses include an <code className="font-mono text-primary">X-Request-ID</code> header. Send your own <code className="font-mono text-primary">X-Request-ID</code> header to keep the same ID through client, proxy, and API logs.
         </p>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="scroll-m-20 border-b border-border/50 pb-2 text-3xl font-semibold tracking-tight font-heading mt-10">
+          API Keys
+        </h2>
+        <p className="leading-7">
+          BDApi4All is open and free to use without a key. Optional API keys raise your rate limit and enable per-key usage analytics.
+        </p>
+        <div className="rounded-md border border-border/50 bg-card p-4">
+          <h3 className="font-semibold">Send your key</h3>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Add the key as the <code className="font-mono text-primary">X-API-Key</code> header or the <code className="font-mono text-primary">apikey</code> query parameter.
+          </p>
+          <pre className="mt-3 overflow-x-auto rounded-md bg-[#0d1117] p-4 text-sm font-mono text-green-300">
+            <code>{`curl "https://bdapi4all.vercel.app/api/v1/districts" \\
+  -H "X-API-Key: bdapi_..."`}</code>
+          </pre>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Get a key from the <a className="font-medium text-primary hover:underline" href="/dashboard">API Keys dashboard</a>.
+          </p>
+        </div>
       </div>
 
       <div className="space-y-4">

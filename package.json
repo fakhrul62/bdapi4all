@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prepare": "husky",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
     "postinstall": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
@@ -15,10 +17,20 @@
     "data:normalize": "tsx scripts/normalize-encyclopedia-data.ts",
     "data:bn-map": "tsx scripts/enrich-bengali-and-mapping.ts",
     "data:search-import": "tsx scripts/search-import-encyclopedia.ts",
-    "data:seed-spices": "tsx scripts/seed-spices.ts"
+    "data:seed-spices": "tsx scripts/seed-spices.ts",
+    "data:quality": "tsx scripts/validate-data-quality.ts",
+    "data:backfill-verified": "tsx scripts/backfill-verified.ts",
+    "keys:issue": "tsx scripts/manage-keys.ts issue",
+    "keys:list": "tsx scripts/manage-keys.ts list",
+    "keys:revoke": "tsx scripts/manage-keys.ts revoke",
+    "contract:validate": "tsx scripts/validate-contract.ts",
+    "data:full-refresh": "npm run db:push && npm run db:seed && npm run data:seed-spices && npm run data:normalize && npm run data:bn-map && npm run data:quality"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": "eslint --fix"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
@@ -49,6 +61,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.3.0",
     "prisma": "^7.8.0",
     "tailwindcss": "^4",
     "tsx": "^4.22.4",

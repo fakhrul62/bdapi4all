@@ -812,13 +812,29 @@ model ApiUsageLog {
   id               Int      @id @default(autoincrement())
   endpoint         String
   ip_hash          String
+  api_key_id       Int?
   response_time_ms Int
   status_code      Int
   created_at       DateTime @default(now())
 
   @@index([endpoint])
   @@index([created_at])
+  @@index([api_key_id])
   @@map("api_usage_logs")
+}
+
+model ApiKey {
+  id          Int       @id @default(autoincrement())
+  key_hash    String    @unique
+  name        String
+  status      String    @default("active")
+  rate_limit  Int       @default(100)
+  created_at  DateTime  @default(now())
+  last_used_at DateTime?
+
+  @@index([status])
+  @@index([created_at])
+  @@map("api_keys")
 }
 
 model EnrichmentRun {

@@ -280,7 +280,7 @@ export default function LandingPage() {
       <section className="relative border-y border-border/50 bg-card px-4 py-12 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
           {[
-            ["One response shape", "Every handled response includes success, version, request_id, timestamp, and either data or a structured error."],
+            ["One response shape", "Every handled response includes success, version, timestamp, X-Request-ID header, and either data or a structured error."],
             ["Bangladesh-first coverage", "Administrative geography, Bengali text helpers, national dates, people, books, foods, rivers, and local validation rules live together."],
             ["Import-friendly", "OpenAPI, Postman, Insomnia, and VS Code REST collections are ready when you want codegen or team sharing."],
           ].map(([title, text]) => (

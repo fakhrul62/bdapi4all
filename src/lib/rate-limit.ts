@@ -3,7 +3,7 @@ import { redis } from "@/lib/redis";
 
 const fallbackWindow = new Map<string, { count: number; resetAt: number }>();
 
-const ratelimit =
+const defaultRatelimit =
   redis &&
   new Ratelimit({
     redis,
@@ -23,11 +23,25 @@ export function getClientIp(request: Request) {
   );
 }
 
-export async function checkRateLimit(request: Request) {
-  const ip = getClientIp(request);
+type LimitResult = {
+  success: boolean;
+  remaining: number;
+  reset: number;
+  retryAfter: number;
+};
 
-  if (ratelimit) {
-    const result = await ratelimit.limit(ip);
+export async function checkKey(
+  key: string,
+  limit: number,
+  windowMs = 60_000,
+): Promise<LimitResult> {
+  if (redis) {
+    const instance = new Ratelimit({
+      redis,
+      limiter: Ratelimit.slidingWindow(limit, `${windowMs / 1000} s`),
+      prefix: "bdapi4all:ratelimit",
+    });
+    const result = await instance.limit(key);
     return {
       success: result.success,
       remaining: result.remaining,
@@ -37,18 +51,39 @@ export async function checkRateLimit(request: Request) {
   }
 
   const now = Date.now();
-  const current = fallbackWindow.get(ip);
+  const current = fallbackWindow.get(key);
   if (!current || current.resetAt <= now) {
-    fallbackWindow.set(ip, { count: 1, resetAt: now + 60_000 });
-    return { success: true, remaining: 99, reset: now + 60_000, retryAfter: 60 };
+    fallbackWindow.set(key, { count: 1, resetAt: now + windowMs });
+    return {
+      success: true,
+      remaining: limit - 1,
+      reset: now + windowMs,
+      retryAfter: Math.ceil(windowMs / 1000),
+    };
   }
 
   current.count += 1;
-  const remaining = Math.max(0, 100 - current.count);
+  const remaining = Math.max(0, limit - current.count);
   return {
-    success: current.count <= 100,
+    success: current.count <= limit,
     remaining,
     reset: current.resetAt,
     retryAfter: Math.max(1, Math.ceil((current.resetAt - now) / 1000)),
   };
+}
+
+export async function checkRateLimit(request: Request, limit = 100) {
+  const ip = getClientIp(request);
+
+  if (defaultRatelimit) {
+    const result = await defaultRatelimit.limit(ip);
+    return {
+      success: result.success,
+      remaining: result.remaining,
+      reset: result.reset,
+      retryAfter: Math.max(1, Math.ceil((result.reset - Date.now()) / 1000)),
+    };
+  }
+
+  return checkKey(ip, limit);
 }

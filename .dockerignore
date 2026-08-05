@@ -1,0 +1,30 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build output
+.next
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# VCS & editor
+.git
+.gitignore
+.vscode
+.idea
+
+# Logs
+*.log
+npm-debug.log*
+
+# Tests & docs
+coverage
+cypress
+
+# Misc
+.DS_Store
+*.md
+Thumbs.db

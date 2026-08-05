@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Copy, ExternalLink, Play, Search } from "lucide-react";
+import { Copy, ExternalLink, Play, Search, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   buildUrl,
@@ -31,6 +31,7 @@ export function ApiExplorer() {
   const [loading, setLoading] = useState(false);
   const [sampleKey, setSampleKey] = useState<keyof ReturnType<typeof codeSamples>>("curl");
   const [endpointQuery, setEndpointQuery] = useState("");
+  const [apiKey, setApiKey] = useState("");
 
   const grouped = useMemo(
     () =>
@@ -109,7 +110,9 @@ export function ApiExplorer() {
     setStatus(null);
     setDuration(null);
     try {
-      const res = await fetch(url);
+      const res = await fetch(url, {
+        headers: apiKey ? { "X-API-Key": apiKey } : undefined,
+      });
       const text = await res.text();
       const parsed = text ? JSON.parse(text) : null;
       const responseTime = res.headers.get("x-response-time");
@@ -331,6 +334,21 @@ export function ApiExplorer() {
                 </div>
               </div>
 
+              <div>
+                <div className="mb-2 text-sm font-semibold">API Key (optional)</div>
+                <div className="flex items-center gap-2">
+                  <input
+                    value={apiKey}
+                    onChange={(event) => setApiKey(event.target.value)}
+                    placeholder="bdapi_..."
+                    className="h-10 w-full rounded-md border border-input bg-background px-3 font-mono text-xs outline-none focus:border-primary"
+                  />
+                </div>
+                <span className="mt-1 block text-xs text-muted-foreground">
+                  Optional. Leave empty to use the public anonymous quota.
+                </span>
+              </div>
+
               <Button onClick={sendRequest} disabled={loading} className="gap-2">
                 <Play className="h-4 w-4" />
                 {loading ? "Sending" : "Send Request"}
@@ -370,10 +388,22 @@ export function ApiExplorer() {
             <div className="rounded-lg border border-border/50 bg-card">
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/50 p-4">
                 <div className="font-semibold">Response</div>
-                <div className="flex flex-wrap gap-3 font-mono text-xs text-muted-foreground">
+                <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-muted-foreground">
                   {status !== null && <span>Status {status}</span>}
                   {duration !== null && <span>{duration} ms</span>}
                   {headers["x-ratelimit-remaining"] && <span>Remaining {headers["x-ratelimit-remaining"]}</span>}
+                </div>
+                <div className="flex gap-2">
+                  {response && (
+                    <>
+                      <Button variant="outline" size="icon" onClick={() => copy(response)} aria-label="Copy response">
+                        <Copy className="h-4 w-4" />
+                      </Button>
+                      <Button variant="outline" size="icon" onClick={() => setResponse("")} aria-label="Clear response">
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </>
+                  )}
                 </div>
               </div>
               <pre className="max-h-[58vh] min-h-80 overflow-auto bg-[#0d1117] p-4 text-sm text-green-300">

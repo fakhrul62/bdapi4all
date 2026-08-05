@@ -229,7 +229,7 @@ async function cleanAllUnverifiedFlags() {
   ] as const;
 
   for (const modelName of tables) {
-    const model = (prisma as any)[modelName];
+    const model = (prisma as unknown as Record<string, { updateMany?: (args: unknown) => Promise<{ count: number }> }>)[modelName];
     if (model && typeof model.updateMany === "function") {
       const res = await model.updateMany({
         where: {

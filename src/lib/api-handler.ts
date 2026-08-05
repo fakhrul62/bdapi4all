@@ -1,7 +1,8 @@
 import { ZodError } from "zod";
-import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { checkKey, checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { createRequestId, errorResponse, successResponse } from "@/lib/response";
 import { logApiUsage } from "@/lib/usage-log";
+import { touchApiKey, verifyApiKey } from "@/lib/api-key";
 
 type HandlerResult<T> = {
   data: T;
@@ -17,9 +18,13 @@ export async function handleApi<T>(
   const pathname = new URL(request.url).pathname;
   const ip = getClientIp(request);
   const requestId = createRequestId(request);
+  const apiKey = await verifyApiKey(request);
 
   try {
-    const limit = await checkRateLimit(request);
+    const limit = apiKey
+      ? await checkKey(`key:${apiKey.apiKeyId}`, apiKey.rateLimit)
+      : await checkRateLimit(request);
+
     if (!limit.success) {
       const response = errorResponse("RATE_LIMITED", "Rate limit exceeded.", 429, {
         responseTimeMs: Date.now() - startedAt,
@@ -34,8 +39,13 @@ export async function handleApi<T>(
         ip,
         responseTimeMs: Date.now() - startedAt,
         statusCode: 429,
+        apiKeyId: apiKey?.apiKeyId ?? null,
       });
       return response;
+    }
+
+    if (apiKey) {
+      await touchApiKey(apiKey.apiKeyId);
     }
 
     const result = await handler();
@@ -51,6 +61,7 @@ export async function handleApi<T>(
       ip,
       responseTimeMs: Date.now() - startedAt,
       statusCode: response.status,
+      apiKeyId: apiKey?.apiKeyId ?? null,
     });
     return response;
   } catch (error) {
@@ -64,12 +75,12 @@ export async function handleApi<T>(
         responseTimeMs,
         requestId,
       });
-      logApiUsage({ endpoint: pathname, ip, responseTimeMs, statusCode: 422 });
+      logApiUsage({ endpoint: pathname, ip, responseTimeMs, statusCode: 422, apiKeyId: apiKey?.apiKeyId ?? null });
       return response;
     }
 
     if (error instanceof Response) {
-      logApiUsage({ endpoint: pathname, ip, responseTimeMs, statusCode: error.status });
+      logApiUsage({ endpoint: pathname, ip, responseTimeMs, statusCode: error.status, apiKeyId: apiKey?.apiKeyId ?? null });
       return error;
     }
 
@@ -79,7 +90,7 @@ export async function handleApi<T>(
       500,
       { responseTimeMs, requestId },
     );
-    logApiUsage({ endpoint: pathname, ip, responseTimeMs, statusCode: 500 });
+    logApiUsage({ endpoint: pathname, ip, responseTimeMs, statusCode: 500, apiKeyId: apiKey?.apiKeyId ?? null });
     return response;
   }
 }

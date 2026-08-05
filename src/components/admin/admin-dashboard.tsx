@@ -65,6 +65,8 @@ type ApiPayload<T> = {
   };
 };
 
+type ApiError = Error & { status: number };
+
 async function api<T>(url: string, init?: RequestInit) {
   const response = await fetch(url, {
     ...init,
@@ -75,7 +77,9 @@ async function api<T>(url: string, init?: RequestInit) {
   });
   const payload = (await response.json()) as ApiPayload<T>;
   if (!response.ok || !payload.success) {
-    throw new Error("Request failed");
+    const err = new Error("Request failed") as ApiError;
+    err.status = response.status;
+    throw err;
   }
   return payload;
 }
@@ -145,8 +149,14 @@ export function AdminDashboard({ initialAuthenticated }: { initialAuthenticated:
         if (!payload.data.summary.some((item) => item.slug === selectedCategory)) {
           setSelectedCategory(payload.data.summary[0]?.slug ?? "rivers");
         }
-      } catch {
-        if (!cancelled) setAuthenticated(false);
+      } catch (err) {
+        if (cancelled) return;
+        const status = (err as ApiError).status;
+        if (status === 401) {
+          setAuthenticated(false);
+        } else {
+          setMessage("Dashboard data unavailable — database may be temporarily unreachable. You are still logged in.");
+        }
       }
     }
     void run();

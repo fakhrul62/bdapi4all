@@ -1,0 +1,66 @@
+name: bdapi4all
+
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: bdapi4all
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d bdapi4all"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - bdapi4all
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/bdapi4all
+      DIRECT_URL: postgresql://postgres:postgres@db:5432/bdapi4all
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:3000/api/v1
+      CRON_SECRET: local-development-cron-secret
+      ADMIN_SECRET: local-development-admin
+      # Optional Upstash Redis for distributed rate limiting:
+      # UPSTASH_REDIS_REST_URL: ${UPSTASH_REDIS_REST_URL}
+      # UPSTASH_REDIS_REST_TOKEN: ${UPSTASH_REDIS_REST_TOKEN}
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/v1/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - bdapi4all
+
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    command: sh -c "npx prisma migrate deploy && node ./prisma/seed-docker.mjs"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/bdapi4all
+      DIRECT_URL: postgresql://postgres:postgres@db:5432/bdapi4all
+    networks:
+      - bdapi4all
+
+volumes:
+  db_data:
+
+networks:
+  bdapi4all:

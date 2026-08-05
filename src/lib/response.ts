@@ -8,6 +8,7 @@ export type ApiErrorCode =
   | "NOT_FOUND"
   | "RATE_LIMITED"
   | "SERVER_ERROR"
+  | "SERVICE_UNAVAILABLE"
   | "UNPROCESSABLE_ENTITY";
 
 export type ApiError = {
