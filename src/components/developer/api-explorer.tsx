@@ -113,17 +113,42 @@ export function ApiExplorer() {
       const res = await fetch(url, {
         headers: apiKey ? { "X-API-Key": apiKey } : undefined,
       });
-      const text = await res.text();
-      const parsed = text ? JSON.parse(text) : null;
+
       const responseTime = res.headers.get("x-response-time");
       setStatus(res.status);
       setDuration(responseTime ? Number.parseInt(responseTime, 10) : null);
       setHeaders({
+        "content-type": res.headers.get("content-type") ?? "",
         "cache-control": res.headers.get("cache-control") ?? "",
         "x-response-time": res.headers.get("x-response-time") ?? "",
         "x-ratelimit-remaining": res.headers.get("x-ratelimit-remaining") ?? "",
       });
-      setResponse(JSON.stringify(parsed, null, 2));
+
+      const contentType = res.headers.get("content-type") ?? "";
+      if (contentType.includes("text/event-stream") && res.body) {
+        setLoading(false);
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let accumulated = "";
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          accumulated += decoder.decode(value, { stream: true });
+          setResponse(accumulated);
+        }
+        return;
+      }
+
+      const text = await res.text();
+      let formatted = text;
+      try {
+        const parsed = text ? JSON.parse(text) : null;
+        formatted = JSON.stringify(parsed, null, 2);
+      } catch {
+        // Not JSON, keep raw text
+      }
+      setResponse(formatted);
     } catch (error) {
       setStatus(500);
       setDuration(null);
