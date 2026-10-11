@@ -1,17 +1,17 @@
 import type { PoolClient } from "pg";
 
-export type RepairTable = { table: string; category: string };
+export type RepairTable = { table: string; category: string; verification?: boolean };
 function identifier(value: string) {
   if (!/^[a-z_]+$/.test(value)) throw new Error("Invalid repair table or column.");
   return `"${value}"`;
 }
 
 /** Caller owns the transaction. Snapshots and changes commit or roll back together. */
-export async function repairTable(client: PoolClient, { table, category }: RepairTable, apply: boolean) {
+export async function repairTable(client: PoolClient, { table, category, verification = true }: RepairTable, apply: boolean) {
   const name = `public.${identifier(table)}`;
   if (apply) await client.query(`LOCK TABLE ${name} IN SHARE ROW EXCLUSIVE MODE`);
-  const missing = await client.query<{ count: string }>(`SELECT count(*) FROM ${name} WHERE verified AND (coalesce(trim(source),'')='' OR coalesce(trim(source_url),'')='')`);
-  if (apply) {
+  const missing = verification ? await client.query<{ count: string }>(`SELECT count(*) FROM ${name} WHERE verified AND (coalesce(trim(source),'')='' OR coalesce(trim(source_url),'')='')`) : { rows: [{ count: "0" }] };
+  if (apply && verification) {
     await client.query(`INSERT INTO record_archive (category,record_id,reason,payload)
       SELECT $1,id,'unsupported_verification',to_jsonb(t) FROM ${name} t
       WHERE verified AND (coalesce(trim(source),'')='' OR coalesce(trim(source_url),'')='')

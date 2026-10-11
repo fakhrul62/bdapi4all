@@ -17,9 +17,10 @@ async function main() {
     await client.query("SELECT pg_advisory_xact_lock(42026012)");
     const results = [];
     for (const model of Prisma.dmmf.datamodel.models) {
-      if (!model.fields.some((field) => field.name === "source_url")) continue;
+      const verification = model.fields.some((field) => field.name === "source_url");
+      if (!verification && model.name !== "Union") continue;
       const table = model.dbName!;
-      results.push(await repairTable(client, { table, category: table.replaceAll("_", "-") }, apply));
+      results.push(await repairTable(client, { table, category: table.replaceAll("_", "-"), verification }, apply));
     }
     await client.query(apply ? "COMMIT" : "ROLLBACK");
     console.table(results);

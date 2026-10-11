@@ -6,4 +6,6 @@ Records marked verified without a source or source URL become unverified. This d
 
 Old encyclopedia detail URLs continue to resolve through the archive to the canonical record. Name collisions with different content are reported for review and are retained.
 
+The repair also merges exact union duplicates within the same upazila. Unions have no verification fields or individual detail endpoint; their original rows and IDs are retained in the archive.
+
 To undo a change, review the relevant archived JSON. Verification flags can be restored from the `unsupported_verification` snapshot. An exact duplicate can be restored with its original ID and fields using PostgreSQL `jsonb_populate_record`; its canonical record remains untouched. Remove the corresponding archive alias only after restoring and checking the row. Repair never deletes archive snapshots.
