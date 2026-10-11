@@ -1,4 +1,5 @@
 import { databaseConnectionOptions } from "../src/lib/db-config";
+import { createImportedRecord } from "../src/lib/import-record";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { config } from "dotenv";
@@ -230,7 +231,9 @@ async function importSpec(spec: SearchSpec) {
       skipped += 1;
       continue;
     }
-    await model.create({ data: spec.makeData(summary) });
+    const data = spec.makeData(summary);
+    if (!(await createImportedRecord(prisma, spec.model, data))) { skipped += 1; continue; }
+    existing.add(String(data.name_en).toLowerCase());
     existing.add(clean.toLowerCase());
     created += 1;
   }

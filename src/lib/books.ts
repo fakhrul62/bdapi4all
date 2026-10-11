@@ -27,7 +27,7 @@ export async function listBooksByWhere(
   const url = new URL(request.url);
   const { page, limit } = parsePagination(url.searchParams);
   const skip = (page - 1) * limit;
-  const key = `books:${cachePrefix}:${url.searchParams.toString()}`;
+  const key = `books:v2:${cachePrefix}:${url.searchParams.toString()}`;
 
   return withCache(key, CACHE_TTL.encyclopedia, async () => {
     const [items, total] = await Promise.all([

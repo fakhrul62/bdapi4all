@@ -166,7 +166,7 @@ function sortableFields(category: EncyclopediaCategory) {
 
 function cacheKey(category: EncyclopediaCategory, suffix: string, searchParams?: URLSearchParams) {
   const query = searchParams?.toString();
-  return `encyclopedia:${category.slug}:${suffix}${query ? `:${query}` : ""}`;
+  return `encyclopedia:v2:${category.slug}:${suffix}${query ? `:${query}` : ""}`;
 }
 
 function notFound(category: EncyclopediaCategory, id: number) {
@@ -218,12 +218,18 @@ export async function listEncyclopediaRecords(category: EncyclopediaCategory, re
 
 export async function getEncyclopediaRecord(category: EncyclopediaCategory, id: number) {
   const delegate = getDelegate(category);
-  const { data } = await withCache(cacheKey(category, `detail:${id}`), CACHE_TTL.encyclopedia, async () =>
-    delegate.findUnique({
+  const { data } = await withCache(cacheKey(category, `detail:${id}`), CACHE_TTL.encyclopedia, async () => {
+    const record = await delegate.findUnique({
       where: { id },
       ...(category.include ? { include: category.include } : {}),
-    }),
-  );
+    });
+    if (record) return record;
+    const aliases = await prisma.$queryRaw<Array<{ canonical_id: number }>>`
+      SELECT canonical_id FROM record_archive WHERE category=${category.slug}
+      AND record_id=${id} AND reason='exact_duplicate' AND canonical_id IS NOT NULL`;
+    if (!aliases.length) return null;
+    return delegate.findUnique({ where: { id: aliases[0].canonical_id }, ...(category.include ? { include: category.include } : {}) });
+  });
 
   if (!data) {
     throw notFound(category, id);
