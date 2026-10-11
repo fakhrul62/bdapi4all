@@ -10,7 +10,7 @@ const prisma = new PrismaClient({ adapter: new PrismaPg(databaseConnectionOption
 
 async function main() {
   const inserted = await prisma.$transaction(async (tx) => {
-    await tx.$queryRaw`SELECT pg_advisory_xact_lock(42026011)`;
+    await tx.$executeRaw`SELECT pg_advisory_xact_lock(42026011)`;
     const upazilas = await tx.upazila.findMany({ select: { id: true, district_id: true } });
     const parents = new Map(upazilas.map((item) => [item.id, item.district_id]));
     const existing = await tx.postcode.findMany({ select: { district_id: true, upazila_id: true, postcode: true } });

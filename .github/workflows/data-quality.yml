@@ -50,7 +50,6 @@ jobs:
         run: |
           curl --fail --silent --show-error https://supabase-downloads.s3-ap-southeast-1.amazonaws.com/prod/ssl/prod-ca-2021.crt -o /tmp/database-ca.crt
           { echo 'DATABASE_CA_CERT<<DATABASE_CERTIFICATE'; cat /tmp/database-ca.crt; echo; echo 'DATABASE_CERTIFICATE'; } >> "$GITHUB_ENV"
-          cat /tmp/database-ca.crt
 
       - name: Fill missing postcode data
         env:

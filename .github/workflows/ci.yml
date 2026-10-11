@@ -77,7 +77,7 @@ jobs:
 
       - name: Smoke-test the production server
         run: |
-          cp -r public .next/standalone/
+          if [ -d public ]; then cp -r public .next/standalone/; fi
           cp -r .next/static .next/standalone/.next/
           npm run start > /tmp/bdapi4all-server.log 2>&1 &
           SERVER_PID=$!
