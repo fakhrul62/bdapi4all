@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '30 1 * * *'   # daily 01:30 UTC
   workflow_dispatch:
+    inputs:
+      repair:
+        description: 'Archive and merge exact duplicates; clear unsupported verification flags'
+        type: boolean
+        default: false
   pull_request:
     paths:
       - 'prisma/**'
@@ -56,10 +61,16 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npm run data:seed-postcodes
 
+      - name: Repair confirmed data issues
+        if: github.event_name == 'workflow_dispatch' && inputs.repair
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npm run data:repair -- --apply
+
       - name: Run data quality validation
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DIRECT_URL: ${{ secrets.DIRECT_URL }}
-          DATA_QUALITY_WRITE: ${{ github.event_name == 'schedule' && 'true' || 'false' }}
+          DATA_QUALITY_WRITE: ${{ (github.event_name == 'schedule' || inputs.repair) && 'true' || 'false' }}
           DATA_QUALITY_FAIL_ON: high
         run: npm run data:quality

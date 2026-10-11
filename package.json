@@ -26,7 +26,8 @@
     "contract:validate": "tsx scripts/validate-contract.ts",
     "data:full-refresh": "npm run db:push && npm run db:seed && npm run data:seed-spices && npm run data:normalize && npm run data:bn-map && npm run data:quality",
     "test": "tsx --test tests/*.test.ts",
-    "data:seed-postcodes": "tsx scripts/seed-postcodes.ts"
+    "data:seed-postcodes": "tsx scripts/seed-postcodes.ts",
+    "data:repair": "tsx scripts/repair-data.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

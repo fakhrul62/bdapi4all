@@ -2,6 +2,19 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model RecordArchive {
+  id           Int      @id @default(autoincrement())
+  category     String
+  record_id    Int
+  canonical_id Int?
+  reason       String
+  payload      Json
+  archived_at  DateTime @default(now())
+
+  @@unique([category, record_id, reason])
+  @@map("record_archive")
+}
+
 datasource db {
   provider = "postgresql"
 }

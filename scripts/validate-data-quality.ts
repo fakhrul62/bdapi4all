@@ -49,6 +49,11 @@ const validators: Validator[] = [
   { slug: "festivals", model: "festival", select: { id: true, name_en: true, name_bn: true, verified: true, needs_image: true, source: true, source_url: true } },
   { slug: "traditional-foods", model: "traditionalFood", select: { id: true, name_en: true, name_bn: true, verified: true, needs_image: true, source: true, source_url: true } },
   { slug: "spices", model: "spice", select: { id: true, name_en: true, name_bn: true, verified: true, needs_image: true, source: true, source_url: true } },
+  { slug: "traditional-clothing", model: "traditionalClothing", select: { name_en: true, source: true } },
+  { slug: "traditional-music", model: "traditionalMusic", select: { name_en: true, source: true } },
+  { slug: "traditional-crafts", model: "traditionalCraft", select: { name_en: true, source: true } },
+  { slug: "historical-periods", model: "historicalPeriod", select: { name_en: true, source: true } },
+  { slug: "sports-categories", model: "sportsCategory", select: { name_en: true, source: true } },
   { slug: "historical-places", model: "historicalPlace", select: { id: true, name_en: true, name_bn: true, verified: true, needs_image: true, source: true, source_url: true } },
   { slug: "historical-events", model: "historicalEvent", select: { id: true, name_en: true, name_bn: true, verified: true, needs_image: true, source: true, source_url: true } },
   { slug: "political-leaders", model: "politicalLeader", select: { id: true, name_en: true, name_bn: true, verified: true, needs_image: true, source: true, source_url: true } },
@@ -76,8 +81,8 @@ function report(category: string, record: Record<string, unknown>, issueType: st
 
 async function validateRecords(validator: Validator) {
   const model = delegate(validator.model);
-  const records = await model.findMany({ select: validator.select });
-  const seen = new Map<string, number>();
+  const records = await model.findMany({});
+  const seen = new Map<string, Set<string>>();
 
   for (const record of records) {
     const nameEn = typeof record.name_en === "string" ? record.name_en.trim() : "";
@@ -91,16 +96,17 @@ async function validateRecords(validator: Validator) {
       report(validator.slug, record, "missing_bengali_name", "Record has no Bengali name.", "medium");
     }
 
-    const key = (nameEn.toLowerCase() || titleEn.toLowerCase()) + ":" + String(record.district_id ?? record.upazila_id ?? "");
-    if (key) {
-      if (seen.has(key)) {
-        report(validator.slug, record, "duplicate_name", `Duplicate English name '${nameEn}'.`, "high");
-      } else {
-        seen.set(key, 1);
-      }
+    const key = (nameEn.toLowerCase() || titleEn.toLowerCase()) + ":" + String(record.district_id ?? record.upazila_id ?? record.author_id ?? "");
+    if (nameEn || titleEn) {
+      const content = JSON.stringify(Object.fromEntries(Object.entries(record).filter(([field]) => !["id", "created_at", "updated_at"].includes(field))));
+      const matches = seen.get(key);
+      if (matches?.has(content)) report(validator.slug, record, "duplicate_name", `Exact duplicate of '${nameEn}'.`, "high");
+      else if (matches) report(validator.slug, record, "possible_duplicate_name", `Matching name '${nameEn}' has different content and needs review.`, "medium");
+      if (!matches) seen.set(key, new Set([content]));
+      else matches.add(content);
     }
 
-    if (validator.select.source && record.verified === true && (!record.source || !record.source_url)) {
+    if (validator.select.source && record.verified === true && (!String(record.source ?? "").trim() || !String(record.source_url ?? "").trim())) {
       report(validator.slug, record, "verified_without_source", "Record is verified but missing source or source_url.", "high");
     }
   }
@@ -120,15 +126,27 @@ async function writeIssues() {
   console.log(`\nTotal issues: ${issues.length} (critical: ${counts.critical}, high: ${counts.high}, medium: ${counts.medium}, low: ${counts.low})`);
 
   if (process.env.DATA_QUALITY_WRITE === "true") {
-    await prisma.dataQualityIssue.deleteMany({});
-    await prisma.dataQualityIssue.createMany({
-      data: issues.map((issue) => ({
+    await prisma.$transaction(async (tx) => {
+      await tx.dataQualityIssue.updateMany({
+        where: { category: { in: validators.map((validator) => validator.slug) }, issue_type: { in: ["missing_name", "missing_bengali_name", "duplicate_name", "possible_duplicate_name", "verified_without_source"] }, resolved: false },
+        data: { resolved: true, resolved_at: new Date() },
+      });
+      await tx.dataQualityIssue.createMany({
+        skipDuplicates: true,
+        data: issues.map((issue) => ({
         category: issue.category,
         record_id: issue.recordId,
         issue_type: issue.issueType,
         message: issue.message,
         severity: issue.severity,
-      })),
+        })),
+      });
+      for (let index = 0; index < issues.length; index += 500) {
+        await tx.dataQualityIssue.updateMany({
+          where: { OR: issues.slice(index, index + 500).map((issue) => ({ category: issue.category, record_id: issue.recordId, issue_type: issue.issueType })) },
+          data: { resolved: false, resolved_at: null },
+        });
+      }
     });
     console.log("Wrote issues to data_quality_issues table.");
   }

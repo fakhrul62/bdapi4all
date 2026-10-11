@@ -21,6 +21,7 @@ jobs:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/bdapi4all
       NEXT_PUBLIC_API_BASE_URL: http://localhost:3000/api/v1
       HUSKY: 0
+      DATABASE_INTEGRITY_TESTS: 'true'
     services:
       postgres:
         image: postgres:17-alpine
