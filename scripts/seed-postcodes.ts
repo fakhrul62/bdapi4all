@@ -29,4 +29,14 @@ async function main() {
   console.log(`Postcodes: inserted ${inserted} new records; existing records preserved.`);
 }
 
-main().catch(() => { console.error("Postcode import failed. Check database connectivity and geography IDs."); process.exitCode = 1; }).finally(() => prisma.$disconnect());
+main().catch((error: unknown) => {
+  let message = error instanceof Error ? error.message : "Unknown database error";
+  const url = process.env.DATABASE_URL;
+  if (url) {
+    const password = new URL(url).password;
+    message = message.replaceAll(url, "[database URL]");
+    if (password) message = message.replaceAll(password, "[redacted]").replaceAll(decodeURIComponent(password), "[redacted]");
+  }
+  console.error("Postcode import failed:", message);
+  process.exitCode = 1;
+}).finally(() => prisma.$disconnect());
