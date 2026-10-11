@@ -19,7 +19,7 @@ import {
   TerminalSquare,
   Wrench,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 
 const featuredApis = [
   {
@@ -113,17 +113,13 @@ export default function LandingPage() {
             </p>
 
             <div className="home-rise home-delay-3 mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/playground">
-                <Button size="lg" className="h-11 w-full gap-2 px-4 text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5 sm:w-auto">
+              <Link href="/playground" className={`${buttonVariants({ size: "lg" })} h-11 w-full gap-2 px-4 text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5 sm:w-auto`}>
                   <TerminalSquare className="size-4" />
                   Try API Explorer
-                </Button>
               </Link>
-              <Link href="/docs">
-                <Button variant="outline" size="lg" className="h-11 w-full gap-2 px-4 bg-background/70 backdrop-blur transition-transform hover:-translate-y-0.5 sm:w-auto">
+              <Link href="/docs" className={`${buttonVariants({ variant: "outline", size: "lg" })} h-11 w-full gap-2 px-4 bg-background/70 backdrop-blur transition-transform hover:-translate-y-0.5 sm:w-auto`}>
                   <BookOpen className="size-4" />
                   Read Docs
-                </Button>
               </Link>
             </div>
 
