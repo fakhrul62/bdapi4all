@@ -1,17 +1,15 @@
+import { QuickStart } from "@/components/developer/quick-start";
 import Link from "next/link";
 import {
-  Activity,
   ArrowRight,
   BookOpen,
   CalendarDays,
   CheckCircle2,
   Clock3,
-  Code2,
   Database,
   FileJson,
   Globe2,
   Languages,
-  Layers3,
   MapPin,
   Phone,
   Route,
@@ -19,7 +17,6 @@ import {
   ShieldCheck,
   Sparkles,
   TerminalSquare,
-  Zap,
   Wrench,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -94,19 +91,7 @@ const stats = [
   ["8", "Divisions"],
   ["64", "Districts"],
   ["494", "Upazilas"],
-  ["4,540", "Unions"],
-];
-
-const liveMetrics = [
-  ["12ms", "edge cache"],
-  ["v1", "stable"],
-  ["JSON", "response"],
-];
-
-const requestSamples = [
-  "curl https://bdapi4all.vercel.app/api/v1/holidays/next",
-  "curl https://bdapi4all.vercel.app/api/v1/mobile/operator?number=01700000000",
-  "curl https://bdapi4all.vercel.app/api/v1/prayer-times?district_id=47",
+  ["4,537", "Unions"],
 ];
 
 export default function LandingPage() {
@@ -114,11 +99,11 @@ export default function LandingPage() {
     <div className="overflow-hidden">
       <section className="home-hero relative border-b border-border/50 bg-background">
         <div className="home-hero-grid" aria-hidden="true" />
-        <div className="mx-auto grid min-h-[calc(100svh-3.5rem)] max-w-7xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_540px] lg:items-center lg:px-8">
+        <div className="mx-auto grid min-h-[640px] max-w-7xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,500px)] lg:items-center lg:px-8">
           <div className="relative z-10 max-w-3xl">
             <div className="home-rise mb-5 inline-flex items-center gap-2 rounded-lg border border-primary/25 bg-primary/10 px-3 py-1.5 text-sm font-semibold text-primary">
               <CheckCircle2 className="size-4" />
-              Free Bangladesh API for serious local products
+              Free, open-source Bangladesh API
             </div>
             <h1 className="home-rise home-delay-1 font-heading text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               Bangladesh data, ready for your next request.
@@ -142,7 +127,8 @@ export default function LandingPage() {
               </Link>
             </div>
 
-            <div className="home-rise home-delay-4 mt-10 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
+            <p className="mt-4 text-sm text-muted-foreground">No signup for public requests. REST responses in English and Bengali.</p>
+            <div className="home-rise home-delay-4 mt-8 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
               {stats.map(([value, label]) => (
                 <div key={label} className="group rounded-lg border border-border/60 bg-card/85 p-4 shadow-sm backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md">
                   <div className="font-heading text-2xl font-extrabold text-primary">{value}</div>
@@ -152,60 +138,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="home-console relative z-10 rounded-lg border border-border/60 bg-card/90 shadow-2xl shadow-primary/10 backdrop-blur">
-            <div className="home-scan" aria-hidden="true" />
-            <div className="flex items-center justify-between border-b border-border/60 px-4 py-3">
-              <div className="flex items-center gap-2 text-sm font-semibold">
-                <Code2 className="size-4 text-primary" />
-                Live-style API console
-              </div>
-              <span className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-2 py-1 text-xs font-bold text-emerald-600">
-                <span className="home-status-dot" />
-                200 OK
-              </span>
-            </div>
-            <div className="grid gap-3 border-b border-border/60 p-4 sm:grid-cols-3">
-              {liveMetrics.map(([value, label], index) => (
-                <div key={label} className="rounded-lg border border-border/60 bg-background/80 p-3">
-                  <div className="flex items-center gap-2 text-sm font-bold text-foreground">
-                    {index === 0 ? <Zap className="size-4 text-amber-500" /> : null}
-                    {index === 1 ? <Activity className="size-4 text-emerald-500" /> : null}
-                    {index === 2 ? <Layers3 className="size-4 text-sky-500" /> : null}
-                    {value}
-                  </div>
-                  <div className="mt-1 text-xs text-muted-foreground">{label}</div>
-                </div>
-              ))}
-            </div>
-            <div className="space-y-2 border-b border-border/60 bg-muted/25 p-4">
-              {requestSamples.map((sample) => (
-                <code key={sample} className="home-command block overflow-x-auto rounded-md border border-border/60 bg-background px-3 py-2 text-xs text-muted-foreground">
-                  {sample}
-                </code>
-              ))}
-            </div>
-            <pre className="overflow-auto bg-[#0d1117] p-5 text-sm leading-6 text-emerald-200">
-              <code>{`{
-  "success": true,
-  "version": "v1",
-  "timestamp": "2026-06-30T18:00:00.000Z",
-  "data": {
-    "date": "2026-12-16",
-    "name_en": "Victory Day",
-    "name_bn": "বিজয় দিবস",
-    "type": "national"
-  }
-}`}</code>
-            </pre>
-            <div className="grid gap-3 border-t border-border/60 bg-background/70 p-4 sm:grid-cols-3">
-              {["Dhaka", "Sylhet", "Chattogram"].map((city, index) => (
-                <div key={city} className="flex items-center gap-2 text-xs font-semibold text-muted-foreground">
-                  <span className={`home-route home-route-${index + 1}`} />
-                  {city} synced
-                </div>
-              ))}
-            </div>
-          </div>
+          <QuickStart />
         </div>
       </section>
 
@@ -215,7 +148,7 @@ export default function LandingPage() {
             <div>
               <p className="text-sm font-semibold uppercase tracking-normal text-primary">Featured APIs</p>
               <h2 className="mt-2 font-heading text-3xl font-extrabold tracking-tight sm:text-4xl">
-                Intriguing endpoints worth trying first
+                Start with something useful
               </h2>
             </div>
             <Link href="/docs" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
@@ -240,7 +173,7 @@ export default function LandingPage() {
                   {api.path}
                 </code>
                 <p className="mt-4 text-sm leading-6 text-muted-foreground">{api.text}</p>
-                <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-primary opacity-0 transition duration-300 group-hover:opacity-100">
+                <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-primary transition duration-300">
                   Open guide
                   <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </div>

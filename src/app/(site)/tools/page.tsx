@@ -1,5 +1,7 @@
 import { ToolsPanel } from "@/components/developer/tools-panel";
 
+export const metadata = { title: "Developer Tools" };
+
 export default function ToolsPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">

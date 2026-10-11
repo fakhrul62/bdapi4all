@@ -1,5 +1,7 @@
 import { StatusMonitor } from "@/components/developer/status-monitor";
 
+export const metadata = { title: "API Status" };
+
 export default function StatusPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">

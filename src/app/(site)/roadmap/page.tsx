@@ -87,6 +87,8 @@ const immediateMilestones = [
   "Build the TypeScript SDK around the stable query contract.",
 ];
 
+export const metadata = { title: "Roadmap" };
+
 export default function RoadmapPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
@@ -100,6 +102,7 @@ export default function RoadmapPage() {
         </p>
       </div>
 
+      <section className="mb-5 rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-5"><h2 className="font-heading text-xl font-semibold">Available today</h2><p className="mt-2 text-sm leading-6 text-muted-foreground">Live REST endpoints, an API Explorer, OpenAPI and collections, field selection and sorting, sample fixtures, and JSON / CSV / XML exports. The phases below describe the broader direction; individual items may already be available.</p><a href="/changelog" className="mt-3 inline-block text-sm font-medium text-primary hover:underline">See recent improvements →</a></section>
       <section className="mb-10 rounded-md border border-border/50 bg-muted/30 p-5">
         <h2 className="font-heading text-2xl font-semibold tracking-tight">Immediate implementation order</h2>
         <ol className="mt-4 grid gap-3 text-sm text-muted-foreground md:grid-cols-2">

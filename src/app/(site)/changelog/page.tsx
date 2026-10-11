@@ -1,5 +1,8 @@
+export const metadata = { title: "Changelog" };
+
 export default function ChangelogPage() {
   const releases = [
+    { version: "Portal update", date: "October 12, 2026", title: "A clearer, more useful developer portal", description: "Improved navigation, mobile layouts, documentation search, and live request workflows.", features: ["Mobile navigation and active page links", "Searchable documentation with direct links to the selected endpoint in the playground", "Copy feedback, request cancellation, loading states, and geography pagination"], fixes: ["Corrected stale homepage counts and removed simulated live status claims", "Added proper not-found pages for unknown documentation URLs"] },
     {
       version: "v1.2.0",
       date: "June 28, 2026",
@@ -52,7 +55,7 @@ export default function ChangelogPage() {
       </div>
 
       <div className="space-y-12 border-l border-border/50 ml-4 pl-8 relative">
-        {releases.map((release, i) => (
+        {[...releases].sort((a, b) => Date.parse(b.date) - Date.parse(a.date)).map((release, i) => (
           <div key={i} className="relative">
             <div className="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-background"></div>
             <div className="space-y-4">
@@ -63,6 +66,7 @@ export default function ChangelogPage() {
               <h3 className="text-xl font-medium">{release.title}</h3>
               <p className="text-muted-foreground leading-relaxed">{release.description}</p>
               
+              {release.fixes.length > 0 && <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">{release.fixes.map(fix => <li key={fix}>{fix}</li>)}</ul>}
               {release.features.length > 0 && (
                 <div className="space-y-2 mt-4">
                   <h4 className="font-semibold text-sm uppercase tracking-wider text-green-600 dark:text-green-400">Features</h4>

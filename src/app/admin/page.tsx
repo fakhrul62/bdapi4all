@@ -1,4 +1,5 @@
 import { ShieldAlert } from "lucide-react";
+import Link from "next/link";
 
 export default function AdminPage() {
   return (
@@ -11,6 +12,8 @@ export default function AdminPage() {
         <p className="mt-2 text-sm text-muted-foreground">
           The administrative control panel is temporarily offline for maintenance.
         </p>
+        <p className="mt-4 text-sm text-muted-foreground">Public API requests and developer tools are available.</p>
+        <div className="mt-5 flex flex-wrap justify-center gap-3"><Link href="/dashboard" className="rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground">API Keys</Link><Link href="/" className="rounded-md border border-border px-3 py-2 text-sm font-medium">Back to home</Link></div>
       </div>
     </main>
   );

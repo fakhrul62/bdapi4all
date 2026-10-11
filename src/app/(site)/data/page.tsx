@@ -1,5 +1,7 @@
 import { DataBrowser } from "@/components/developer/data-browser";
 
+export const metadata = { title: "Data Browser" };
+
 export default function DataPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">

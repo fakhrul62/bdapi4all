@@ -1,7 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { Copy, ExternalLink, Play, Search, Trash2 } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ExternalLink, Play, Search, Trash2, Loader2, Square, RotateCcw } from "lucide-react";
+import Link from "next/link";
+import { CopyButton } from "@/components/ui/copy-button";
 import { Button } from "@/components/ui/button";
 import {
   buildUrl,
@@ -15,15 +17,15 @@ function defaultValues(endpoint: EndpointDefinition) {
   return Object.fromEntries(endpoint.parameters.map((param) => [param.name, param.example]));
 }
 
-export function ApiExplorer() {
-  const [selectedSlug, setSelectedSlug] = useState("divisions");
+export function ApiExplorer({ initialSlug = "divisions" }: { initialSlug?: string }) {
+  const [selectedSlug, setSelectedSlug] = useState(initialSlug);
   const selected = endpointDefinitions.find((endpoint) => endpoint.slug === selectedSlug) ?? endpointDefinitions[0];
   const [valuesBySlug, setValuesBySlug] = useState<Record<string, Record<string, string>>>({
     [selected.slug]: defaultValues(selected),
   });
   const values = valuesBySlug[selected.slug] ?? defaultValues(selected);
   const url = buildUrl(selected, values);
-  const samples = codeSamples(selected);
+  const samples = codeSamples(selected, values);
   const [response, setResponse] = useState("");
   const [headers, setHeaders] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<number | null>(null);
@@ -32,6 +34,9 @@ export function ApiExplorer() {
   const [sampleKey, setSampleKey] = useState<keyof ReturnType<typeof codeSamples>>("curl");
   const [endpointQuery, setEndpointQuery] = useState("");
   const [apiKey, setApiKey] = useState("");
+  const [notice, setNotice] = useState("");
+  const requestRef = useRef<AbortController | null>(null);
+  useEffect(() => () => { requestRef.current?.abort(); }, []);
 
   const grouped = useMemo(
     () =>
@@ -106,18 +111,29 @@ export function ApiExplorer() {
   }
 
   async function sendRequest() {
+    requestRef.current?.abort();
+    const controller = new AbortController();
+    requestRef.current = controller;
+    const timeout = window.setTimeout(() => controller.abort(), selected.slug === "events" ? 30000 : 20000);
+    const started = performance.now();
+    setNotice("");
+    setResponse("");
+    setHeaders({});
     setLoading(true);
     setStatus(null);
     setDuration(null);
     try {
-      const res = await fetch(url, {
+      const res = await fetch(new URL(url).pathname + new URL(url).search, {
+        signal: controller.signal,
         headers: apiKey ? { "X-API-Key": apiKey } : undefined,
       });
 
       const responseTime = res.headers.get("x-response-time");
       setStatus(res.status);
-      setDuration(responseTime ? Number.parseInt(responseTime, 10) : null);
+      setDuration(responseTime ? Number.parseInt(responseTime, 10) : Math.round(performance.now() - started));
       setHeaders({
+        "x-request-id": res.headers.get("x-request-id") ?? "",
+        "retry-after": res.headers.get("retry-after") ?? "",
         "content-type": res.headers.get("content-type") ?? "",
         "cache-control": res.headers.get("cache-control") ?? "",
         "x-response-time": res.headers.get("x-response-time") ?? "",
@@ -126,7 +142,7 @@ export function ApiExplorer() {
 
       const contentType = res.headers.get("content-type") ?? "";
       if (contentType.includes("text/event-stream") && res.body) {
-        setLoading(false);
+        setNotice("Streaming events. Stop the request when finished; the preview ends after 30 seconds.");
         const reader = res.body.getReader();
         const decoder = new TextDecoder();
         let accumulated = "";
@@ -150,21 +166,24 @@ export function ApiExplorer() {
       }
       setResponse(formatted);
     } catch (error) {
-      setStatus(500);
-      setDuration(null);
-      setResponse(JSON.stringify({ error: error instanceof Error ? error.message : "Request failed" }, null, 2));
+      if (requestRef.current !== controller) return;
+      const message = controller.signal.aborted ? "Request stopped or timed out. You can send it again." : error instanceof Error ? error.message : "Request failed. Check your connection and retry.";
+      setNotice(message);
+      if (!controller.signal.aborted) setResponse(JSON.stringify({ error: message }, null, 2));
     } finally {
-      setLoading(false);
+      window.clearTimeout(timeout);
+      if (requestRef.current === controller) { setLoading(false); requestRef.current = null; }
     }
-  }
-
-  function copy(text: string) {
-    void navigator.clipboard.writeText(text);
   }
 
   function selectEndpoint(slug: string) {
     const endpoint = endpointDefinitions.find((item) => item.slug === slug);
     if (!endpoint) return;
+    requestRef.current?.abort();
+    requestRef.current = null;
+    setLoading(false);
+    setResponse(""); setStatus(null); setDuration(null); setHeaders({}); setNotice("");
+    window.history.replaceState(null, "", `/playground?endpoint=${encodeURIComponent(slug)}`);
     setSelectedSlug(endpoint.slug);
     setValuesBySlug((current) => ({
       ...current,
@@ -174,6 +193,7 @@ export function ApiExplorer() {
 
   return (
     <div className="space-y-5">
+      {notice && <p role="status" className="rounded-lg border border-border bg-muted/40 px-4 py-3 text-sm">{notice}</p>}
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-3xl">
           <h1 className="font-heading text-4xl font-extrabold tracking-tight">API Explorer</h1>
@@ -221,6 +241,7 @@ export function ApiExplorer() {
               <div className="text-xs text-muted-foreground">{endpointCount} matching endpoints</div>
             </div>
             <div className="max-h-[52vh] overflow-auto p-3 lg:max-h-[calc(100vh-18rem)]">
+              {!endpointCount && <p className="p-3 text-sm text-muted-foreground">No matching endpoints. <button onClick={() => setEndpointQuery("")} className="text-primary underline">Clear search</button></p>}
               {grouped.map(({ group, endpoints }) => (
                 <div key={group} className="pb-3 last:pb-0">
                   <div className="sticky top-0 z-10 bg-card px-2 pb-1 pt-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
@@ -230,6 +251,8 @@ export function ApiExplorer() {
                     {endpoints.map((endpoint) => (
                       <button
                         key={endpoint.slug}
+                        aria-pressed={endpoint.slug === selected.slug}
+                        disabled={loading}
                         onClick={() => selectEndpoint(endpoint.slug)}
                         className={`w-full rounded-md px-2 py-2 text-left text-sm transition-colors ${
                           endpoint.slug === selected.slug
@@ -353,16 +376,17 @@ export function ApiExplorer() {
                   <code className="min-w-0 flex-1 overflow-x-auto rounded-md border border-border/50 bg-muted/40 px-3 py-2 font-mono text-xs break-all whitespace-pre-wrap">
                     {url}
                   </code>
-                  <Button variant="outline" size="icon" onClick={() => copy(url)} aria-label="Copy URL" className="shrink-0">
-                    <Copy className="h-4 w-4" />
-                  </Button>
+                  <CopyButton text={url} label="Copy URL" compact />
                 </div>
               </div>
 
               <div>
-                <div className="mb-2 text-sm font-semibold">API Key (optional)</div>
+                <label htmlFor="explorer-key" className="mb-2 block text-sm font-semibold">API Key (optional)</label>
                 <div className="flex items-center gap-2">
                   <input
+                    id="explorer-key"
+                    type="password"
+                    autoComplete="off"
                     value={apiKey}
                     onChange={(event) => setApiKey(event.target.value)}
                     placeholder="bdapi_..."
@@ -374,10 +398,13 @@ export function ApiExplorer() {
                 </span>
               </div>
 
-              <Button onClick={sendRequest} disabled={loading} className="gap-2">
-                <Play className="h-4 w-4" />
-                {loading ? "Sending" : "Send Request"}
+              <div className="flex flex-wrap items-center gap-2"><Button onClick={sendRequest} disabled={loading} className="gap-2">
+                {loading ? <Loader2 className="size-4 animate-spin" /> : <Play className="size-4" />}
+                {loading ? "Sending…" : "Send Request"}
               </Button>
+              {loading && <Button variant="outline" onClick={() => requestRef.current?.abort()}><Square className="size-3.5" /> Stop</Button>}
+              <Button variant="outline" disabled={loading} onClick={() => setValuesBySlug(current => ({ ...current, [selected.slug]: defaultValues(selected) }))}><RotateCcw className="size-3.5" /> Reset</Button>
+              <Link href={`/docs/${selected.slug}`} className="px-2 text-sm text-primary hover:underline">Endpoint guide →</Link></div>
               </div>
             </div>
 
@@ -385,9 +412,7 @@ export function ApiExplorer() {
               <div>
                 <div className="mb-2 flex items-center justify-between">
                   <span className="text-sm font-semibold">Code</span>
-                  <Button variant="outline" size="sm" onClick={() => copy(samples[sampleKey])}>
-                    Copy
-                  </Button>
+                  <CopyButton text={samples[sampleKey]} label="Copy code" />
                 </div>
                 <div className="mb-2 flex flex-wrap gap-2">
                   {(Object.keys(samples) as Array<keyof typeof samples>).map((key) => (
@@ -412,19 +437,17 @@ export function ApiExplorer() {
           <div className="min-w-0 xl:sticky xl:top-20 xl:self-start">
             <div className="rounded-lg border border-border/50 bg-card">
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/50 p-4">
-                <div className="font-semibold">Response</div>
+                <div className="font-semibold">Response {loading && <span role="status" className="text-xs font-normal text-muted-foreground">· Request in progress</span>}</div>
                 <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-muted-foreground">
-                  {status !== null && <span>Status {status}</span>}
+                  {status !== null && <span className={`rounded-md px-2 py-1 ${status < 400 ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400" : "bg-destructive/10 text-destructive"}`}>HTTP {status}</span>}
                   {duration !== null && <span>{duration} ms</span>}
                   {headers["x-ratelimit-remaining"] && <span>Remaining {headers["x-ratelimit-remaining"]}</span>}
                 </div>
                 <div className="flex gap-2">
                   {response && (
                     <>
-                      <Button variant="outline" size="icon" onClick={() => copy(response)} aria-label="Copy response">
-                        <Copy className="h-4 w-4" />
-                      </Button>
-                      <Button variant="outline" size="icon" onClick={() => setResponse("")} aria-label="Clear response">
+                      <CopyButton text={response} label="Copy response" compact />
+                      <Button variant="outline" size="icon" onClick={() => { setResponse(""); setStatus(null); setDuration(null); setHeaders({}); }} aria-label="Clear response">
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </>
