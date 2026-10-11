@@ -21,12 +21,12 @@ export async function GET() {
       status: "healthy",
       latency_ms: Date.now() - startTime,
     });
-  } catch (error) {
+  } catch {
     checks.push({
       name: "database",
       status: "down",
       latency_ms: Date.now() - startTime,
-      message: error instanceof Error ? error.message : "Unknown error",
+      message: "Database is unavailable.",
     });
   }
 

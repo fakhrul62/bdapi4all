@@ -33,6 +33,7 @@ export async function GET(request: Request) {
 
     return {
       data,
+      meta: { source: "Community postcode dataset", source_url: "https://github.com/MHNahib/bangladesh-postcodes-npm", verified: false },
       cacheControl: "public, s-maxage=86400, stale-while-revalidate=43200",
     };
   });

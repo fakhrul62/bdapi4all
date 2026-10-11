@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { normalizeAndAuditData } from "@/lib/data-quality";
-import { errorResponse, successResponse } from "@/lib/response";
+import { successResponse } from "@/lib/response";
+
+import { requireCronResponse } from "@/lib/cron-auth";
 
 const querySchema = z.object({
   category: z.string().optional(),
@@ -8,13 +10,8 @@ const querySchema = z.object({
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const secret = request.headers.get("x-cron-secret") ?? url.searchParams.get("secret");
-
-  if (process.env.CRON_SECRET && secret !== process.env.CRON_SECRET) {
-    return errorResponse("UNAUTHORIZED", "Invalid cron secret.", 401, {
-      docsPath: "/docs/authentication",
-    });
-  }
+  const unauthorized = requireCronResponse(request);
+  if (unauthorized) return unauthorized;
 
   const query = querySchema.parse(Object.fromEntries(url.searchParams));
   const result = await normalizeAndAuditData(query.category);

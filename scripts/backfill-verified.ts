@@ -1,3 +1,4 @@
+import { databaseConnectionOptions } from "../src/lib/db-config";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { config } from "dotenv";
@@ -9,10 +10,7 @@ type Delegate = {
   updateMany(args: Record<string, unknown>): Promise<{ count: number }>;
 };
 
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
-});
+const adapter = new PrismaPg(databaseConnectionOptions());
 const prisma = new PrismaClient({ adapter });
 
 function delegate(model: string) {

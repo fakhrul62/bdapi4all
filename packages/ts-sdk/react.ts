@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { BdApiClient, type QueryParams } from "./index";
 
 type State<T> = { data: T | null; loading: boolean; error: Error | null };
@@ -15,11 +15,15 @@ export function useBdApi<T>(
     setTick((t) => t + 1);
   }, []);
 
+  const fetcherRef = useRef(fetcher);
+  useEffect(() => { fetcherRef.current = fetcher; }, [fetcher]);
+  const dependencyKey = JSON.stringify(deps);
+
   useEffect(() => {
     let cancelled = false;
     const client = new BdApiClient();
 
-    fetcher(client)
+    fetcherRef.current(client)
       .then((result) => {
         if (!cancelled) {
           setState({ data: result, loading: false, error: null });
@@ -34,7 +38,7 @@ export function useBdApi<T>(
     return () => {
       cancelled = true;
     };
-  }, [...deps, tick]);
+  }, [dependencyKey, tick]);
 
   return { ...state, refetch };
 }

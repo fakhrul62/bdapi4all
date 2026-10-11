@@ -6,16 +6,41 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/bdapi4all
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:3000/api/v1
+      HUSKY: 0
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: bdapi4all
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres -d bdapi4all"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
@@ -26,6 +51,18 @@ jobs:
       - name: Generate Prisma Client
         run: npx prisma generate
 
+      - name: Apply database migrations
+        run: npx prisma migrate deploy
+
+      - name: Run security and API regression tests
+        run: npm test
+
+      - name: Validate API contract
+        run: npm run contract:validate
+
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+
       - name: Run Linter
         run: npm run lint
 
@@ -34,6 +71,15 @@ jobs:
 
       - name: Build Next.js application
         run: npm run build
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL || 'postgresql://postgres.exvughrmuxsuthnqqhtv:xSJ5jxcDR6bsnmod@aws-1-us-east-2.pooler.supabase.com:6543/postgres' }}
-          NEXT_PUBLIC_API_BASE_URL: "https://bdapi4all.vercel.app/api/v1"
+
+      - name: Seed local test data
+        run: node prisma/seed-docker.mjs
+
+      - name: Smoke-test the production server
+        run: |
+          if [ -d public ]; then cp -r public .next/standalone/; fi
+          cp -r .next/static .next/standalone/.next/
+          npm run start > /tmp/bdapi4all-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" || true' EXIT
+          node scripts/smoke-test.mjs

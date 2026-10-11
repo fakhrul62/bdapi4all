@@ -1,3 +1,4 @@
+import { databaseConnectionOptions } from "../src/lib/db-config";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { config } from "dotenv";
@@ -24,10 +25,7 @@ type District = {
   name_bn: string;
 };
 
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
-});
+const adapter = new PrismaPg(databaseConnectionOptions());
 const prisma = new PrismaClient({ adapter });
 
 const specs: CategorySpec[] = [

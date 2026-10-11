@@ -1,6 +1,9 @@
 import { prisma } from "@/lib/db";
 import { getEncyclopediaCategory } from "@/lib/encyclopedia";
 
+import { handleApi } from "@/lib/api-handler";
+import { optionsResponse } from "@/lib/response";
+
 export const runtime = "nodejs";
 
 type ExportFormat = "json" | "csv" | "xml";
@@ -62,10 +65,9 @@ function toCsv(records: Record<string, unknown>[]): string {
     const values = headerList.map((header) => {
       const value = record[header];
       if (value === null || value === undefined) return "";
-      if (Array.isArray(value)) return `"${value.join(";")}"`;
-      if (typeof value === "object") return `"${JSON.stringify(value).replace(/"/g, '""')}"`;
-      const str = String(value);
-      if (str.includes(",") || str.includes("\n") || str.includes('"')) {
+      let str = Array.isArray(value) ? value.join(";") : typeof value === "object" ? JSON.stringify(value) : String(value);
+      if (/^[\s]*[=+@-]/.test(str) && typeof value !== "number") str = "'" + str;
+      if (/[\r\n,"]/.test(str)) {
         return `"${str.replace(/"/g, '""')}"`;
       }
       return str;
@@ -77,6 +79,7 @@ function toCsv(records: Record<string, unknown>[]): string {
 }
 
 export async function GET(request: Request) {
+  return handleApi(request, async () => {
   const url = new URL(request.url);
   const category = url.searchParams.get("category");
   const format = (url.searchParams.get("format") ?? "json") as ExportFormat;
@@ -117,7 +120,7 @@ export async function GET(request: Request) {
     const delegate = (prisma as unknown as Record<string, { findMany: (args: unknown) => Promise<Record<string, unknown>[]> }>)[encCategory.model];
     records = await delegate.findMany({ take: 1000 });
     rootName = encCategory.slug;
-  } else if (category in GEO_MODELS) {
+  } else if (Object.hasOwn(GEO_MODELS, category)) {
     const modelName = GEO_MODELS[category] as keyof typeof prisma;
     const delegate = prisma[modelName] as unknown as { findMany: (args: unknown) => Promise<Record<string, unknown>[]> };
     records = await delegate.findMany({ take: 1000 });
@@ -170,8 +173,9 @@ export async function GET(request: Request) {
       "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=1800",
     },
   });
+  });
 }
 
 export function OPTIONS() {
-  return new Response(null, { status: 204 });
+  return optionsResponse();
 }

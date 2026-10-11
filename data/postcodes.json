@@ -1,0 +1,4400 @@
+[
+  {
+    "district_id": 47,
+    "upazila_id": 366,
+    "postcode": "1350",
+    "post_office": "Dhamrai"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 366,
+    "postcode": "1351",
+    "post_office": "Kamalpur"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 367,
+    "postcode": "1312",
+    "post_office": "Ati"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 367,
+    "postcode": "1311",
+    "post_office": "Dhaka Jute Mills"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 367,
+    "postcode": "1313",
+    "post_office": "Kalatia"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 367,
+    "postcode": "1310",
+    "post_office": "Keraniganj"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 368,
+    "postcode": "1323",
+    "post_office": "Agla"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 368,
+    "postcode": "1325",
+    "post_office": "Churain"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 368,
+    "postcode": "1322",
+    "post_office": "Daudpur"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 368,
+    "postcode": "1321",
+    "post_office": "Hasnabad"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 368,
+    "postcode": "1324",
+    "post_office": "Khalpar"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 368,
+    "postcode": "1320",
+    "post_office": "Nawabganj"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 365,
+    "postcode": "1348",
+    "post_office": "Amin Bazar"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 365,
+    "postcode": "1341",
+    "post_office": "Dairy Farm"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 365,
+    "postcode": "1349",
+    "post_office": "EPZ"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 365,
+    "postcode": "1342",
+    "post_office": "Jahangirnagar Univer"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 365,
+    "postcode": "1346",
+    "post_office": "Kashem Cotton Mills"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 365,
+    "postcode": "1347",
+    "post_office": "Rajphulbaria"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 365,
+    "postcode": "1340",
+    "post_office": "Savar"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 365,
+    "postcode": "1344",
+    "post_office": "Savar Canttonment"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 365,
+    "postcode": "1343",
+    "post_office": "Saver P.A.T.C"
+  },
+  {
+    "district_id": 47,
+    "upazila_id": 365,
+    "postcode": "1345",
+    "post_office": "Shimulia"
+  },
+  {
+    "district_id": 52,
+    "upazila_id": 391,
+    "postcode": "7870",
+    "post_office": "Alfadanga"
+  },
+  {
+    "district_id": 52,
+    "upazila_id": 395,
+    "postcode": "7830",
+    "post_office": "Bhanga"
+  },
+  {
+    "district_id": 52,
+    "upazila_id": 392,
+    "postcode": "7860",
+    "post_office": "Boalmari"
+  },
+  {
+    "district_id": 52,
+    "upazila_id": 392,
+    "postcode": "7861",
+    "post_office": "Rupatpat"
+  },
+  {
+    "district_id": 52,
+    "upazila_id": 396,
+    "postcode": "7810",
+    "post_office": "Charbadrashan"
+  },
+  {
+    "district_id": 52,
+    "upazila_id": 390,
+    "postcode": "7802",
+    "post_office": "Ambikapur"
+  },
+  {
+    "district_id": 52,
+    "upazila_id": 390,
+    "postcode": "7803",
+    "post_office": "Baitulaman Politecni"
+  },
+  {
+    "district_id": 52,
+    "upazila_id": 390,
+    "postcode": "7800",
+    "post_office": "Faridpursadar"
+  },
+  {
+    "district_id": 52,
+    "upazila_id": 390,
+    "postcode": "7801",
+    "post_office": "Kanaipur"
+  },
+  {
+    "district_id": 52,
+    "upazila_id": 394,
+    "postcode": "7840",
+    "post_office": "Nagarkanda"
+  },
+  {
+    "district_id": 52,
+    "upazila_id": 394,
+    "postcode": "7841",
+    "post_office": "Talma"
+  },
+  {
+    "district_id": 52,
+    "upazila_id": 393,
+    "postcode": "7822",
+    "post_office": "Bishwa jaker Manjil"
+  },
+  {
+    "district_id": 52,
+    "upazila_id": 393,
+    "postcode": "7821",
+    "post_office": "Hat Krishapur"
+  },
+  {
+    "district_id": 52,
+    "upazila_id": 393,
+    "postcode": "7820",
+    "post_office": "Sadarpur"
+  },
+  {
+    "district_id": 41,
+    "upazila_id": 320,
+    "postcode": "1703",
+    "post_office": "B.O.F"
+  },
+  {
+    "district_id": 41,
+    "upazila_id": 320,
+    "postcode": "1701",
+    "post_office": "B.R.R"
+  },
+  {
+    "district_id": 41,
+    "upazila_id": 320,
+    "postcode": "1702",
+    "post_office": "Chandna"
+  },
+  {
+    "district_id": 41,
+    "upazila_id": 320,
+    "postcode": "1700",
+    "post_office": "Gazipur Sadar"
+  },
+  {
+    "district_id": 41,
+    "upazila_id": 320,
+    "postcode": "1704",
+    "post_office": "National University"
+  },
+  {
+    "district_id": 41,
+    "upazila_id": 317,
+    "postcode": "1720",
+    "post_office": "Kaliganj"
+  },
+  {
+    "district_id": 41,
+    "upazila_id": 317,
+    "postcode": "1721",
+    "post_office": "Pubail"
+  },
+  {
+    "district_id": 41,
+    "upazila_id": 317,
+    "postcode": "1722",
+    "post_office": "Santanpara"
+  },
+  {
+    "district_id": 41,
+    "upazila_id": 317,
+    "postcode": "1723",
+    "post_office": "Vaoal Jamalpur"
+  },
+  {
+    "district_id": 41,
+    "upazila_id": 321,
+    "postcode": "1743",
+    "post_office": "Barmi"
+  },
+  {
+    "district_id": 41,
+    "upazila_id": 321,
+    "postcode": "1747",
+    "post_office": "Bashamur"
+  },
+  {
+    "district_id": 41,
+    "upazila_id": 321,
+    "postcode": "1748",
+    "post_office": "Boubi"
+  },
+  {
+    "district_id": 41,
+    "upazila_id": 321,
+    "postcode": "1745",
+    "post_office": "Kawraid"
+  },
+  {
+    "district_id": 41,
+    "upazila_id": 321,
+    "postcode": "1744",
+    "post_office": "Satkhamair"
+  },
+  {
+    "district_id": 41,
+    "upazila_id": 321,
+    "postcode": "1740",
+    "post_office": "Sreepur"
+  },
+  {
+    "district_id": 51,
+    "upazila_id": 385,
+    "postcode": "8102",
+    "post_office": "Barfa"
+  },
+  {
+    "district_id": 51,
+    "upazila_id": 385,
+    "postcode": "8013",
+    "post_office": "Chandradighalia"
+  },
+  {
+    "district_id": 51,
+    "upazila_id": 385,
+    "postcode": "8100",
+    "post_office": "Gopalganj Sadar"
+  },
+  {
+    "district_id": 51,
+    "upazila_id": 385,
+    "postcode": "8101",
+    "post_office": "Ulpur"
+  },
+  {
+    "district_id": 51,
+    "upazila_id": 386,
+    "postcode": "8133",
+    "post_office": "Jonapur"
+  },
+  {
+    "district_id": 51,
+    "upazila_id": 386,
+    "postcode": "8130",
+    "post_office": "Kashiani"
+  },
+  {
+    "district_id": 51,
+    "upazila_id": 386,
+    "postcode": "8131",
+    "post_office": "Ramdia College"
+  },
+  {
+    "district_id": 51,
+    "upazila_id": 386,
+    "postcode": "8132",
+    "post_office": "Ratoil"
+  },
+  {
+    "district_id": 51,
+    "upazila_id": 388,
+    "postcode": "8110",
+    "post_office": "Kotalipara"
+  },
+  {
+    "district_id": 51,
+    "upazila_id": 387,
+    "postcode": "8121",
+    "post_office": "Patgati"
+  },
+  {
+    "district_id": 51,
+    "upazila_id": 387,
+    "postcode": "8120",
+    "post_office": "Tungipara"
+  },
+  {
+    "district_id": 63,
+    "upazila_id": 478,
+    "postcode": "2030",
+    "post_office": "Dewangonj"
+  },
+  {
+    "district_id": 63,
+    "upazila_id": 478,
+    "postcode": "2031",
+    "post_office": "Dewangonj S. Mills"
+  },
+  {
+    "district_id": 63,
+    "upazila_id": 477,
+    "postcode": "2021",
+    "post_office": "Durmoot"
+  },
+  {
+    "district_id": 63,
+    "upazila_id": 477,
+    "postcode": "2022",
+    "post_office": "Gilabari"
+  },
+  {
+    "district_id": 63,
+    "upazila_id": 477,
+    "postcode": "2020",
+    "post_office": "Islampur"
+  },
+  {
+    "district_id": 45,
+    "upazila_id": 354,
+    "postcode": "2336",
+    "post_office": "Bajitpur"
+  },
+  {
+    "district_id": 45,
+    "upazila_id": 354,
+    "postcode": "2338",
+    "post_office": "Laksmipur"
+  },
+  {
+    "district_id": 45,
+    "upazila_id": 354,
+    "postcode": "2337",
+    "post_office": "Sararchar"
+  },
+  {
+    "district_id": 45,
+    "upazila_id": 345,
+    "postcode": "2390",
+    "post_office": "Itna"
+  },
+  {
+    "district_id": 45,
+    "upazila_id": 346,
+    "postcode": "2331",
+    "post_office": "Gochhihata"
+  },
+  {
+    "district_id": 45,
+    "upazila_id": 346,
+    "postcode": "2330",
+    "post_office": "Katiadi"
+  },
+  {
+    "district_id": 45,
+    "upazila_id": 352,
+    "postcode": "2301",
+    "post_office": "Kishoreganj S.Mills"
+  },
+  {
+    "district_id": 45,
+    "upazila_id": 352,
+    "postcode": "2300",
+    "post_office": "Kishoreganj Sadar"
+  },
+  {
+    "district_id": 45,
+    "upazila_id": 352,
+    "postcode": "2302",
+    "post_office": "Maizhati"
+  },
+  {
+    "district_id": 45,
+    "upazila_id": 352,
+    "postcode": "2303",
+    "post_office": "Nilganj"
+  },
+  {
+    "district_id": 45,
+    "upazila_id": 351,
+    "postcode": "2341",
+    "post_office": "Chhoysuti"
+  },
+  {
+    "district_id": 45,
+    "upazila_id": 351,
+    "postcode": "2340",
+    "post_office": "Kuliarchar"
+  },
+  {
+    "district_id": 45,
+    "upazila_id": 356,
+    "postcode": "2371",
+    "post_office": "Abdullahpur"
+  },
+  {
+    "district_id": 45,
+    "upazila_id": 356,
+    "postcode": "2370",
+    "post_office": "MIthamoin"
+  },
+  {
+    "district_id": 45,
+    "upazila_id": 357,
+    "postcode": "2360",
+    "post_office": "Nikli"
+  },
+  {
+    "district_id": 45,
+    "upazila_id": 350,
+    "postcode": "2326",
+    "post_office": "Pakundia"
+  },
+  {
+    "district_id": 50,
+    "upazila_id": 383,
+    "postcode": "7920",
+    "post_office": "Kalkini"
+  },
+  {
+    "district_id": 50,
+    "upazila_id": 383,
+    "postcode": "7921",
+    "post_office": "Sahabrampur"
+  },
+  {
+    "district_id": 50,
+    "upazila_id": 381,
+    "postcode": "7901",
+    "post_office": "Charmugria"
+  },
+  {
+    "district_id": 50,
+    "upazila_id": 381,
+    "postcode": "7903",
+    "post_office": "Habiganj"
+  },
+  {
+    "district_id": 50,
+    "upazila_id": 381,
+    "postcode": "7902",
+    "post_office": "Kulpaddi"
+  },
+  {
+    "district_id": 50,
+    "upazila_id": 381,
+    "postcode": "7900",
+    "post_office": "Madaripur Sadar"
+  },
+  {
+    "district_id": 50,
+    "upazila_id": 381,
+    "postcode": "7904",
+    "post_office": "Mustafapur"
+  },
+  {
+    "district_id": 50,
+    "upazila_id": 384,
+    "postcode": "7911",
+    "post_office": "Khalia"
+  },
+  {
+    "district_id": 50,
+    "upazila_id": 384,
+    "postcode": "7910",
+    "post_office": "Rajoir"
+  },
+  {
+    "district_id": 46,
+    "upazila_id": 363,
+    "postcode": "1860",
+    "post_office": "Doulatpur"
+  },
+  {
+    "district_id": 46,
+    "upazila_id": 360,
+    "postcode": "1804",
+    "post_office": "Barangail"
+  },
+  {
+    "district_id": 46,
+    "upazila_id": 360,
+    "postcode": "1802",
+    "post_office": "Gorpara"
+  },
+  {
+    "district_id": 46,
+    "upazila_id": 360,
+    "postcode": "1803",
+    "post_office": "Mahadebpur"
+  },
+  {
+    "district_id": 46,
+    "upazila_id": 360,
+    "postcode": "1801",
+    "post_office": "Manikganj Bazar"
+  },
+  {
+    "district_id": 46,
+    "upazila_id": 360,
+    "postcode": "1800",
+    "post_office": "Manikganj Sadar"
+  },
+  {
+    "district_id": 46,
+    "upazila_id": 359,
+    "postcode": "1811",
+    "post_office": "Baliati"
+  },
+  {
+    "district_id": 46,
+    "upazila_id": 359,
+    "postcode": "1810",
+    "post_office": "Saturia"
+  },
+  {
+    "district_id": 48,
+    "upazila_id": 374,
+    "postcode": "1510",
+    "post_office": "Gajaria"
+  },
+  {
+    "district_id": 48,
+    "upazila_id": 374,
+    "postcode": "1511",
+    "post_office": "Hossendi"
+  },
+  {
+    "district_id": 48,
+    "upazila_id": 374,
+    "postcode": "1512",
+    "post_office": "Rasulpur"
+  },
+  {
+    "district_id": 48,
+    "upazila_id": 370,
+    "postcode": "1503",
+    "post_office": "Kathakhali"
+  },
+  {
+    "district_id": 48,
+    "upazila_id": 370,
+    "postcode": "1502",
+    "post_office": "Mirkadim"
+  },
+  {
+    "district_id": 48,
+    "upazila_id": 370,
+    "postcode": "1500",
+    "post_office": "Munshiganj Sadar"
+  },
+  {
+    "district_id": 48,
+    "upazila_id": 370,
+    "postcode": "1501",
+    "post_office": "Rikabibazar"
+  },
+  {
+    "district_id": 48,
+    "upazila_id": 372,
+    "postcode": "1542",
+    "post_office": "Ichapur"
+  },
+  {
+    "district_id": 48,
+    "upazila_id": 372,
+    "postcode": "1541",
+    "post_office": "Kola"
+  },
+  {
+    "district_id": 48,
+    "upazila_id": 372,
+    "postcode": "1543",
+    "post_office": "Malkha Nagar"
+  },
+  {
+    "district_id": 48,
+    "upazila_id": 372,
+    "postcode": "1544",
+    "post_office": "Shekher Nagar"
+  },
+  {
+    "district_id": 48,
+    "upazila_id": 372,
+    "postcode": "1540",
+    "post_office": "Sirajdikhan"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 464,
+    "postcode": "2240",
+    "post_office": "Bhaluka"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 462,
+    "postcode": "2216",
+    "post_office": "Fulbaria"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 470,
+    "postcode": "2270",
+    "post_office": "Gouripur"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 470,
+    "postcode": "2271",
+    "post_office": "Ramgopalpur"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 469,
+    "postcode": "2261",
+    "post_office": "Dhara"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 469,
+    "postcode": "2260",
+    "post_office": "Haluaghat"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 469,
+    "postcode": "2262",
+    "post_office": "Munshirhat"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 466,
+    "postcode": "2202",
+    "post_office": "Agriculture Universi"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 466,
+    "postcode": "2204",
+    "post_office": "Biddyaganj"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 466,
+    "postcode": "2201",
+    "post_office": "Kawatkhali"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 466,
+    "postcode": "2200",
+    "post_office": "Mymensingh Sadar"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 466,
+    "postcode": "2205",
+    "post_office": "Pearpur"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 466,
+    "postcode": "2203",
+    "post_office": "Shombhuganj"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 473,
+    "postcode": "2291",
+    "post_office": "Gangail"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 473,
+    "postcode": "2290",
+    "post_office": "Nandail"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 468,
+    "postcode": "2251",
+    "post_office": "Beltia"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 468,
+    "postcode": "2250",
+    "post_office": "Phulpur"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 468,
+    "postcode": "2252",
+    "post_office": "Tarakanda"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 463,
+    "postcode": "2221",
+    "post_office": "Ahmadbad"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 463,
+    "postcode": "2223",
+    "post_office": "Dhala"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 463,
+    "postcode": "2222",
+    "post_office": "Ram Amritaganj"
+  },
+  {
+    "district_id": 62,
+    "upazila_id": 463,
+    "postcode": "2220",
+    "post_office": "Trishal"
+  },
+  {
+    "district_id": 43,
+    "upazila_id": 328,
+    "postcode": "1450",
+    "post_office": "Araihazar"
+  },
+  {
+    "district_id": 43,
+    "upazila_id": 328,
+    "postcode": "1451",
+    "post_office": "Gopaldi"
+  },
+  {
+    "district_id": 43,
+    "upazila_id": 329,
+    "postcode": "1410",
+    "post_office": "Bandar"
+  },
+  {
+    "district_id": 43,
+    "upazila_id": 329,
+    "postcode": "1413",
+    "post_office": "BIDS"
+  },
+  {
+    "district_id": 43,
+    "upazila_id": 329,
+    "postcode": "1411",
+    "post_office": "D.C Mills"
+  },
+  {
+    "district_id": 43,
+    "upazila_id": 329,
+    "postcode": "1414",
+    "post_office": "Madanganj"
+  },
+  {
+    "district_id": 43,
+    "upazila_id": 329,
+    "postcode": "1412",
+    "post_office": "Nabiganj"
+  },
+  {
+    "district_id": 43,
+    "upazila_id": 330,
+    "postcode": "1400",
+    "post_office": "Narayanganj Sadar"
+  },
+  {
+    "district_id": 43,
+    "upazila_id": 331,
+    "postcode": "1462",
+    "post_office": "Bhulta"
+  },
+  {
+    "district_id": 43,
+    "upazila_id": 331,
+    "postcode": "1461",
+    "post_office": "Kanchan"
+  },
+  {
+    "district_id": 43,
+    "upazila_id": 331,
+    "postcode": "1464",
+    "post_office": "Murapara"
+  },
+  {
+    "district_id": 43,
+    "upazila_id": 331,
+    "postcode": "1463",
+    "post_office": "Nagri"
+  },
+  {
+    "district_id": 43,
+    "upazila_id": 331,
+    "postcode": "1460",
+    "post_office": "Rupganj"
+  },
+  {
+    "district_id": 40,
+    "upazila_id": 311,
+    "postcode": "1640",
+    "post_office": "Belabo"
+  },
+  {
+    "district_id": 40,
+    "upazila_id": 314,
+    "postcode": "1612",
+    "post_office": "Char Sindhur"
+  },
+  {
+    "district_id": 40,
+    "upazila_id": 314,
+    "postcode": "1613",
+    "post_office": "Ghorashal"
+  },
+  {
+    "district_id": 40,
+    "upazila_id": 314,
+    "postcode": "1611",
+    "post_office": "Ghorashal Urea Facto"
+  },
+  {
+    "district_id": 40,
+    "upazila_id": 314,
+    "postcode": "1610",
+    "post_office": "Palash"
+  },
+  {
+    "district_id": 40,
+    "upazila_id": 316,
+    "postcode": "1620",
+    "post_office": "Shibpur"
+  },
+  {
+    "district_id": 64,
+    "upazila_id": 485,
+    "postcode": "2470",
+    "post_office": "Atpara"
+  },
+  {
+    "district_id": 64,
+    "upazila_id": 482,
+    "postcode": "2440",
+    "post_office": "Barhatta"
+  },
+  {
+    "district_id": 64,
+    "upazila_id": 488,
+    "postcode": "2430",
+    "post_office": "Kalmakanda"
+  },
+  {
+    "district_id": 64,
+    "upazila_id": 484,
+    "postcode": "2480",
+    "post_office": "Kendua"
+  },
+  {
+    "district_id": 64,
+    "upazila_id": 487,
+    "postcode": "2460",
+    "post_office": "Khaliajhri"
+  },
+  {
+    "district_id": 64,
+    "upazila_id": 487,
+    "postcode": "2462",
+    "post_office": "Shaldigha"
+  },
+  {
+    "district_id": 64,
+    "upazila_id": 486,
+    "postcode": "2490",
+    "post_office": "Madan"
+  },
+  {
+    "district_id": 49,
+    "upazila_id": 379,
+    "postcode": "7730",
+    "post_office": "Baliakandi"
+  },
+  {
+    "district_id": 49,
+    "upazila_id": 379,
+    "postcode": "7731",
+    "post_office": "Nalia"
+  },
+  {
+    "district_id": 49,
+    "upazila_id": 376,
+    "postcode": "7710",
+    "post_office": "Goalanda"
+  },
+  {
+    "district_id": 49,
+    "upazila_id": 376,
+    "postcode": "7711",
+    "post_office": "Khankhanapur"
+  },
+  {
+    "district_id": 49,
+    "upazila_id": 376,
+    "postcode": "7700",
+    "post_office": "Rajbari Sadar"
+  },
+  {
+    "district_id": 42,
+    "upazila_id": 325,
+    "postcode": "8050",
+    "post_office": "Gosairhat"
+  },
+  {
+    "district_id": 42,
+    "upazila_id": 323,
+    "postcode": "8021",
+    "post_office": "Bhozeshwar"
+  },
+  {
+    "district_id": 42,
+    "upazila_id": 323,
+    "postcode": "8022",
+    "post_office": "Gharisar"
+  },
+  {
+    "district_id": 42,
+    "upazila_id": 323,
+    "postcode": "8024",
+    "post_office": "Kartikpur"
+  },
+  {
+    "district_id": 42,
+    "upazila_id": 323,
+    "postcode": "8020",
+    "post_office": "Naria"
+  },
+  {
+    "district_id": 42,
+    "upazila_id": 323,
+    "postcode": "8023",
+    "post_office": "Upshi"
+  },
+  {
+    "district_id": 42,
+    "upazila_id": 322,
+    "postcode": "8001",
+    "post_office": "Angaria"
+  },
+  {
+    "district_id": 42,
+    "upazila_id": 322,
+    "postcode": "8002",
+    "post_office": "Chikandi"
+  },
+  {
+    "district_id": 42,
+    "upazila_id": 322,
+    "postcode": "8000",
+    "post_office": "Shariatpur Sadar"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 333,
+    "postcode": "1920",
+    "post_office": "Basail"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 334,
+    "postcode": "1960",
+    "post_office": "Bhuapur"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 335,
+    "postcode": "1910",
+    "post_office": "Delduar"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 335,
+    "postcode": "1913",
+    "post_office": "Elasin"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 335,
+    "postcode": "1914",
+    "post_office": "Hinga Nagar"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 335,
+    "postcode": "1911",
+    "post_office": "Jangalia"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 335,
+    "postcode": "1915",
+    "post_office": "Lowhati"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 335,
+    "postcode": "1912",
+    "post_office": "Patharail"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 336,
+    "postcode": "1982",
+    "post_office": "D. Pakutia"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 336,
+    "postcode": "1983",
+    "post_office": "Dhalapara"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 336,
+    "postcode": "1980",
+    "post_office": "Ghatial"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 336,
+    "postcode": "1984",
+    "post_office": "Lohani"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 336,
+    "postcode": "1981",
+    "post_office": "Zahidganj"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 337,
+    "postcode": "1990",
+    "post_office": "Gopalpur"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 337,
+    "postcode": "1992",
+    "post_office": "Hemnagar"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 337,
+    "postcode": "1991",
+    "post_office": "Jhowail"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 343,
+    "postcode": "1973",
+    "post_office": "Ballabazar"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 343,
+    "postcode": "1974",
+    "post_office": "Elinga"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 343,
+    "postcode": "1970",
+    "post_office": "Kalihati"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 343,
+    "postcode": "1977",
+    "post_office": "Nagarbari"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 343,
+    "postcode": "1976",
+    "post_office": "Nagarbari SO"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 343,
+    "postcode": "1972",
+    "post_office": "Nagbari"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 343,
+    "postcode": "1975",
+    "post_office": "Palisha"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 343,
+    "postcode": "1971",
+    "post_office": "Rajafair"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 338,
+    "postcode": "1997",
+    "post_office": "Dhobari"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 338,
+    "postcode": "1996",
+    "post_office": "Madhupur"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 339,
+    "postcode": "1941",
+    "post_office": "Gorai"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 339,
+    "postcode": "1944",
+    "post_office": "Jarmuki"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 339,
+    "postcode": "1942",
+    "post_office": "M.C. College"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 339,
+    "postcode": "1940",
+    "post_office": "Mirzapur"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 339,
+    "postcode": "1945",
+    "post_office": "Mohera"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 339,
+    "postcode": "1943",
+    "post_office": "Warri paikpara"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 340,
+    "postcode": "1937",
+    "post_office": "Dhuburia"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 340,
+    "postcode": "1936",
+    "post_office": "Nagarpur"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 340,
+    "postcode": "1938",
+    "post_office": "Salimabad"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 341,
+    "postcode": "1951",
+    "post_office": "Kochua"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 341,
+    "postcode": "1950",
+    "post_office": "Sakhipur"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 342,
+    "postcode": "1901",
+    "post_office": "Kagmari"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 342,
+    "postcode": "1903",
+    "post_office": "Korotia"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 342,
+    "postcode": "1904",
+    "post_office": "Purabari"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 342,
+    "postcode": "1902",
+    "post_office": "Santosh"
+  },
+  {
+    "district_id": 44,
+    "upazila_id": 342,
+    "postcode": "1900",
+    "post_office": "Tangail Sadar"
+  },
+  {
+    "district_id": 14,
+    "upazila_id": 123,
+    "postcode": "5801",
+    "post_office": "Bogra Canttonment"
+  },
+  {
+    "district_id": 14,
+    "upazila_id": 123,
+    "postcode": "5800",
+    "post_office": "Bogra Sadar"
+  },
+  {
+    "district_id": 14,
+    "upazila_id": 132,
+    "postcode": "5841",
+    "post_office": "Chandaikona"
+  },
+  {
+    "district_id": 14,
+    "upazila_id": 132,
+    "postcode": "5842",
+    "post_office": "Palli Unnyan Accadem"
+  },
+  {
+    "district_id": 14,
+    "upazila_id": 132,
+    "postcode": "5840",
+    "post_office": "Sherpur"
+  },
+  {
+    "district_id": 14,
+    "upazila_id": 133,
+    "postcode": "5810",
+    "post_office": "Shibganj"
+  },
+  {
+    "district_id": 17,
+    "upazila_id": 150,
+    "postcode": "5940",
+    "post_office": "Akklepur"
+  },
+  {
+    "district_id": 17,
+    "upazila_id": 150,
+    "postcode": "5941",
+    "post_office": "jamalganj"
+  },
+  {
+    "district_id": 17,
+    "upazila_id": 150,
+    "postcode": "5942",
+    "post_office": "Tilakpur"
+  },
+  {
+    "district_id": 17,
+    "upazila_id": 154,
+    "postcode": "5900",
+    "post_office": "Joypurhat Sadar"
+  },
+  {
+    "district_id": 17,
+    "upazila_id": 151,
+    "postcode": "5930",
+    "post_office": "kalai"
+  },
+  {
+    "district_id": 17,
+    "upazila_id": 152,
+    "postcode": "5920",
+    "post_office": "Khetlal"
+  },
+  {
+    "district_id": 17,
+    "upazila_id": 153,
+    "postcode": "5910",
+    "post_office": "Panchbibi"
+  },
+  {
+    "district_id": 19,
+    "upazila_id": 168,
+    "postcode": "6500",
+    "post_office": "Naogaon Sadar"
+  },
+  {
+    "district_id": 19,
+    "upazila_id": 164,
+    "postcode": "6520",
+    "post_office": "Niamatpur"
+  },
+  {
+    "district_id": 19,
+    "upazila_id": 162,
+    "postcode": "6540",
+    "post_office": "Patnitala"
+  },
+  {
+    "district_id": 19,
+    "upazila_id": 167,
+    "postcode": "6591",
+    "post_office": "Kashimpur"
+  },
+  {
+    "district_id": 19,
+    "upazila_id": 167,
+    "postcode": "6590",
+    "post_office": "Raninagar"
+  },
+  {
+    "district_id": 19,
+    "upazila_id": 170,
+    "postcode": "6561",
+    "post_office": "Moduhil"
+  },
+  {
+    "district_id": 19,
+    "upazila_id": 170,
+    "postcode": "6560",
+    "post_office": "Sapahar"
+  },
+  {
+    "district_id": 16,
+    "upazila_id": 143,
+    "postcode": "6402",
+    "post_office": "Baiddyabal Gharia"
+  },
+  {
+    "district_id": 16,
+    "upazila_id": 143,
+    "postcode": "6401",
+    "post_office": "Digapatia"
+  },
+  {
+    "district_id": 16,
+    "upazila_id": 143,
+    "postcode": "6403",
+    "post_office": "Madhnagar"
+  },
+  {
+    "district_id": 16,
+    "upazila_id": 143,
+    "postcode": "6400",
+    "post_office": "Natore Sadar"
+  },
+  {
+    "district_id": 16,
+    "upazila_id": 144,
+    "postcode": "6450",
+    "post_office": "Singra"
+  },
+  {
+    "district_id": 13,
+    "upazila_id": 117,
+    "postcode": "6680",
+    "post_office": "Bera"
+  },
+  {
+    "district_id": 13,
+    "upazila_id": 117,
+    "postcode": "6682",
+    "post_office": "Kashinathpur"
+  },
+  {
+    "district_id": 13,
+    "upazila_id": 117,
+    "postcode": "6681",
+    "post_office": "Nakalia"
+  },
+  {
+    "district_id": 13,
+    "upazila_id": 117,
+    "postcode": "6683",
+    "post_office": "Puran Bharenga"
+  },
+  {
+    "district_id": 13,
+    "upazila_id": 115,
+    "postcode": "6640",
+    "post_office": "Bhangura"
+  },
+  {
+    "district_id": 13,
+    "upazila_id": 119,
+    "postcode": "6630",
+    "post_office": "Chatmohar"
+  },
+  {
+    "district_id": 13,
+    "upazila_id": 116,
+    "postcode": "6602",
+    "post_office": "Hamayetpur"
+  },
+  {
+    "district_id": 13,
+    "upazila_id": 116,
+    "postcode": "6601",
+    "post_office": "Kaliko Cotton Mills"
+  },
+  {
+    "district_id": 13,
+    "upazila_id": 116,
+    "postcode": "6600",
+    "post_office": "Pabna Sadar"
+  },
+  {
+    "district_id": 13,
+    "upazila_id": 113,
+    "postcode": "6661",
+    "post_office": "Sagarkandi"
+  },
+  {
+    "district_id": 13,
+    "upazila_id": 113,
+    "postcode": "6660",
+    "post_office": "Sujanagar"
+  },
+  {
+    "district_id": 15,
+    "upazila_id": 139,
+    "postcode": "6281",
+    "post_office": "Arani"
+  },
+  {
+    "district_id": 15,
+    "upazila_id": 139,
+    "postcode": "6280",
+    "post_office": "Bagha"
+  },
+  {
+    "district_id": 15,
+    "upazila_id": 137,
+    "postcode": "6270",
+    "post_office": "Charghat"
+  },
+  {
+    "district_id": 15,
+    "upazila_id": 137,
+    "postcode": "6271",
+    "post_office": "Sarda"
+  },
+  {
+    "district_id": 15,
+    "upazila_id": 135,
+    "postcode": "6240",
+    "post_office": "Durgapur"
+  },
+  {
+    "district_id": 15,
+    "upazila_id": 140,
+    "postcode": "6290",
+    "post_office": "Godagari"
+  },
+  {
+    "district_id": 15,
+    "upazila_id": 140,
+    "postcode": "6291",
+    "post_office": "Premtoli"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 104,
+    "postcode": "6740",
+    "post_office": "Belkuchi"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 104,
+    "postcode": "6751",
+    "post_office": "Enayetpur"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 104,
+    "postcode": "6742",
+    "post_office": "Rajapur"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 104,
+    "postcode": "6741",
+    "post_office": "Sohagpur"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 104,
+    "postcode": "6752",
+    "post_office": "Sthal"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 107,
+    "postcode": "6712",
+    "post_office": "Gandail"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 107,
+    "postcode": "6710",
+    "post_office": "Kazipur"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 107,
+    "postcode": "6711",
+    "post_office": "Shuvgachha"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 109,
+    "postcode": "6772",
+    "post_office": "Jamirta"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 109,
+    "postcode": "6773",
+    "post_office": "Kaijuri"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 109,
+    "postcode": "6771",
+    "post_office": "Porjana"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 109,
+    "postcode": "6770",
+    "post_office": "Shahjadpur"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 110,
+    "postcode": "6701",
+    "post_office": "Raipur"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 110,
+    "postcode": "6702",
+    "post_office": "Rashidabad"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 110,
+    "postcode": "6700",
+    "post_office": "Sirajganj Sadar"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 111,
+    "postcode": "6780",
+    "post_office": "Tarash"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 112,
+    "postcode": "6762",
+    "post_office": "Lahiri Mohanpur"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 112,
+    "postcode": "6763",
+    "post_office": "Salap"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 112,
+    "postcode": "6760",
+    "post_office": "Ullapara"
+  },
+  {
+    "district_id": 12,
+    "upazila_id": 112,
+    "postcode": "6761",
+    "post_office": "Ullapara R.S"
+  },
+  {
+    "district_id": 54,
+    "upazila_id": 407,
+    "postcode": "5266",
+    "post_office": "Birampur"
+  },
+  {
+    "district_id": 54,
+    "upazila_id": 405,
+    "postcode": "5220",
+    "post_office": "Birganj"
+  },
+  {
+    "district_id": 54,
+    "upazila_id": 412,
+    "postcode": "5201",
+    "post_office": "Dinajpur Rajbari"
+  },
+  {
+    "district_id": 54,
+    "upazila_id": 412,
+    "postcode": "5200",
+    "post_office": "Dinajpur Sadar"
+  },
+  {
+    "district_id": 54,
+    "upazila_id": 414,
+    "postcode": "5230",
+    "post_office": "Khansama"
+  },
+  {
+    "district_id": 54,
+    "upazila_id": 414,
+    "postcode": "5231",
+    "post_office": "Pakarhat"
+  },
+  {
+    "district_id": 54,
+    "upazila_id": 408,
+    "postcode": "5250",
+    "post_office": "Parbatipur"
+  },
+  {
+    "district_id": 57,
+    "upazila_id": 429,
+    "postcode": "5700",
+    "post_office": "Gaibandha Sadar"
+  },
+  {
+    "district_id": 57,
+    "upazila_id": 432,
+    "postcode": "5740",
+    "post_office": "Gobindhaganj"
+  },
+  {
+    "district_id": 57,
+    "upazila_id": 432,
+    "postcode": "5741",
+    "post_office": "Mahimaganj"
+  },
+  {
+    "district_id": 57,
+    "upazila_id": 430,
+    "postcode": "5730",
+    "post_office": "Palashbari"
+  },
+  {
+    "district_id": 57,
+    "upazila_id": 433,
+    "postcode": "5721",
+    "post_office": "Bamandanga"
+  },
+  {
+    "district_id": 57,
+    "upazila_id": 433,
+    "postcode": "5720",
+    "post_office": "Sundarganj"
+  },
+  {
+    "district_id": 60,
+    "upazila_id": 450,
+    "postcode": "5670",
+    "post_office": "Bhurungamari"
+  },
+  {
+    "district_id": 60,
+    "upazila_id": 454,
+    "postcode": "5630",
+    "post_office": "Chilmari"
+  },
+  {
+    "district_id": 60,
+    "upazila_id": 454,
+    "postcode": "5631",
+    "post_office": "Jorgachh"
+  },
+  {
+    "district_id": 60,
+    "upazila_id": 448,
+    "postcode": "5600",
+    "post_office": "Kurigram Sadar"
+  },
+  {
+    "district_id": 60,
+    "upazila_id": 448,
+    "postcode": "5601",
+    "post_office": "Pandul"
+  },
+  {
+    "district_id": 60,
+    "upazila_id": 448,
+    "postcode": "5680",
+    "post_office": "Phulbari"
+  },
+  {
+    "district_id": 60,
+    "upazila_id": 452,
+    "postcode": "5611",
+    "post_office": "Nazimkhan"
+  },
+  {
+    "district_id": 60,
+    "upazila_id": 452,
+    "postcode": "5610",
+    "post_office": "Rajarhat"
+  },
+  {
+    "district_id": 60,
+    "upazila_id": 453,
+    "postcode": "5621",
+    "post_office": "Bazarhat"
+  },
+  {
+    "district_id": 60,
+    "upazila_id": 453,
+    "postcode": "5620",
+    "post_office": "Ulipur"
+  },
+  {
+    "district_id": 55,
+    "upazila_id": 421,
+    "postcode": "5510",
+    "post_office": "Aditmari"
+  },
+  {
+    "district_id": 55,
+    "upazila_id": 419,
+    "postcode": "5530",
+    "post_office": "Hatibandha"
+  },
+  {
+    "district_id": 55,
+    "upazila_id": 417,
+    "postcode": "5502",
+    "post_office": "Kulaghat SO"
+  },
+  {
+    "district_id": 55,
+    "upazila_id": 417,
+    "postcode": "5500",
+    "post_office": "Lalmonirhat Sadar"
+  },
+  {
+    "district_id": 55,
+    "upazila_id": 417,
+    "postcode": "5501",
+    "post_office": "Moghalhat"
+  },
+  {
+    "district_id": 55,
+    "upazila_id": 420,
+    "postcode": "5541",
+    "post_office": "Baura"
+  },
+  {
+    "district_id": 55,
+    "upazila_id": 420,
+    "postcode": "5542",
+    "post_office": "Burimari"
+  },
+  {
+    "district_id": 55,
+    "upazila_id": 420,
+    "postcode": "5540",
+    "post_office": "Patgram"
+  },
+  {
+    "district_id": 56,
+    "upazila_id": 424,
+    "postcode": "5350",
+    "post_office": "Dimla"
+  },
+  {
+    "district_id": 56,
+    "upazila_id": 424,
+    "postcode": "5351",
+    "post_office": "Ghaga Kharibari"
+  },
+  {
+    "district_id": 56,
+    "upazila_id": 423,
+    "postcode": "5341",
+    "post_office": "Chilahati"
+  },
+  {
+    "district_id": 56,
+    "upazila_id": 423,
+    "postcode": "5340",
+    "post_office": "Domar"
+  },
+  {
+    "district_id": 56,
+    "upazila_id": 425,
+    "postcode": "5330",
+    "post_office": "Jaldhaka"
+  },
+  {
+    "district_id": 56,
+    "upazila_id": 427,
+    "postcode": "5300",
+    "post_office": "Nilphamari Sadar"
+  },
+  {
+    "district_id": 56,
+    "upazila_id": 427,
+    "postcode": "5301",
+    "post_office": "Nilphamari Sugar Mil"
+  },
+  {
+    "district_id": 56,
+    "upazila_id": 422,
+    "postcode": "5310",
+    "post_office": "Syedpur"
+  },
+  {
+    "district_id": 56,
+    "upazila_id": 422,
+    "postcode": "5311",
+    "post_office": "Syedpur Upashahar"
+  },
+  {
+    "district_id": 53,
+    "upazila_id": 401,
+    "postcode": "5010",
+    "post_office": "Boda"
+  },
+  {
+    "district_id": 53,
+    "upazila_id": 403,
+    "postcode": "5030",
+    "post_office": "Tetulia"
+  },
+  {
+    "district_id": 59,
+    "upazila_id": 441,
+    "postcode": "5410",
+    "post_office": "Gangachara"
+  },
+  {
+    "district_id": 59,
+    "upazila_id": 446,
+    "postcode": "5441",
+    "post_office": "Haragachh"
+  },
+  {
+    "district_id": 59,
+    "upazila_id": 446,
+    "postcode": "5440",
+    "post_office": "Kaunia"
+  },
+  {
+    "district_id": 59,
+    "upazila_id": 444,
+    "postcode": "5460",
+    "post_office": "Mithapukur"
+  },
+  {
+    "district_id": 59,
+    "upazila_id": 440,
+    "postcode": "5402",
+    "post_office": "Alamnagar"
+  },
+  {
+    "district_id": 59,
+    "upazila_id": 440,
+    "postcode": "5403",
+    "post_office": "Mahiganj"
+  },
+  {
+    "district_id": 59,
+    "upazila_id": 440,
+    "postcode": "5404",
+    "post_office": "Rangpur Cadet Colleg"
+  },
+  {
+    "district_id": 59,
+    "upazila_id": 440,
+    "postcode": "5405",
+    "post_office": "Rangpur Carmiecal Col"
+  },
+  {
+    "district_id": 59,
+    "upazila_id": 440,
+    "postcode": "5400",
+    "post_office": "Rangpur Sadar"
+  },
+  {
+    "district_id": 59,
+    "upazila_id": 440,
+    "postcode": "5401",
+    "post_office": "Rangpur Upa-Shahar"
+  },
+  {
+    "district_id": 58,
+    "upazila_id": 439,
+    "postcode": "5140",
+    "post_office": "Baliadangi"
+  },
+  {
+    "district_id": 58,
+    "upazila_id": 439,
+    "postcode": "5141",
+    "post_office": "Lahiri"
+  },
+  {
+    "district_id": 58,
+    "upazila_id": 436,
+    "postcode": "5110",
+    "post_office": "Pirganj"
+  },
+  {
+    "district_id": 58,
+    "upazila_id": 436,
+    "postcode": "5470",
+    "post_office": "Pirganj"
+  },
+  {
+    "district_id": 58,
+    "upazila_id": 437,
+    "postcode": "5121",
+    "post_office": "Nekmarad"
+  },
+  {
+    "district_id": 58,
+    "upazila_id": 437,
+    "postcode": "5120",
+    "post_office": "Rani Sankail"
+  },
+  {
+    "district_id": 58,
+    "upazila_id": 435,
+    "postcode": "5103",
+    "post_office": "Ruhia"
+  },
+  {
+    "district_id": 58,
+    "upazila_id": 435,
+    "postcode": "5102",
+    "post_office": "Shibganj"
+  },
+  {
+    "district_id": 58,
+    "upazila_id": 435,
+    "postcode": "5101",
+    "post_office": "Thakurgaon Road"
+  },
+  {
+    "district_id": 58,
+    "upazila_id": 435,
+    "postcode": "5100",
+    "post_office": "Thakurgaon Sadar"
+  },
+  {
+    "district_id": 35,
+    "upazila_id": 266,
+    "postcode": "8710",
+    "post_office": "Amtali"
+  },
+  {
+    "district_id": 35,
+    "upazila_id": 269,
+    "postcode": "8730",
+    "post_office": "Bamna"
+  },
+  {
+    "district_id": 35,
+    "upazila_id": 267,
+    "postcode": "8700",
+    "post_office": "Barguna Sadar"
+  },
+  {
+    "district_id": 35,
+    "upazila_id": 267,
+    "postcode": "8701",
+    "post_office": "Nali Bandar"
+  },
+  {
+    "district_id": 35,
+    "upazila_id": 268,
+    "postcode": "8740",
+    "post_office": "Betagi"
+  },
+  {
+    "district_id": 35,
+    "upazila_id": 268,
+    "postcode": "8741",
+    "post_office": "Darul Ulam"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 251,
+    "postcode": "8210",
+    "post_office": "Babuganj"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 251,
+    "postcode": "8216",
+    "post_office": "Barisal Cadet"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 251,
+    "postcode": "8212",
+    "post_office": "Chandpasha"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 251,
+    "postcode": "8213",
+    "post_office": "Madhabpasha"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 251,
+    "postcode": "8215",
+    "post_office": "Nizamuddin College"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 251,
+    "postcode": "8211",
+    "post_office": "Rahamatpur"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 251,
+    "postcode": "8214",
+    "post_office": "Thakur Mallik"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 249,
+    "postcode": "8200",
+    "post_office": "Barisal Sadar"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 249,
+    "postcode": "8201",
+    "post_office": "Bukhainagar"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 249,
+    "postcode": "8206",
+    "post_office": "Jaguarhat"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 249,
+    "postcode": "8205",
+    "post_office": "Kashipur"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 249,
+    "postcode": "8204",
+    "post_office": "Patang"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 249,
+    "postcode": "8202",
+    "post_office": "Saheberhat"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 249,
+    "postcode": "8203",
+    "post_office": "Sugandia"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 257,
+    "postcode": "8252",
+    "post_office": "Charkalekhan"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 257,
+    "postcode": "8251",
+    "post_office": "Kazirchar"
+  },
+  {
+    "district_id": 33,
+    "upazila_id": 257,
+    "postcode": "8250",
+    "post_office": "Muladi"
+  },
+  {
+    "district_id": 34,
+    "upazila_id": 259,
+    "postcode": "8300",
+    "post_office": "Bhola Sadar"
+  },
+  {
+    "district_id": 34,
+    "upazila_id": 259,
+    "postcode": "8301",
+    "post_office": "Joynagar"
+  },
+  {
+    "district_id": 34,
+    "upazila_id": 262,
+    "postcode": "8310",
+    "post_office": "Doulatkhan"
+  },
+  {
+    "district_id": 34,
+    "upazila_id": 262,
+    "postcode": "8311",
+    "post_office": "Hajipur"
+  },
+  {
+    "district_id": 30,
+    "upazila_id": 231,
+    "postcode": "8431",
+    "post_office": "Amua"
+  },
+  {
+    "district_id": 30,
+    "upazila_id": 231,
+    "postcode": "8430",
+    "post_office": "Kathalia"
+  },
+  {
+    "district_id": 30,
+    "upazila_id": 231,
+    "postcode": "8432",
+    "post_office": "Niamatee"
+  },
+  {
+    "district_id": 30,
+    "upazila_id": 231,
+    "postcode": "8433",
+    "post_office": "Shoulajalia"
+  },
+  {
+    "district_id": 30,
+    "upazila_id": 233,
+    "postcode": "8410",
+    "post_office": "Rajapur"
+  },
+  {
+    "district_id": 31,
+    "upazila_id": 234,
+    "postcode": "8621",
+    "post_office": "Bagabandar"
+  },
+  {
+    "district_id": 31,
+    "upazila_id": 234,
+    "postcode": "8620",
+    "post_office": "Bauphal"
+  },
+  {
+    "district_id": 31,
+    "upazila_id": 234,
+    "postcode": "8622",
+    "post_office": "Birpasha"
+  },
+  {
+    "district_id": 31,
+    "upazila_id": 234,
+    "postcode": "8624",
+    "post_office": "Kalaia"
+  },
+  {
+    "district_id": 31,
+    "upazila_id": 234,
+    "postcode": "8623",
+    "post_office": "Kalishari"
+  },
+  {
+    "district_id": 31,
+    "upazila_id": 237,
+    "postcode": "8630",
+    "post_office": "Dashmina"
+  },
+  {
+    "district_id": 31,
+    "upazila_id": 240,
+    "postcode": "8640",
+    "post_office": "Galachipa"
+  },
+  {
+    "district_id": 31,
+    "upazila_id": 240,
+    "postcode": "8641",
+    "post_office": "Gazipur Bandar"
+  },
+  {
+    "district_id": 31,
+    "upazila_id": 235,
+    "postcode": "8602",
+    "post_office": "Dumkee"
+  },
+  {
+    "district_id": 31,
+    "upazila_id": 235,
+    "postcode": "8601",
+    "post_office": "Moukaran"
+  },
+  {
+    "district_id": 31,
+    "upazila_id": 235,
+    "postcode": "8600",
+    "post_office": "Patuakhali Sadar"
+  },
+  {
+    "district_id": 31,
+    "upazila_id": 235,
+    "postcode": "8603",
+    "post_office": "Rahimabad"
+  },
+  {
+    "district_id": 32,
+    "upazila_id": 246,
+    "postcode": "8550",
+    "post_office": "Bhandaria"
+  },
+  {
+    "district_id": 32,
+    "upazila_id": 246,
+    "postcode": "8552",
+    "post_office": "Dhaoa"
+  },
+  {
+    "district_id": 32,
+    "upazila_id": 246,
+    "postcode": "8551",
+    "post_office": "Kanudashkathi"
+  },
+  {
+    "district_id": 32,
+    "upazila_id": 247,
+    "postcode": "8565",
+    "post_office": "Betmor Natun Hat"
+  },
+  {
+    "district_id": 32,
+    "upazila_id": 247,
+    "postcode": "8563",
+    "post_office": "Gulishakhali"
+  },
+  {
+    "district_id": 32,
+    "upazila_id": 247,
+    "postcode": "8562",
+    "post_office": "Halta"
+  },
+  {
+    "district_id": 32,
+    "upazila_id": 247,
+    "postcode": "8560",
+    "post_office": "Mathbaria"
+  },
+  {
+    "district_id": 32,
+    "upazila_id": 247,
+    "postcode": "8566",
+    "post_office": "Shilarganj"
+  },
+  {
+    "district_id": 32,
+    "upazila_id": 247,
+    "postcode": "8564",
+    "post_office": "Tiarkhali"
+  },
+  {
+    "district_id": 32,
+    "upazila_id": 247,
+    "postcode": "8561",
+    "post_office": "Tushkhali"
+  },
+  {
+    "district_id": 32,
+    "upazila_id": 243,
+    "postcode": "8540",
+    "post_office": "Nazirpur"
+  },
+  {
+    "district_id": 32,
+    "upazila_id": 243,
+    "postcode": "8541",
+    "post_office": "Sriramkathi"
+  },
+  {
+    "district_id": 32,
+    "upazila_id": 242,
+    "postcode": "8501",
+    "post_office": "Hularhat"
+  },
+  {
+    "district_id": 32,
+    "upazila_id": 242,
+    "postcode": "8502",
+    "post_office": "Parerhat"
+  },
+  {
+    "district_id": 32,
+    "upazila_id": 242,
+    "postcode": "8500",
+    "post_office": "Pirojpur Sadar"
+  },
+  {
+    "district_id": 11,
+    "upazila_id": 98,
+    "postcode": "4650",
+    "post_office": "Alikadam"
+  },
+  {
+    "district_id": 11,
+    "upazila_id": 97,
+    "postcode": "4600",
+    "post_office": "Bandarban Sadar"
+  },
+  {
+    "district_id": 11,
+    "upazila_id": 102,
+    "postcode": "4620",
+    "post_office": "Ruma"
+  },
+  {
+    "district_id": 11,
+    "upazila_id": 103,
+    "postcode": "4641",
+    "post_office": "Lama"
+  },
+  {
+    "district_id": 11,
+    "upazila_id": 103,
+    "postcode": "4630",
+    "post_office": "Thanchi"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 29,
+    "postcode": "3450",
+    "post_office": "Akhaura"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 29,
+    "postcode": "3451",
+    "post_office": "Azampur"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 29,
+    "postcode": "3452",
+    "post_office": "Gangasagar"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 25,
+    "postcode": "3462",
+    "post_office": "Chandidar"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 25,
+    "postcode": "3463",
+    "post_office": "Chargachh"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 25,
+    "postcode": "3464",
+    "post_office": "Gopinathpur"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 25,
+    "postcode": "3460",
+    "post_office": "Kasba"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 25,
+    "postcode": "3461",
+    "post_office": "Kuti"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 30,
+    "postcode": "3419",
+    "post_office": "Jibanganj"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 30,
+    "postcode": "3417",
+    "post_office": "Kaitala"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 30,
+    "postcode": "3411",
+    "post_office": "Laubfatehpur"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 30,
+    "postcode": "3410",
+    "post_office": "Nabinagar"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 30,
+    "postcode": "3412",
+    "post_office": "Rasullabad"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 30,
+    "postcode": "3414",
+    "post_office": "Ratanpur"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 30,
+    "postcode": "3418",
+    "post_office": "Salimganj"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 30,
+    "postcode": "3415",
+    "post_office": "Shahapur"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 30,
+    "postcode": "3413",
+    "post_office": "Shamgram"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 26,
+    "postcode": "3441",
+    "post_office": "Fandauk"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 26,
+    "postcode": "3440",
+    "post_office": "Nasirnagar"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 27,
+    "postcode": "3432",
+    "post_office": "Chandura"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 27,
+    "postcode": "3430",
+    "post_office": "Sarial"
+  },
+  {
+    "district_id": 3,
+    "upazila_id": 27,
+    "postcode": "3431",
+    "post_office": "Shahbajpur"
+  },
+  {
+    "district_id": 6,
+    "upazila_id": 55,
+    "postcode": "3602",
+    "post_office": "Baburhat"
+  },
+  {
+    "district_id": 6,
+    "upazila_id": 55,
+    "postcode": "3600",
+    "post_office": "Chandpur Sadar"
+  },
+  {
+    "district_id": 6,
+    "upazila_id": 55,
+    "postcode": "3601",
+    "post_office": "Puranbazar"
+  },
+  {
+    "district_id": 6,
+    "upazila_id": 55,
+    "postcode": "3603",
+    "post_office": "Sahatali"
+  },
+  {
+    "district_id": 6,
+    "upazila_id": 57,
+    "postcode": "3611",
+    "post_office": "Bolakhal"
+  },
+  {
+    "district_id": 6,
+    "upazila_id": 57,
+    "postcode": "3610",
+    "post_office": "Hajiganj"
+  },
+  {
+    "district_id": 6,
+    "upazila_id": 53,
+    "postcode": "3630",
+    "post_office": "Kachua"
+  },
+  {
+    "district_id": 6,
+    "upazila_id": 53,
+    "postcode": "3631",
+    "post_office": "Pak Shrirampur"
+  },
+  {
+    "district_id": 6,
+    "upazila_id": 53,
+    "postcode": "3632",
+    "post_office": "Rahima Nagar"
+  },
+  {
+    "district_id": 6,
+    "upazila_id": 53,
+    "postcode": "3633",
+    "post_office": "Shachar"
+  },
+  {
+    "district_id": 6,
+    "upazila_id": 54,
+    "postcode": "3623",
+    "post_office": "Chotoshi"
+  },
+  {
+    "district_id": 6,
+    "upazila_id": 54,
+    "postcode": "3624",
+    "post_office": "Islamia Madrasha"
+  },
+  {
+    "district_id": 6,
+    "upazila_id": 54,
+    "postcode": "3621",
+    "post_office": "Khilabazar"
+  },
+  {
+    "district_id": 6,
+    "upazila_id": 54,
+    "postcode": "3622",
+    "post_office": "Pashchim Kherihar Al"
+  },
+  {
+    "district_id": 6,
+    "upazila_id": 54,
+    "postcode": "3620",
+    "post_office": "Shahrasti"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 71,
+    "postcode": "4366",
+    "post_office": "Boalkhali"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 71,
+    "postcode": "4369",
+    "post_office": "Charandwip"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 71,
+    "postcode": "4365",
+    "post_office": "Iqbal Park"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 71,
+    "postcode": "4368",
+    "post_office": "Kadurkhal"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 71,
+    "postcode": "4363",
+    "post_office": "Kanungopara"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 71,
+    "postcode": "4367",
+    "post_office": "Sakpura"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 71,
+    "postcode": "4364",
+    "post_office": "Saroatoli"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 77,
+    "postcode": "4352",
+    "post_office": "Bhandar Sharif"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 77,
+    "postcode": "4350",
+    "post_office": "Fatikchhari"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 77,
+    "postcode": "4354",
+    "post_office": "Harualchhari"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 77,
+    "postcode": "4353",
+    "post_office": "Najirhat"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 77,
+    "postcode": "4351",
+    "post_office": "Nanupur"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 77,
+    "postcode": "4355",
+    "post_office": "Narayanhat"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 76,
+    "postcode": "4331",
+    "post_office": "Chitt.University"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 76,
+    "postcode": "4335",
+    "post_office": "Fatahabad"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 76,
+    "postcode": "4332",
+    "post_office": "Gorduara"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 76,
+    "postcode": "4330",
+    "post_office": "Hathazari"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 76,
+    "postcode": "4333",
+    "post_office": "Katirhat"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 76,
+    "postcode": "4339",
+    "post_office": "Madrasa"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 76,
+    "postcode": "4334",
+    "post_office": "Mirzapur"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 76,
+    "postcode": "4337",
+    "post_office": "Nuralibari"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 76,
+    "postcode": "4338",
+    "post_office": "Yunus Nagar"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 75,
+    "postcode": "4398",
+    "post_office": "Chunti"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 75,
+    "postcode": "4396",
+    "post_office": "Lohagara"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 75,
+    "postcode": "4397",
+    "post_office": "Padua"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 67,
+    "postcode": "4321",
+    "post_office": "Abutorab"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 67,
+    "postcode": "4325",
+    "post_office": "Azampur"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 67,
+    "postcode": "4323",
+    "post_office": "Bharawazhat"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 67,
+    "postcode": "4322",
+    "post_office": "Darrogahat"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 67,
+    "postcode": "4324",
+    "post_office": "Joarganj"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 67,
+    "postcode": "4327",
+    "post_office": "Korerhat"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 67,
+    "postcode": "4320",
+    "post_office": "Mirsharai"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 67,
+    "postcode": "4328",
+    "post_office": "Mohazanhat"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 68,
+    "postcode": "4371",
+    "post_office": "Budhpara"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 68,
+    "postcode": "4370",
+    "post_office": "Patiya Head Office"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 65,
+    "postcode": "4361",
+    "post_office": "Dhamair"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 65,
+    "postcode": "4360",
+    "post_office": "Rangunia"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 69,
+    "postcode": "4300",
+    "post_office": "Sandwip"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 69,
+    "postcode": "4301",
+    "post_office": "Shiberhat"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 69,
+    "postcode": "4302",
+    "post_office": "Urirchar"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 74,
+    "postcode": "4387",
+    "post_office": "Baitul Ijjat"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 74,
+    "postcode": "4388",
+    "post_office": "Bazalia"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 74,
+    "postcode": "4386",
+    "post_office": "Satkania"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 66,
+    "postcode": "4312",
+    "post_office": "Barabkunda"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 66,
+    "postcode": "4311",
+    "post_office": "Baroidhala"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 66,
+    "postcode": "4313",
+    "post_office": "Bawashbaria"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 66,
+    "postcode": "4315",
+    "post_office": "Bhatiari"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 66,
+    "postcode": "4316",
+    "post_office": "Fouzdarhat"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 66,
+    "postcode": "4317",
+    "post_office": "Jafrabad"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 66,
+    "postcode": "4314",
+    "post_office": "Kumira"
+  },
+  {
+    "district_id": 8,
+    "upazila_id": 66,
+    "postcode": "4310",
+    "post_office": "Sitakunda"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 2,
+    "postcode": "3560",
+    "post_office": "Barura"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 2,
+    "postcode": "3562",
+    "post_office": "Murdafarganj"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 2,
+    "postcode": "3561",
+    "post_office": "Poyalgachha"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 3,
+    "postcode": "3526",
+    "post_office": "Brahmanpara"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 16,
+    "postcode": "3520",
+    "post_office": "Burichang"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 16,
+    "postcode": "3521",
+    "post_office": "Maynamoti bazar"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 4,
+    "postcode": "3510",
+    "post_office": "Chandia"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 4,
+    "postcode": "3511",
+    "post_office": "Madhaiabazar"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 11,
+    "postcode": "3501",
+    "post_office": "Comilla Contoment"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 11,
+    "postcode": "3500",
+    "post_office": "Comilla Sadar"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 11,
+    "postcode": "3503",
+    "post_office": "Courtbari"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 11,
+    "postcode": "3502",
+    "post_office": "Halimanagar"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 11,
+    "postcode": "3504",
+    "post_office": "Suaganj"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 6,
+    "postcode": "3518",
+    "post_office": "Dashpara"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 6,
+    "postcode": "3516",
+    "post_office": "Daudkandi"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 6,
+    "postcode": "3519",
+    "post_office": "Eliotganj"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 6,
+    "postcode": "3517",
+    "post_office": "Gouripur"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 7,
+    "postcode": "3546",
+    "post_office": "Homna"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 8,
+    "postcode": "3572",
+    "post_office": "Bipulasar"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 8,
+    "postcode": "3570",
+    "post_office": "Laksam"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 8,
+    "postcode": "3571",
+    "post_office": "Lakshamanpur"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 9,
+    "postcode": "3543",
+    "post_office": "Bangra"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 9,
+    "postcode": "3542",
+    "post_office": "Companyganj"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 9,
+    "postcode": "3540",
+    "post_office": "Muradnagar"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 9,
+    "postcode": "3545",
+    "post_office": "Pantibazar"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 9,
+    "postcode": "3541",
+    "post_office": "Ramchandarpur"
+  },
+  {
+    "district_id": 1,
+    "upazila_id": 9,
+    "postcode": "3544",
+    "post_office": "Sonakanda"
+  },
+  {
+    "district_id": 9,
+    "upazila_id": 80,
+    "postcode": "4700",
+    "post_office": "Coxs Bazar Sadar"
+  },
+  {
+    "district_id": 9,
+    "upazila_id": 80,
+    "postcode": "4702",
+    "post_office": "Eidga"
+  },
+  {
+    "district_id": 9,
+    "upazila_id": 80,
+    "postcode": "4701",
+    "post_office": "Zhilanja"
+  },
+  {
+    "district_id": 9,
+    "upazila_id": 82,
+    "postcode": "4720",
+    "post_office": "Kutubdia"
+  },
+  {
+    "district_id": 9,
+    "upazila_id": 86,
+    "postcode": "4730",
+    "post_office": "Ramu"
+  },
+  {
+    "district_id": 9,
+    "upazila_id": 87,
+    "postcode": "4761",
+    "post_office": "Hnila"
+  },
+  {
+    "district_id": 9,
+    "upazila_id": 87,
+    "postcode": "4762",
+    "post_office": "St.Martin"
+  },
+  {
+    "district_id": 9,
+    "upazila_id": 87,
+    "postcode": "4760",
+    "post_office": "Teknaf"
+  },
+  {
+    "district_id": 2,
+    "upazila_id": 19,
+    "postcode": "3901",
+    "post_office": "Fazilpur"
+  },
+  {
+    "district_id": 2,
+    "upazila_id": 19,
+    "postcode": "3900",
+    "post_office": "Feni Sadar"
+  },
+  {
+    "district_id": 2,
+    "upazila_id": 19,
+    "postcode": "3903",
+    "post_office": "Laskarhat"
+  },
+  {
+    "district_id": 2,
+    "upazila_id": 19,
+    "postcode": "3902",
+    "post_office": "Sharshadie"
+  },
+  {
+    "district_id": 2,
+    "upazila_id": 20,
+    "postcode": "3932",
+    "post_office": "Ahmadpur"
+  },
+  {
+    "district_id": 2,
+    "upazila_id": 20,
+    "postcode": "3933",
+    "post_office": "Kazirhat"
+  },
+  {
+    "district_id": 2,
+    "upazila_id": 20,
+    "postcode": "3931",
+    "post_office": "Motiganj"
+  },
+  {
+    "district_id": 2,
+    "upazila_id": 20,
+    "postcode": "3930",
+    "post_office": "Sonagazi"
+  },
+  {
+    "district_id": 10,
+    "upazila_id": 91,
+    "postcode": "4470",
+    "post_office": "Laxmichhari"
+  },
+  {
+    "district_id": 10,
+    "upazila_id": 95,
+    "postcode": "4450",
+    "post_office": "Matiranga"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3831",
+    "post_office": "Alaiarpur"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3847",
+    "post_office": "Amisha Para"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3822",
+    "post_office": "Banglabazar"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3824",
+    "post_office": "Bazra"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3820",
+    "post_office": "Begumganj"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3837",
+    "post_office": "Bhabani Jibanpur"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3821",
+    "post_office": "Choumohani"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3843",
+    "post_office": "Dauti"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3848",
+    "post_office": "Durgapur"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3828",
+    "post_office": "Gopalpur"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3825",
+    "post_office": "Jamidar Hat"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3844",
+    "post_office": "Joyag"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3829",
+    "post_office": "Joynarayanpur"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3833",
+    "post_office": "Khalafat Bazar"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3842",
+    "post_office": "Khalishpur"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3838",
+    "post_office": "Maheshganj"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3823",
+    "post_office": "Mir Owarishpur"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3839",
+    "post_office": "Nadona"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3841",
+    "post_office": "Nandiapara"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3835",
+    "post_office": "Oachhekpur"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3834",
+    "post_office": "Rajganj"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3827",
+    "post_office": "Sonaimuri"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3832",
+    "post_office": "Tangirpar"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 45,
+    "postcode": "3845",
+    "post_office": "Thanar Hat"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 50,
+    "postcode": "3879",
+    "post_office": "Bansa Bazar"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 50,
+    "postcode": "3873",
+    "post_office": "Bodalcourt"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 50,
+    "postcode": "3870",
+    "post_office": "Chatkhil"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 50,
+    "postcode": "3878",
+    "post_office": "Dosh Gharia"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 50,
+    "postcode": "3877",
+    "post_office": "Karihati"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 50,
+    "postcode": "3872",
+    "post_office": "Khilpara"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 50,
+    "postcode": "3871",
+    "post_office": "Palla"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 50,
+    "postcode": "3874",
+    "post_office": "Rezzakpur"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 50,
+    "postcode": "3881",
+    "post_office": "Sahapur"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 50,
+    "postcode": "3882",
+    "post_office": "Sampara"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 50,
+    "postcode": "3883",
+    "post_office": "Shingbahura"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 50,
+    "postcode": "3875",
+    "post_office": "Solla"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 43,
+    "postcode": "3811",
+    "post_office": "Chaprashir Hat"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 43,
+    "postcode": "3812",
+    "post_office": "Char Jabbar"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 43,
+    "postcode": "3809",
+    "post_office": "Charam Tua"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 43,
+    "postcode": "3803",
+    "post_office": "Din Monir Hat"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 43,
+    "postcode": "3807",
+    "post_office": "Kabirhat"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 43,
+    "postcode": "3808",
+    "post_office": "Khalifar Hat"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 43,
+    "postcode": "3806",
+    "post_office": "Mriddarhat"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 43,
+    "postcode": "3801",
+    "post_office": "Noakhali College"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 43,
+    "postcode": "3800",
+    "post_office": "Noakhali Sadar"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 43,
+    "postcode": "3804",
+    "post_office": "Pak Kishoreganj"
+  },
+  {
+    "district_id": 5,
+    "upazila_id": 43,
+    "postcode": "3802",
+    "post_office": "Sonapur"
+  },
+  {
+    "district_id": 4,
+    "upazila_id": 34,
+    "postcode": "4531",
+    "post_office": "Chandraghona"
+  },
+  {
+    "district_id": 4,
+    "upazila_id": 34,
+    "postcode": "4530",
+    "post_office": "Kaptai"
+  },
+  {
+    "district_id": 4,
+    "upazila_id": 34,
+    "postcode": "4533",
+    "post_office": "Kaptai Nuton Bazar"
+  },
+  {
+    "district_id": 4,
+    "upazila_id": 34,
+    "postcode": "4532",
+    "post_office": "Kaptai Project"
+  },
+  {
+    "district_id": 4,
+    "upazila_id": 33,
+    "postcode": "4500",
+    "post_office": "Rangamati Sadar"
+  },
+  {
+    "district_id": 38,
+    "upazila_id": 293,
+    "postcode": "3310",
+    "post_office": "Bahubal"
+  },
+  {
+    "district_id": 38,
+    "upazila_id": 297,
+    "postcode": "3321",
+    "post_office": "Chandpurbagan"
+  },
+  {
+    "district_id": 38,
+    "upazila_id": 297,
+    "postcode": "3320",
+    "post_office": "Chunarughat"
+  },
+  {
+    "district_id": 38,
+    "upazila_id": 297,
+    "postcode": "3322",
+    "post_office": "Narapati"
+  },
+  {
+    "district_id": 38,
+    "upazila_id": 299,
+    "postcode": "3331",
+    "post_office": "Itakhola"
+  },
+  {
+    "district_id": 38,
+    "upazila_id": 299,
+    "postcode": "3330",
+    "post_office": "Madhabpur"
+  },
+  {
+    "district_id": 38,
+    "upazila_id": 299,
+    "postcode": "3333",
+    "post_office": "Saihamnagar"
+  },
+  {
+    "district_id": 38,
+    "upazila_id": 299,
+    "postcode": "3332",
+    "post_office": "Shahajibazar"
+  },
+  {
+    "district_id": 38,
+    "upazila_id": 292,
+    "postcode": "3373",
+    "post_office": "Digalbak"
+  },
+  {
+    "district_id": 38,
+    "upazila_id": 292,
+    "postcode": "3372",
+    "post_office": "Golduba"
+  },
+  {
+    "district_id": 38,
+    "upazila_id": 292,
+    "postcode": "3371",
+    "post_office": "Goplarbazar"
+  },
+  {
+    "district_id": 38,
+    "upazila_id": 292,
+    "postcode": "3374",
+    "post_office": "Inathganj"
+  },
+  {
+    "district_id": 38,
+    "upazila_id": 292,
+    "postcode": "3370",
+    "post_office": "Nabiganj"
+  },
+  {
+    "district_id": 37,
+    "upazila_id": 287,
+    "postcode": "3237",
+    "post_office": "Baramchal"
+  },
+  {
+    "district_id": 37,
+    "upazila_id": 287,
+    "postcode": "3234",
+    "post_office": "Kajaldhara"
+  },
+  {
+    "district_id": 37,
+    "upazila_id": 287,
+    "postcode": "3235",
+    "post_office": "Karimpur"
+  },
+  {
+    "district_id": 37,
+    "upazila_id": 287,
+    "postcode": "3230",
+    "post_office": "Kulaura"
+  },
+  {
+    "district_id": 37,
+    "upazila_id": 287,
+    "postcode": "3232",
+    "post_office": "Langla"
+  },
+  {
+    "district_id": 37,
+    "upazila_id": 287,
+    "postcode": "3233",
+    "post_office": "Prithimpasha"
+  },
+  {
+    "district_id": 37,
+    "upazila_id": 287,
+    "postcode": "3231",
+    "post_office": "Tillagaon"
+  },
+  {
+    "district_id": 37,
+    "upazila_id": 288,
+    "postcode": "3203",
+    "post_office": "Afrozganj"
+  },
+  {
+    "district_id": 37,
+    "upazila_id": 288,
+    "postcode": "3201",
+    "post_office": "Barakapan"
+  },
+  {
+    "district_id": 37,
+    "upazila_id": 288,
+    "postcode": "3202",
+    "post_office": "Monumukh"
+  },
+  {
+    "district_id": 37,
+    "upazila_id": 288,
+    "postcode": "3200",
+    "post_office": "Moulvibazar Sadar"
+  },
+  {
+    "district_id": 37,
+    "upazila_id": 289,
+    "postcode": "3240",
+    "post_office": "Rajnagar"
+  },
+  {
+    "district_id": 39,
+    "upazila_id": 303,
+    "postcode": "3080",
+    "post_office": "Chhatak"
+  },
+  {
+    "district_id": 39,
+    "upazila_id": 303,
+    "postcode": "3081",
+    "post_office": "Chhatak Cement Facto"
+  },
+  {
+    "district_id": 39,
+    "upazila_id": 303,
+    "postcode": "3082",
+    "post_office": "Chhatak Paper Mills"
+  },
+  {
+    "district_id": 39,
+    "upazila_id": 303,
+    "postcode": "3893",
+    "post_office": "Chourangi Bazar"
+  },
+  {
+    "district_id": 39,
+    "upazila_id": 303,
+    "postcode": "3083",
+    "post_office": "Gabindaganj"
+  },
+  {
+    "district_id": 39,
+    "upazila_id": 303,
+    "postcode": "3084",
+    "post_office": "Gabindaganj Natun Ba"
+  },
+  {
+    "district_id": 39,
+    "upazila_id": 303,
+    "postcode": "3088",
+    "post_office": "Islamabad"
+  },
+  {
+    "district_id": 39,
+    "upazila_id": 303,
+    "postcode": "3087",
+    "post_office": "jahidpur"
+  },
+  {
+    "district_id": 39,
+    "upazila_id": 303,
+    "postcode": "3085",
+    "post_office": "Khurma"
+  },
+  {
+    "district_id": 39,
+    "upazila_id": 303,
+    "postcode": "3086",
+    "post_office": "Moinpur"
+  },
+  {
+    "district_id": 39,
+    "upazila_id": 300,
+    "postcode": "3001",
+    "post_office": "Pagla"
+  },
+  {
+    "district_id": 39,
+    "upazila_id": 300,
+    "postcode": "3002",
+    "post_office": "Patharia"
+  },
+  {
+    "district_id": 39,
+    "upazila_id": 300,
+    "postcode": "3000",
+    "post_office": "Sunamganj Sadar"
+  },
+  {
+    "district_id": 39,
+    "upazila_id": 306,
+    "postcode": "3030",
+    "post_office": "Tahirpur"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 272,
+    "postcode": "3120",
+    "post_office": "Balaganj"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 272,
+    "postcode": "3125",
+    "post_office": "Begumpur"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 272,
+    "postcode": "3122",
+    "post_office": "Brahman Shashon"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 272,
+    "postcode": "3128",
+    "post_office": "Gaharpur"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 272,
+    "postcode": "3124",
+    "post_office": "Goala Bazar"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 272,
+    "postcode": "3121",
+    "post_office": "Karua"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 272,
+    "postcode": "3127",
+    "post_office": "Kathal Khair"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 272,
+    "postcode": "3129",
+    "post_office": "Natun Bazar"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 272,
+    "postcode": "3126",
+    "post_office": "Omarpur"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 272,
+    "postcode": "3123",
+    "post_office": "Tajpur"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 274,
+    "postcode": "3130",
+    "post_office": "Bishwanath"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 274,
+    "postcode": "3131",
+    "post_office": "Dashghar"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 274,
+    "postcode": "3133",
+    "post_office": "Deokalas"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 274,
+    "postcode": "3132",
+    "post_office": "Doulathpur"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 274,
+    "postcode": "3134",
+    "post_office": "Singer kanch"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 276,
+    "postcode": "3116",
+    "post_office": "Fenchuganj"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 276,
+    "postcode": "3117",
+    "post_office": "Fenchuganj SareKarkh"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 280,
+    "postcode": "3181",
+    "post_office": "Chatulbazar"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 280,
+    "postcode": "3183",
+    "post_office": "Gachbari"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 280,
+    "postcode": "3180",
+    "post_office": "Kanaighat"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 280,
+    "postcode": "3182",
+    "post_office": "Manikganj"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 281,
+    "postcode": "3106",
+    "post_office": "Birahimpur"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 281,
+    "postcode": "3107",
+    "post_office": "Jalalabad"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 281,
+    "postcode": "3104",
+    "post_office": "Jalalabad Cantoment"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 281,
+    "postcode": "3111",
+    "post_office": "Kadamtali"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 281,
+    "postcode": "3112",
+    "post_office": "Kamalbazer"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 281,
+    "postcode": "3103",
+    "post_office": "Khadimnagar"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 281,
+    "postcode": "3113",
+    "post_office": "Lalbazar"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 281,
+    "postcode": "3108",
+    "post_office": "Mogla"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 281,
+    "postcode": "3109",
+    "post_office": "Ranga Hajiganj"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 281,
+    "postcode": "3114",
+    "post_office": "Shahajalal Science &"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 281,
+    "postcode": "3105",
+    "post_office": "Silam"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 281,
+    "postcode": "3100",
+    "post_office": "Sylhe Sadar"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 281,
+    "postcode": "3102",
+    "post_office": "Sylhet Biman Bondar"
+  },
+  {
+    "district_id": 36,
+    "upazila_id": 281,
+    "postcode": "3101",
+    "post_office": "Sylhet Cadet Col"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 216,
+    "postcode": "9300",
+    "post_office": "Bagerhat Sadar"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 216,
+    "postcode": "9301",
+    "post_office": "P.C College"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 216,
+    "postcode": "9302",
+    "post_office": "Rangdia"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 223,
+    "postcode": "9361",
+    "post_office": "Barabaria"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 223,
+    "postcode": "9360",
+    "post_office": "Chitalmari"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 215,
+    "postcode": "9372",
+    "post_office": "Bhanganpar Bazar"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 215,
+    "postcode": "9370",
+    "post_office": "Fakirhat"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 215,
+    "postcode": "9371",
+    "post_office": "Mansa"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 217,
+    "postcode": "9383",
+    "post_office": "Charkulia"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 217,
+    "postcode": "9382",
+    "post_office": "Dariala"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 217,
+    "postcode": "9381",
+    "post_office": "Kahalpur"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 217,
+    "postcode": "9380",
+    "post_office": "Mollahat"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 217,
+    "postcode": "9384",
+    "post_office": "Nagarkandi"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 217,
+    "postcode": "9385",
+    "post_office": "Pak Gangni"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 219,
+    "postcode": "9341",
+    "post_office": "Foylahat"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 219,
+    "postcode": "9343",
+    "post_office": "Gourambha"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 219,
+    "postcode": "9340",
+    "post_office": "Rampal"
+  },
+  {
+    "district_id": 28,
+    "upazila_id": 219,
+    "postcode": "9342",
+    "post_office": "Sonatunia"
+  },
+  {
+    "district_id": 24,
+    "upazila_id": 193,
+    "postcode": "7210",
+    "post_office": "Alamdanga"
+  },
+  {
+    "district_id": 24,
+    "upazila_id": 193,
+    "postcode": "7211",
+    "post_office": "Hardi"
+  },
+  {
+    "district_id": 24,
+    "upazila_id": 192,
+    "postcode": "7200",
+    "post_office": "Chuadanga Sadar"
+  },
+  {
+    "district_id": 24,
+    "upazila_id": 192,
+    "postcode": "7201",
+    "post_office": "Munshiganj"
+  },
+  {
+    "district_id": 24,
+    "upazila_id": 194,
+    "postcode": "7222",
+    "post_office": "Andulbaria"
+  },
+  {
+    "district_id": 24,
+    "upazila_id": 194,
+    "postcode": "7220",
+    "post_office": "Damurhuda"
+  },
+  {
+    "district_id": 24,
+    "upazila_id": 194,
+    "postcode": "7221",
+    "post_office": "Darshana"
+  },
+  {
+    "district_id": 20,
+    "upazila_id": 177,
+    "postcode": "7406",
+    "post_office": "Basundia"
+  },
+  {
+    "district_id": 20,
+    "upazila_id": 177,
+    "postcode": "7402",
+    "post_office": "Chanchra"
+  },
+  {
+    "district_id": 20,
+    "upazila_id": 177,
+    "postcode": "7407",
+    "post_office": "Churamankathi"
+  },
+  {
+    "district_id": 20,
+    "upazila_id": 177,
+    "postcode": "7404",
+    "post_office": "Jessore Airbach"
+  },
+  {
+    "district_id": 20,
+    "upazila_id": 177,
+    "postcode": "7403",
+    "post_office": "Jessore canttonment"
+  },
+  {
+    "district_id": 20,
+    "upazila_id": 177,
+    "postcode": "7400",
+    "post_office": "Jessore Sadar"
+  },
+  {
+    "district_id": 20,
+    "upazila_id": 177,
+    "postcode": "7401",
+    "post_office": "Jessore Upa-Shahar"
+  },
+  {
+    "district_id": 20,
+    "upazila_id": 177,
+    "postcode": "7405",
+    "post_office": "Rupdia"
+  },
+  {
+    "district_id": 20,
+    "upazila_id": 176,
+    "postcode": "7450",
+    "post_office": "Keshobpur"
+  },
+  {
+    "district_id": 29,
+    "upazila_id": 226,
+    "postcode": "7310",
+    "post_office": "Harinakundu"
+  },
+  {
+    "district_id": 29,
+    "upazila_id": 228,
+    "postcode": "7330",
+    "post_office": "Kotchandpur"
+  },
+  {
+    "district_id": 25,
+    "upazila_id": 201,
+    "postcode": "7042",
+    "post_office": "Allardarga"
+  },
+  {
+    "district_id": 25,
+    "upazila_id": 201,
+    "postcode": "7040",
+    "post_office": "Bheramara"
+  },
+  {
+    "district_id": 25,
+    "upazila_id": 201,
+    "postcode": "7041",
+    "post_office": "Ganges Bheramara"
+  },
+  {
+    "district_id": 25,
+    "upazila_id": 197,
+    "postcode": "7010",
+    "post_office": "Kumarkhali"
+  },
+  {
+    "district_id": 25,
+    "upazila_id": 197,
+    "postcode": "7011",
+    "post_office": "Panti"
+  },
+  {
+    "district_id": 25,
+    "upazila_id": 199,
+    "postcode": "7032",
+    "post_office": "Amla Sadarpur"
+  },
+  {
+    "district_id": 25,
+    "upazila_id": 199,
+    "postcode": "7030",
+    "post_office": "Mirpur"
+  },
+  {
+    "district_id": 25,
+    "upazila_id": 199,
+    "postcode": "7031",
+    "post_office": "Poradaha"
+  },
+  {
+    "district_id": 26,
+    "upazila_id": 204,
+    "postcode": "7600",
+    "post_office": "Magura Sadar"
+  },
+  {
+    "district_id": 26,
+    "upazila_id": 205,
+    "postcode": "7631",
+    "post_office": "Binodpur"
+  },
+  {
+    "district_id": 26,
+    "upazila_id": 205,
+    "postcode": "7630",
+    "post_office": "Mohammadpur"
+  },
+  {
+    "district_id": 26,
+    "upazila_id": 205,
+    "postcode": "7632",
+    "post_office": "Nahata"
+  },
+  {
+    "district_id": 22,
+    "upazila_id": 188,
+    "postcode": "7110",
+    "post_office": "Gangni"
+  },
+  {
+    "district_id": 22,
+    "upazila_id": 187,
+    "postcode": "7101",
+    "post_office": "Amjhupi"
+  },
+  {
+    "district_id": 22,
+    "upazila_id": 187,
+    "postcode": "7152",
+    "post_office": "Amjhupi"
+  },
+  {
+    "district_id": 22,
+    "upazila_id": 187,
+    "postcode": "7100",
+    "post_office": "Meherpur Sadar"
+  },
+  {
+    "district_id": 22,
+    "upazila_id": 187,
+    "postcode": "7102",
+    "post_office": "Mujib Nagar Complex"
+  },
+  {
+    "district_id": 23,
+    "upazila_id": 191,
+    "postcode": "7520",
+    "post_office": "Kalia"
+  },
+  {
+    "district_id": 23,
+    "upazila_id": 189,
+    "postcode": "7500",
+    "post_office": "Narail Sadar"
+  },
+  {
+    "district_id": 23,
+    "upazila_id": 189,
+    "postcode": "7501",
+    "post_office": "Ratanganj"
+  },
+  {
+    "district_id": 21,
+    "upazila_id": 181,
+    "postcode": "9415",
+    "post_office": "Chandanpur"
+  },
+  {
+    "district_id": 21,
+    "upazila_id": 181,
+    "postcode": "9413",
+    "post_office": "Hamidpur"
+  },
+  {
+    "district_id": 21,
+    "upazila_id": 181,
+    "postcode": "9412",
+    "post_office": "Jhaudanga"
+  },
+  {
+    "district_id": 21,
+    "upazila_id": 181,
+    "postcode": "9410",
+    "post_office": "kalaroa"
+  },
+  {
+    "district_id": 21,
+    "upazila_id": 181,
+    "postcode": "9414",
+    "post_office": "Khordo"
+  },
+  {
+    "district_id": 21,
+    "upazila_id": 181,
+    "postcode": "9411",
+    "post_office": "Murarikati"
+  },
+  {
+    "district_id": 21,
+    "upazila_id": 182,
+    "postcode": "9403",
+    "post_office": "Budhhat"
+  },
+  {
+    "district_id": 21,
+    "upazila_id": 182,
+    "postcode": "9402",
+    "post_office": "Gunakar kati"
+  },
+  {
+    "district_id": 21,
+    "upazila_id": 182,
+    "postcode": "9401",
+    "post_office": "Satkhira Islamia Acc"
+  },
+  {
+    "district_id": 21,
+    "upazila_id": 182,
+    "postcode": "9400",
+    "post_office": "Satkhira Sadar"
+  },
+  {
+    "district_id": 18,
+    "upazila_id": 158,
+    "postcode": "6330",
+    "post_office": "Bholahat"
+  },
+  {
+    "district_id": 18,
+    "upazila_id": 157,
+    "postcode": "6311",
+    "post_office": "Mandumala"
+  },
+  {
+    "district_id": 18,
+    "upazila_id": 157,
+    "postcode": "6310",
+    "post_office": "Nachol"
+  }
+]

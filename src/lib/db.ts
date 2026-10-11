@@ -1,3 +1,4 @@
+import { databaseConnectionOptions } from "./db-config";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
@@ -5,10 +6,7 @@ const globalForPrisma = globalThis as unknown as {
   prisma?: PrismaClient;
 };
 
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
-});
+const adapter = new PrismaPg(databaseConnectionOptions());
 
 export const prisma =
   globalForPrisma.prisma ??

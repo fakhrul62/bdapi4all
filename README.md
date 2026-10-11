@@ -172,7 +172,7 @@ Apps that need strict data can filter for verified records. Apps that want wider
 
 Basic public use is free and does not require authentication. The API is rate-limited to keep the service stable for everyone.
 
-For higher limits and per-key usage analytics, create an API key from the [API Keys dashboard](https://bdapi4all.vercel.app/dashboard) and send it via the `X-API-Key` header:
+For higher limits and per-key usage analytics, ask the administrator to issue an API key through the [API Keys dashboard](https://bdapi4all.vercel.app/dashboard) and send it via the `X-API-Key` header:
 
 ```bash
 curl "https://bdapi4all.vercel.app/api/v1/districts" \

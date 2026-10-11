@@ -1,3 +1,4 @@
+import { databaseConnectionOptions } from "../src/lib/db-config";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { config } from "dotenv";
@@ -81,10 +82,7 @@ const divisionCoordinates: Record<number, { lat: number; lng: number }> = {
   8: { lat: 24.7471, lng: 90.4203 },
 };
 
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
-});
+const adapter = new PrismaPg(databaseConnectionOptions());
 const prisma = new PrismaClient({ adapter });
 
 async function fetchTable<T>(path: string) {

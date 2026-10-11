@@ -9,24 +9,52 @@ on:
       - 'prisma/**'
       - 'scripts/**'
 
+permissions:
+  contents: read
+
+concurrency:
+  group: data-quality
+  cancel-in-progress: false
+
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    if: github.event_name != 'pull_request'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
+
+      - name: Validate database configuration
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::error::Configure the DATABASE_URL repository secret before running this job."
+            exit 1
+          fi
 
       - name: Install dependencies
         run: npm ci
 
       - name: Generate Prisma Client
         run: npx prisma generate
+
+      - name: Configure Supabase certificate authority
+        run: |
+          curl --fail --silent --show-error https://supabase-downloads.s3-ap-southeast-1.amazonaws.com/prod/ssl/prod-ca-2021.crt -o /tmp/database-ca.crt
+          { echo 'DATABASE_CA_CERT<<DATABASE_CERTIFICATE'; cat /tmp/database-ca.crt; echo; echo 'DATABASE_CERTIFICATE'; } >> "$GITHUB_ENV"
+
+      - name: Fill missing postcode data
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npm run data:seed-postcodes
 
       - name: Run data quality validation
         env:

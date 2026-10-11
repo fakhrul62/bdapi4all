@@ -1,3 +1,4 @@
+import { databaseConnectionOptions } from "../src/lib/db-config";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { config } from "dotenv";
@@ -5,10 +6,7 @@ import { config } from "dotenv";
 config({ path: ".env.local" });
 config();
 
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
-});
+const adapter = new PrismaPg(databaseConnectionOptions());
 const prisma = new PrismaClient({ adapter });
 
 // Known river names (lowercase)

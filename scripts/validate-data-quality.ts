@@ -1,3 +1,4 @@
+import { databaseConnectionOptions } from "../src/lib/db-config";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { config } from "dotenv";
@@ -24,10 +25,7 @@ type Issue = {
   severity: "critical" | "high" | "medium" | "low";
 };
 
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
-});
+const adapter = new PrismaPg(databaseConnectionOptions());
 const prisma = new PrismaClient({ adapter });
 
 function delegate(model: string) {
@@ -35,10 +33,10 @@ function delegate(model: string) {
 }
 
 const validators: Validator[] = [
-  { slug: "divisions", model: "division", select: { id: true, name_en: true } },
+  { slug: "divisions", model: "division", select: { id: true, name_en: true, name_bn: true } },
   { slug: "districts", model: "district", select: { id: true, name_en: true, name_bn: true } },
-  { slug: "upazilas", model: "upazila", select: { id: true, name_en: true } },
-  { slug: "unions", model: "union", select: { id: true, name_en: true } },
+  { slug: "upazilas", model: "upazila", select: { id: true, name_en: true, name_bn: true, district_id: true } },
+  { slug: "unions", model: "union", select: { id: true, name_en: true, name_bn: true, upazila_id: true } },
   { slug: "rivers", model: "river", select: { id: true, name_en: true, name_bn: true, verified: true, needs_image: true, source: true, source_url: true } },
   { slug: "canals", model: "canal", select: { id: true, name_en: true, name_bn: true, verified: true, needs_image: true, source: true, source_url: true } },
   { slug: "haors", model: "haor", select: { id: true, name_en: true, name_bn: true, verified: true, needs_image: true, source: true, source_url: true } },
@@ -93,7 +91,7 @@ async function validateRecords(validator: Validator) {
       report(validator.slug, record, "missing_bengali_name", "Record has no Bengali name.", "medium");
     }
 
-    const key = nameEn.toLowerCase() || titleEn.toLowerCase();
+    const key = (nameEn.toLowerCase() || titleEn.toLowerCase()) + ":" + String(record.district_id ?? record.upazila_id ?? "");
     if (key) {
       if (seen.has(key)) {
         report(validator.slug, record, "duplicate_name", `Duplicate English name '${nameEn}'.`, "high");
@@ -137,8 +135,9 @@ async function writeIssues() {
 
   const failOn = process.env.DATA_QUALITY_FAIL_ON ?? "critical";
   const threshold: Record<string, number> = { low: 0, medium: 1, high: 2, critical: 3 };
-  if (threshold[failOn] !== undefined && counts[failOn as keyof typeof counts] > 0) {
-    console.error(`FAIL: found ${counts[failOn as keyof typeof counts]} '${failOn}' issues.`);
+  const blocking = Object.entries(counts).reduce((total, [severity, count]) => total + (threshold[severity] >= (threshold[failOn] ?? 3) ? count : 0), 0);
+  if (blocking > 0) {
+    console.error(`FAIL: found ${blocking} issues at severity ${failOn} or above.`);
     process.exit(1);
   }
 }
