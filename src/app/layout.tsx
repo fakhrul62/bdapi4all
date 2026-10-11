@@ -14,7 +14,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "BDApi4All",
+  title: { default: "BDApi4All — Bangladesh data for developers", template: "%s | BDApi4All" },
   description: "Free Bangladesh REST API for developers.",
   icons: {
     icon: [

@@ -1,4 +1,5 @@
 const sources = [
+  { name: "Postcodes", source: "MHNahib/bangladesh-postcodes-npm (MIT)", cadence: "Imported from a community dataset; reviewed before changes are applied.", note: "733 entries mapped to district IDs. Community reference data is marked verified: false; confirm delivery details with the postal service." },
   {
     name: "Geo data",
     source: "github.com/nuhil/bangladesh-geocode",
@@ -55,6 +56,8 @@ const transparency = [
     text: "True means no confirmed reusable image URL is attached yet. The API does not invent image URLs.",
   },
 ];
+
+export const metadata = { title: "Data Sources" };
 
 export default function SourcesPage() {
   return (

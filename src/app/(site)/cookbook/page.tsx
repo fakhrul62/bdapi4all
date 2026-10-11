@@ -1,3 +1,4 @@
+import { CopyButton } from "@/components/ui/copy-button";
 import Link from "next/link";
 import { endpointDefinitions, codeSamples } from "@/lib/developer-content";
 
@@ -81,7 +82,9 @@ export function DistrictSelect() {
   },
   {
     title: "Next.js",
-    code: `export default async function Page() {
+    code: `export const metadata = { title: "API Cookbook" };
+
+export default async function Page() {
   const res = await fetch("https://bdapi4all.vercel.app/api/v1/search?q=Padma", {
     next: { revalidate: 86400 },
   });
@@ -148,9 +151,9 @@ export default function CookbookPage() {
                     </li>
                   ))}
                 </ol>
-                <pre className="overflow-auto bg-[#0d1117] p-5 text-sm text-green-300">
+                <div className="min-w-0"><div className="flex justify-end border-b border-border p-2"><CopyButton text={samples.javascript} label="Copy recipe" /></div><pre className="overflow-auto bg-[#0d1117] p-5 text-sm text-green-300">
                   <code>{samples.javascript}</code>
-                </pre>
+                </pre></div>
               </div>
             </section>
           );
@@ -165,7 +168,7 @@ export default function CookbookPage() {
         <div className="grid gap-4 lg:grid-cols-2">
           {frameworkExamples.map((example) => (
             <article key={example.title} className="overflow-hidden rounded-lg border border-border/50 bg-card">
-              <div className="border-b border-border/50 px-4 py-3 font-semibold">{example.title}</div>
+              <div className="flex items-center justify-between gap-3 border-b border-border/50 px-4 py-3 font-semibold">{example.title}<CopyButton text={example.code} label="Copy example" /></div>
               <pre className="overflow-auto bg-[#0d1117] p-4 text-sm text-green-300">
                 <code>{example.code}</code>
               </pre>

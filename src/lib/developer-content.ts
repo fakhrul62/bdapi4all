@@ -456,7 +456,9 @@ const coreEndpointDefinitions: EndpointDefinition[] = [
     summary: "GraphQL wrapper for the REST API.",
     description: "Query multiple resources in a single request with a GraphQL query. Supports divisions, districts, upazilas, unions, holidays, encyclopedia categories, and search.",
     cacheTtl: "1 minute",
-    parameters: [],
+    parameters: [
+      { name: "query", label: "GraphQL query", type: "string", location: "query", required: true, description: "A read-only GraphQL query with selected fields.", example: "{ divisions(limit: 2) { id name_en name_bn } }" },
+    ],
     sampleResponse: { data: { divisions: [] } },
     recipes: ["Fetch related data in one request", "Reduce over-fetching with field selection"],
   },
@@ -546,16 +548,15 @@ export function findEndpoint(slug: string) {
 }
 
 export function getApiBaseUrl() {
-  if (typeof window !== "undefined") {
-    return `${window.location.origin}/api/v1`;
-  }
+  // Keep examples canonical and identical during server and client rendering.
+  // Interactive requests use the current site's relative API route.
   return API_BASE_URL;
 }
 
 export function buildUrl(endpoint: EndpointDefinition, values: Record<string, string>) {
   let path = endpoint.path;
   for (const parameter of endpoint.parameters.filter((item) => item.location === "path")) {
-    path = path.replace(`{${parameter.name}}`, values[parameter.name] || parameter.example);
+    path = path.replace(`{${parameter.name}}`, encodeURIComponent(values[parameter.name] || parameter.example));
   }
 
   const search = new URLSearchParams();
@@ -568,8 +569,7 @@ export function buildUrl(endpoint: EndpointDefinition, values: Record<string, st
   return `${baseUrl}${path}${search.toString() ? `?${search.toString()}` : ""}`;
 }
 
-export function codeSamples(endpoint: EndpointDefinition) {
-  const values = Object.fromEntries(endpoint.parameters.map((param) => [param.name, param.example]));
+export function codeSamples(endpoint: EndpointDefinition, values = Object.fromEntries(endpoint.parameters.map((param) => [param.name, param.example]))) {
   const url = buildUrl(endpoint, values);
 
   return {

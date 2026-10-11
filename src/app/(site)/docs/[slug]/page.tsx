@@ -1,8 +1,14 @@
 import Link from "next/link";
-import { codeSamples, endpointDefinitions, findEndpoint } from "@/lib/developer-content";
+import { notFound } from "next/navigation";
+import { CopyButton } from "@/components/ui/copy-button";
+import { GuidePage, guideSlugs } from "@/components/developer/guide-page";
+import { codeSamples, findEndpoint } from "@/lib/developer-content";
 
-function fallbackEndpoint() {
-  return endpointDefinitions[0];
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const title = findEndpoint(slug)?.title ?? (guideSlugs.includes(slug) ? slug.replaceAll("-", " ").replace(/^./, char => char.toUpperCase()) : "Page not found");
+  return { title };
 }
 
 export default async function EndpointDocPage({
@@ -11,7 +17,9 @@ export default async function EndpointDocPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const endpoint = findEndpoint(slug) ?? fallbackEndpoint();
+  if (guideSlugs.includes(slug)) return <GuidePage slug={slug} />;
+  const endpoint = findEndpoint(slug);
+  if (!endpoint) notFound();
   const samples = codeSamples(endpoint);
   const exampleMeta = endpoint.parameters.some((parameter) => parameter.name === "page")
     ? {
@@ -31,7 +39,7 @@ export default async function EndpointDocPage({
           <span className="rounded bg-green-500/20 px-2 py-1 font-mono text-sm font-bold text-green-700 dark:text-green-400">
             {endpoint.method}
           </span>
-          <code className="font-mono text-sm text-muted-foreground">/api/v1{endpoint.path}</code>
+          <code className="break-all font-mono text-sm text-muted-foreground">/api/v1{endpoint.path}</code>
         </div>
         <h1 className="scroll-m-20 font-heading text-4xl font-extrabold tracking-tight">
           {endpoint.title}
@@ -44,7 +52,7 @@ export default async function EndpointDocPage({
       </div>
 
       <div className="grid gap-5 md:grid-cols-3">
-        <Link href="/playground" className="rounded-lg border border-border/50 bg-card p-4 hover:border-primary/60">
+        <Link href={`/playground?endpoint=${endpoint.slug}`} className="rounded-lg border border-border/50 bg-card p-4 hover:border-primary/60">
           <h2 className="font-semibold">Try live</h2>
           <p className="mt-1 text-sm text-muted-foreground">Open this endpoint in the API Explorer.</p>
         </Link>
@@ -63,7 +71,7 @@ export default async function EndpointDocPage({
           Parameters
         </h2>
         {endpoint.parameters.length > 0 ? (
-          <div className="overflow-hidden rounded-md border border-border/50 shadow-sm">
+          <div className="overflow-x-auto rounded-md border border-border/50 shadow-sm">
             <table className="w-full text-left text-sm">
               <thead className="border-b border-border/50 bg-muted/50 text-muted-foreground">
                 <tr>
@@ -99,7 +107,7 @@ export default async function EndpointDocPage({
         <div className="grid gap-4 lg:grid-cols-2">
           {Object.entries(samples).map(([name, sample]) => (
             <div key={name} className="overflow-hidden rounded-md border border-border/50">
-              <div className="border-b border-border/50 bg-muted/50 px-4 py-2 text-sm font-semibold capitalize">{name}</div>
+              <div className="flex items-center justify-between gap-2 border-b border-border/50 bg-muted/50 px-4 py-2 text-sm font-semibold capitalize">{name}<CopyButton text={sample} label="Copy code" /></div>
               <pre className="h-56 overflow-auto bg-[#0d1117] p-4 text-xs text-green-300">
                 <code>{sample}</code>
               </pre>

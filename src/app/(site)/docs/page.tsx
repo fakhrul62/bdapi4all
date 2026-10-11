@@ -1,3 +1,7 @@
+import { CopyButton } from "@/components/ui/copy-button";
+import Link from "next/link";
+export const metadata = { title: "Documentation" };
+
 export default function DocsPage() {
   return (
     <div className="space-y-6">
@@ -18,10 +22,10 @@ export default function DocsPage() {
           ["Collections", "/collections", "Download Postman, Insomnia, and VS Code REST request files."],
           ["Roadmap", "/roadmap", "Track the platform plan broken into small developer-focused milestones."],
         ].map(([title, href, text]) => (
-          <a key={href} href={href} className="rounded-lg border border-border/50 bg-card p-4 hover:border-primary/60">
+          <Link key={href} href={href} className="rounded-lg border border-border/50 bg-card p-4 hover:border-primary/60">
             <h2 className="font-heading text-xl font-bold">{title}</h2>
             <p className="mt-2 text-sm text-muted-foreground">{text}</p>
-          </a>
+          </Link>
         ))}
       </div>
 
@@ -32,8 +36,8 @@ export default function DocsPage() {
         <p className="leading-7">
           All API requests should be prefixed with the following base URL:
         </p>
-        <div className="rounded-md bg-muted/50 p-4 border border-border/50">
-          <code className="text-sm font-mono text-primary font-bold">https://bdapi4all.vercel.app/api/v1</code>
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-md bg-muted/50 p-4 border border-border/50">
+          <code className="text-sm font-mono text-primary font-bold">https://bdapi4all.vercel.app/api/v1</code><CopyButton text="https://bdapi4all.vercel.app/api/v1" label="Copy base URL" />
         </div>
       </div>
 
@@ -104,7 +108,7 @@ export default function DocsPage() {
   -H "X-API-Key: bdapi_..."`}</code>
           </pre>
           <p className="mt-3 text-sm text-muted-foreground">
-            Get a key from the <a className="font-medium text-primary hover:underline" href="/dashboard">API Keys dashboard</a>.
+            Keys are issued by the project administrator. Public requests work without a key; the <Link className="font-medium text-primary hover:underline" href="/dashboard">API Keys dashboard</Link> is for administrators.
           </p>
         </div>
       </div>

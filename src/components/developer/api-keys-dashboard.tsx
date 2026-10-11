@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Check, Copy, KeyRound, Loader2, LogOut, Plus, ShieldCheck, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 type ApiKeyRow = {
   id: number;
@@ -108,9 +109,11 @@ export function ApiKeysDashboard({ initialAuthenticated }: { initialAuthenticate
   }
 
   async function logout() {
-    await api("/api/admin/logout", { method: "POST" });
-    setAuthenticated(false);
-    setIssued(null);
+    try {
+      await api("/api/admin/logout", { method: "POST" });
+      setAuthenticated(false);
+      setIssued(null);
+    } catch { setMessage("Could not sign out. Please try again."); }
   }
 
   async function createKey() {
@@ -138,20 +141,24 @@ export function ApiKeysDashboard({ initialAuthenticated }: { initialAuthenticate
     try {
       await api("/api/admin/keys", { method: "DELETE", body: JSON.stringify({ id }) });
       await loadKeys();
+    } catch {
+      setMessage("Could not revoke the key. Please try again.");
     } finally {
       setLoading(false);
     }
   }
 
   async function copyKey(key: string) {
-    await navigator.clipboard.writeText(key);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(key);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { setMessage("Could not copy. Select and copy the key above."); }
   }
 
   if (!authenticated) {
     return (
-      <main className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-md flex-col justify-center px-4 py-10">
+      <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-md flex-col justify-center px-4 py-10">
         <div className="rounded-lg border border-border/50 bg-card p-6 shadow-sm">
           <div className="mb-5 flex items-center gap-3">
             <div className="grid h-10 w-10 place-items-center rounded-md bg-primary/10 text-primary">
@@ -162,10 +169,12 @@ export function ApiKeysDashboard({ initialAuthenticated }: { initialAuthenticate
               <p className="text-sm text-muted-foreground">Manage access keys and rate limits.</p>
             </div>
           </div>
+          <p className="mb-5 rounded-md bg-muted/50 p-3 text-sm leading-6 text-muted-foreground">Administrator access only. You can use the public API without a key or account. <Link href="/playground" className="font-medium text-primary hover:underline">Try the playground →</Link></p>
           <label className="block text-sm font-medium">
             Admin secret
             <input
               type="password"
+              autoComplete="current-password"
               value={secret}
               onChange={(event) => setSecret(event.target.value)}
               onKeyDown={(event) => event.key === "Enter" && void login()}
@@ -173,17 +182,17 @@ export function ApiKeysDashboard({ initialAuthenticated }: { initialAuthenticate
             />
           </label>
           {message && <p className="mt-3 text-sm text-red-500">{message}</p>}
-          <Button className="mt-5 w-full gap-2" onClick={login} disabled={loading}>
+          <Button className="mt-5 w-full gap-2" onClick={login} disabled={loading || !secret.trim()}>
             {loading && <Loader2 className="h-4 w-4 animate-spin" />}
             Sign in
           </Button>
         </div>
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
       <div className="mb-6 flex items-center justify-between gap-4">
         <div>
           <h1 className="flex items-center gap-2 font-heading text-3xl font-extrabold tracking-tight">
@@ -207,6 +216,7 @@ export function ApiKeysDashboard({ initialAuthenticated }: { initialAuthenticate
         <div className="mt-4 grid gap-3 sm:grid-cols-[1fr_140px_auto]">
           <input
             value={name}
+            aria-label="API key name"
             onChange={(event) => setName(event.target.value)}
             placeholder="Name, e.g. My Production App"
             className="h-10 rounded-md border border-input bg-background px-3 text-sm outline-none focus:border-primary"
@@ -280,6 +290,6 @@ export function ApiKeysDashboard({ initialAuthenticated }: { initialAuthenticate
           </div>
         )}
       </section>
-    </main>
+    </div>
   );
 }
