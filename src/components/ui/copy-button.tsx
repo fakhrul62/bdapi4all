@@ -11,7 +11,7 @@ export function CopyButton({ text, label = "Copy", compact = false }: { text: st
     catch { setState("failed"); }
     window.setTimeout(() => setState("idle"), 2500);
   }
-  return <span className="inline-flex shrink-0 items-center gap-2">
+  return <span className="relative inline-flex shrink-0 items-center gap-2">
     <Button type="button" variant="outline" size={compact ? "icon" : "sm"} onClick={copy} aria-label={state === "copied" ? "Copied" : label} title={label}>
       {state === "copied" ? <Check className="size-4 text-emerald-600" /> : <Copy className="size-4" />}
       {!compact && (state === "copied" ? "Copied!" : label)}
