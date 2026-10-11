@@ -1,6 +1,6 @@
 import { ZodError } from "zod";
 import { checkKey, checkRateLimit, getClientIp } from "@/lib/rate-limit";
-import { createRequestId, errorResponse, successResponse } from "@/lib/response";
+import { baseHeaders, createRequestId, errorResponse, successResponse } from "@/lib/response";
 import { logApiUsage } from "@/lib/usage-log";
 import { touchApiKey, verifyApiKey } from "@/lib/api-key";
 
@@ -12,15 +12,16 @@ type HandlerResult<T> = {
 
 export async function handleApi<T>(
   request: Request,
-  handler: () => Promise<HandlerResult<T>>,
+  handler: () => Promise<HandlerResult<T> | Response>,
 ) {
   const startedAt = Date.now();
   const pathname = new URL(request.url).pathname;
   const ip = getClientIp(request);
   const requestId = createRequestId(request);
-  const apiKey = await verifyApiKey(request);
+  let apiKey: Awaited<ReturnType<typeof verifyApiKey>> = null;
 
   try {
+    apiKey = await verifyApiKey(request);
     const limit = apiKey
       ? await checkKey(`key:${apiKey.apiKeyId}`, apiKey.rateLimit)
       : await checkRateLimit(request);
@@ -49,13 +50,16 @@ export async function handleApi<T>(
     }
 
     const result = await handler();
-    const response = successResponse(result.data, {
+    const response = result instanceof Response ? result : successResponse(result.data, {
       responseTimeMs: Date.now() - startedAt,
       rateLimitRemaining: limit.remaining,
       cacheControl: result.cacheControl,
       meta: result.meta,
       requestId,
     });
+    if (result instanceof Response) {
+      baseHeaders({ responseTimeMs: Date.now() - startedAt, rateLimitRemaining: limit.remaining, requestId }).forEach((value, key) => response.headers.set(key, value));
+    }
     logApiUsage({
       endpoint: pathname,
       ip,

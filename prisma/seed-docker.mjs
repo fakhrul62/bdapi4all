@@ -1,8 +1,9 @@
 // Minimal seed for the Docker dev environment.
 // Seeds basic geography (divisions + districts) if empty so the API is usable.
 import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({ adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }) });
 
 const divisions = [
   { name_en: "Dhaka", name_bn: "ঢাকা", lat: 23.8103, lng: 90.4125 },

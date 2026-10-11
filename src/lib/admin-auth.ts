@@ -1,75 +1,41 @@
-import { cookies } from "next/headers";
-import { createHash, timingSafeEqual } from "node:crypto";
+﻿import { cookies } from "next/headers";
+import { ADMIN_SESSION_SECONDS, issueAdminToken, secretMatches, validAdminToken } from "@/lib/admin-token";
 
 const COOKIE_NAME = "bdapi4all_admin";
 
-function adminSecret() {
-  return process.env.ADMIN_SECRET || process.env.CRON_SECRET || "local-development-admin";
-}
-
-function tokenDigest(value: string) {
-  return createHash("sha256").update(value).digest("hex");
-}
-
-function expectedDigest() {
-  return tokenDigest(adminSecret());
-}
-
 export async function createAdminSession(secret: string) {
-  const expected = Buffer.from(expectedDigest());
-  const actual = Buffer.from(tokenDigest(secret));
-
-  if (expected.length !== actual.length || !timingSafeEqual(expected, actual)) {
-    return false;
-  }
-
+  const configured = process.env.ADMIN_SECRET;
+  if (!configured || !secretMatches(secret, configured)) return false;
   const cookieStore = await cookies();
-  cookieStore.set(COOKIE_NAME, expectedDigest(), {
+  cookieStore.set(COOKIE_NAME, issueAdminToken(configured), {
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: "strict",
     secure: process.env.NODE_ENV === "production",
     path: "/",
-    maxAge: 60 * 60 * 8,
+    maxAge: ADMIN_SESSION_SECONDS,
   });
-
   return true;
 }
 
 export async function clearAdminSession() {
-  const cookieStore = await cookies();
-  cookieStore.delete(COOKIE_NAME);
+  (await cookies()).delete(COOKIE_NAME);
 }
 
 export async function isAdminRequest(request?: Request) {
+  const secret = process.env.ADMIN_SECRET;
+  if (!secret) return false;
   const bearer = request?.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
-  if (bearer && tokenDigest(bearer) === expectedDigest()) return true;
-
-  const cookieStore = await cookies();
-  return cookieStore.get(COOKIE_NAME)?.value === expectedDigest();
+  if (bearer && secretMatches(bearer, secret)) return true;
+  const token = (await cookies()).get(COOKIE_NAME)?.value;
+  return !!token && validAdminToken(token, secret);
 }
 
 export async function adminUnauthorizedResponse() {
-  return new Response(
-    JSON.stringify({
-      success: false,
-      version: "v1",
-      timestamp: new Date().toISOString(),
-      error: {
-        code: "ADMIN_UNAUTHORIZED",
-        message: "Admin authentication is required.",
-        docs: "https://bdapi4all.vercel.app/admin",
-      },
-    }),
-    {
-      status: 401,
-      headers: { "Content-Type": "application/json" },
-    },
-  );
+  return Response.json({ success: false, version: "v1", timestamp: new Date().toISOString(), error: { code: "ADMIN_UNAUTHORIZED", message: "Admin authentication is required.", docs: "https://bdapi4all.vercel.app/admin" } }, { status: 401 });
 }
 
 export async function requireAdminResponse(request?: Request) {
-  if (await isAdminRequest(request)) return null;
-  return adminUnauthorizedResponse();
+  return await isAdminRequest(request) ? null : adminUnauthorizedResponse();
 }
 
 export async function requireAdmin(request?: Request) {

@@ -7,38 +7,12 @@ export type ScrapedExchangeRate = {
   selling_rate: number;
 };
 
-const fallbackRates: ScrapedExchangeRate[] = [
-  {
-    currency_code: "USD",
-    currency_name: "US Dollar",
-    buying_rate: 117.5,
-    selling_rate: 118.2,
-  },
-  {
-    currency_code: "EUR",
-    currency_name: "Euro",
-    buying_rate: 127.8,
-    selling_rate: 128.6,
-  },
-  {
-    currency_code: "GBP",
-    currency_name: "British Pound",
-    buying_rate: 149.1,
-    selling_rate: 150.2,
-  },
-  {
-    currency_code: "INR",
-    currency_name: "Indian Rupee",
-    buying_rate: 1.4,
-    selling_rate: 1.42,
-  },
-];
-
 export async function scrapeBangladeshBankRates() {
-  try {
     const response = await fetch("https://www.bb.org.bd/en/index.php/econdata/exchangerate", {
-      next: { revalidate: 3600 },
+      cache: "no-store",
+      signal: AbortSignal.timeout(15_000),
     });
+    if (!response.ok) throw new Error("Exchange-rate source is unavailable.");
     const html = await response.text();
     const $ = cheerio.load(html);
     const rates: ScrapedExchangeRate[] = [];
@@ -63,8 +37,6 @@ export async function scrapeBangladeshBankRates() {
       }
     });
 
-    return rates.length ? rates : fallbackRates;
-  } catch {
-    return fallbackRates;
-  }
+    if (!rates.length) throw new Error("Exchange-rate source returned no usable rates; existing rates were preserved.");
+    return rates;
 }

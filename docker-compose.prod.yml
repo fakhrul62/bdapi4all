@@ -10,6 +10,11 @@ services:
       POSTGRES_DB: bdapi4all
     volumes:
       - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d bdapi4all"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     networks:
       - bdapi4all
 
@@ -21,6 +26,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
     expose:
       - "3000"
     environment:
@@ -67,3 +74,6 @@ services:
 volumes:
   db_data:
   caddy_data:
+
+networks:
+  bdapi4all:

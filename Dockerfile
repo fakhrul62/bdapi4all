@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.9
-FROM node:20-alpine AS base
+FROM node:24-alpine AS base
 LABEL org.opencontainers.image.source="https://github.com/fakhrul62/bdapi4all"
 
 # Build stage
@@ -9,7 +9,8 @@ WORKDIR /src
 # Install dependencies first (better layer caching)
 COPY package.json package-lock.json ./
 COPY prisma ./prisma
-RUN apk add --no-cache openssl && npm ci
+COPY prisma.config.ts ./prisma.config.ts
+RUN apk add --no-cache openssl && HUSKY=0 npm ci
 
 # Generate Prisma client
 RUN npx prisma generate
