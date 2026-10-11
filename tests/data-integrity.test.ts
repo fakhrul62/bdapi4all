@@ -58,6 +58,12 @@ test("repair archives exact copies, preserves references and different content, 
     assert.equal((await client.query("SELECT payload FROM record_archive WHERE category='repair-test' AND reason='unsupported_verification'")).rows[0].payload.verified, true);
     assert.equal((await repairTable(client, table, true)).exact_duplicates, 0);
     assert.equal((await client.query("SELECT record_id FROM public.repair_test_references")).rows[0].record_id, 6);
+    await client.query("CREATE TABLE public.repair_test_unions (id INT PRIMARY KEY,upazila_id INT,name_en TEXT,name_bn TEXT)");
+    await client.query("INSERT INTO public.repair_test_unions VALUES (1,1,'Same','Test'),(2,1,'Same','Test'),(3,2,'Same','Test')");
+    const unions = { table: "repair_test_unions", category: "repair-test-unions", verification: false };
+    assert.equal((await repairTable(client, unions, true)).exact_duplicates, 1);
+    assert.equal((await client.query("SELECT count(*) FROM public.repair_test_unions")).rows[0].count, "2");
+    assert.equal((await repairTable(client, unions, true)).exact_duplicates, 0);
     await assert.rejects(repairTable(client, { table: "bad; DROP TABLE books", category: "bad" }, false));
   } finally { await client.query("ROLLBACK"); client.release(); await pool.end(); }
 });
