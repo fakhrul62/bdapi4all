@@ -29,7 +29,7 @@ export async function GET(request: Request) {
     const fields = parseFields(url.searchParams);
     const sort = parseSort(url.searchParams, sortableFields);
     const where = query.upazila_id ? { upazila_id: query.upazila_id } : undefined;
-    const cacheKey = `geo:unions:list:${url.searchParams.toString()}`;
+    const cacheKey = `geo:unions:v2:list:${url.searchParams.toString()}`;
 
     const { data } = await withCache(cacheKey, CACHE_TTL.geo, async () => {
       const [items, total] = await Promise.all([
