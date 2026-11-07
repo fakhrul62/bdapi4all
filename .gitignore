@@ -19,6 +19,11 @@
 
 # production
 /build
+packages/ts-sdk/dist/
+packages/python-sdk/build/
+*.egg-info/
+__pycache__/
+*.py[cod]
 
 # misc
 .DS_Store

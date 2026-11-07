@@ -22,13 +22,14 @@ type ApiResponse<T> = {
 
 export type QueryParams = Record<string, string | number | boolean | undefined>;
 
-type SdkOptions = {
+export type BdApiClientOptions = {
   baseUrl?: string;
   timeout?: number;
   retries?: number;
   retryDelay?: number;
   cache?: boolean;
   cacheTtl?: number;
+  maxCacheEntries?: number;
 };
 
 type CacheEntry<T> = { value: T; expires: number };
@@ -42,15 +43,20 @@ export class BdApiClient {
   private retryDelay: number;
   private cacheEnabled: boolean;
   private cacheTtl: number;
+  private maxCacheEntries: number;
   private cache = new Map<string, CacheEntry<unknown>>();
 
-  constructor(options: SdkOptions = {}) {
+  constructor(options: BdApiClientOptions = {}) {
     this.baseUrl = options.baseUrl ?? DEFAULT_BASE_URL;
     this.timeout = options.timeout ?? 10000;
     this.retries = options.retries ?? 3;
     this.retryDelay = options.retryDelay ?? 500;
     this.cacheEnabled = options.cache ?? true;
     this.cacheTtl = options.cacheTtl ?? 3600_000;
+    const maxCacheEntries = options.maxCacheEntries ?? 1000;
+    this.maxCacheEntries = Number.isFinite(maxCacheEntries)
+      ? Math.max(0, Math.floor(maxCacheEntries))
+      : 1000;
   }
 
   private buildUrl(path: string, params?: QueryParams): string {
@@ -81,14 +87,27 @@ export class BdApiClient {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
+  private rememberCacheEntry(key: string, entry: CacheEntry<unknown>) {
+    if (this.maxCacheEntries === 0) return;
+    this.cache.delete(key);
+    if (this.cache.size >= this.maxCacheEntries) {
+      const leastRecentlyUsed = this.cache.keys().next().value;
+      if (leastRecentlyUsed !== undefined) this.cache.delete(leastRecentlyUsed);
+    }
+    this.cache.set(key, entry);
+  }
+
   private async request<T>(path: string, params?: QueryParams): Promise<T> {
     const cacheKey = this.getCacheKey(path, params);
 
     if (this.cacheEnabled) {
       const cached = this.cache.get(cacheKey) as CacheEntry<T> | undefined;
       if (cached && cached.expires > Date.now()) {
+        this.cache.delete(cacheKey);
+        this.cache.set(cacheKey, cached);
         return cached.value;
       }
+      this.cache.delete(cacheKey);
     }
 
     let lastError: Error | null = null;
@@ -117,7 +136,10 @@ export class BdApiClient {
         }
 
         if (this.cacheEnabled) {
-          this.cache.set(cacheKey, { value: payload.data, expires: Date.now() + this.cacheTtl });
+          this.rememberCacheEntry(cacheKey, {
+            value: payload.data,
+            expires: Date.now() + this.cacheTtl,
+          });
         }
 
         return payload.data;
@@ -270,7 +292,7 @@ export class BdApiClient {
   }
 }
 
-export function createClient(options?: SdkOptions): BdApiClient {
+export function createClient(options?: BdApiClientOptions): BdApiClient {
   return new BdApiClient(options);
 }
 

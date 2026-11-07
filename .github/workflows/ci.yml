@@ -67,6 +67,32 @@ jobs:
       - name: Run Linter
         run: npm run lint
 
+      - name: Build Python SDK wheel and verify import
+        run: |
+          python -m pip wheel --no-deps --wheel-dir "$RUNNER_TEMP/python-sdk-wheel" packages/python-sdk
+          python -m pip install --no-deps --target "$RUNNER_TEMP/python-sdk" "$RUNNER_TEMP"/python-sdk-wheel/bdapi4all-*.whl
+          PYTHONPATH="$RUNNER_TEMP/python-sdk" python - <<'PY'
+          from bdapi4all import BdApiClient
+
+          client = BdApiClient(max_cache_entries=2)
+          assert client.base_url.startswith("https://")
+          client._set_cache("first", 1)
+          client._set_cache("second", 2)
+          assert client._get_cache("first") == 1
+          client._set_cache("third", 3)
+          assert client._get_cache("second") is None
+          PY
+
+      - name: Pack TypeScript SDK
+        run: npm pack ./packages/ts-sdk --pack-destination "$RUNNER_TEMP"
+
+      - name: Install and import packed TypeScript SDK
+        run: |
+          mkdir -p "$RUNNER_TEMP/sdk-consumer"
+          npm install --prefix "$RUNNER_TEMP/sdk-consumer" "$RUNNER_TEMP/bdapi4all-sdk-1.0.0.tgz" --ignore-scripts
+          cd "$RUNNER_TEMP/sdk-consumer"
+          node --input-type=module -e "import { BdApiClient } from '@bdapi4all/sdk'; new BdApiClient();"
+
       - name: Run Type Check
         run: npm run typecheck
 

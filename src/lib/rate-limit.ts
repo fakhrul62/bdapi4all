@@ -2,6 +2,7 @@ import { Ratelimit } from "@upstash/ratelimit";
 import { redis } from "@/lib/redis";
 
 const fallbackWindow = new Map<string, { count: number; resetAt: number }>();
+const FALLBACK_MAX_KEYS = 4096;
 
 const defaultRatelimit =
   redis &&
@@ -53,7 +54,7 @@ export async function checkKey(
   const now = Date.now();
   const current = fallbackWindow.get(key);
   if (!current || current.resetAt <= now) {
-    fallbackWindow.set(key, { count: 1, resetAt: now + windowMs });
+    rememberFallbackKey(key, { count: 1, resetAt: now + windowMs });
     return {
       success: true,
       remaining: limit - 1,
@@ -63,6 +64,7 @@ export async function checkKey(
   }
 
   current.count += 1;
+  rememberFallbackKey(key, current);
   const remaining = Math.max(0, limit - current.count);
   return {
     success: current.count <= limit,
@@ -70,6 +72,15 @@ export async function checkKey(
     reset: current.resetAt,
     retryAfter: Math.max(1, Math.ceil((current.resetAt - now) / 1000)),
   };
+}
+
+function rememberFallbackKey(key: string, value: { count: number; resetAt: number }) {
+  fallbackWindow.delete(key);
+  if (fallbackWindow.size >= FALLBACK_MAX_KEYS) {
+    const leastRecentlyUsed = fallbackWindow.keys().next().value;
+    if (leastRecentlyUsed !== undefined) fallbackWindow.delete(leastRecentlyUsed);
+  }
+  fallbackWindow.set(key, value);
 }
 
 export async function checkRateLimit(request: Request, limit = 100) {

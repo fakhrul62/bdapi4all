@@ -19,6 +19,7 @@ Usage:
 import time
 import json
 import hashlib
+from collections import OrderedDict
 from typing import Any, Optional, Dict, List, Union
 from urllib.request import urlopen, Request
 from urllib.error import URLError, HTTPError
@@ -45,6 +46,7 @@ class BdApiClient:
         retry_delay: float = 0.5,
         cache: bool = True,
         cache_ttl: int = 3600,
+        max_cache_entries: int = 1000,
     ):
         self.base_url = base_url or self.DEFAULT_BASE_URL
         self.timeout = timeout
@@ -52,7 +54,8 @@ class BdApiClient:
         self.retry_delay = retry_delay
         self.cache_enabled = cache
         self.cache_ttl = cache_ttl
-        self._cache: Dict[str, tuple] = {}
+        self.max_cache_entries = max(0, max_cache_entries)
+        self._cache = OrderedDict()
 
     def _build_url(self, path: str, params: Optional[Dict] = None) -> str:
         url = f"{self.base_url}{path}"
@@ -70,12 +73,18 @@ class BdApiClient:
             return None
         entry = self._cache.get(key)
         if entry and entry[1] > time.time():
+            self._cache.move_to_end(key)
             return entry[0]
+        self._cache.pop(key, None)
         return None
 
     def _set_cache(self, key: str, value: Any) -> None:
-        if self.cache_enabled:
-            self._cache[key] = (value, time.time() + self.cache_ttl)
+        if not self.cache_enabled or self.max_cache_entries == 0:
+            return
+        self._cache.pop(key, None)
+        while len(self._cache) >= self.max_cache_entries:
+            self._cache.popitem(last=False)
+        self._cache[key] = (value, time.time() + self.cache_ttl)
 
     def clear_cache(self) -> None:
         self._cache.clear()

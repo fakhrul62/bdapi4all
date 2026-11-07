@@ -6,6 +6,7 @@ import { databaseConnectionOptions } from "../src/lib/db-config";
 import { cronAuthorized } from "../src/lib/cron-auth";
 import { optionsResponse } from "../src/lib/response";
 import { scrapeBangladeshBankRates } from "../src/lib/scraper";
+import { checkKey } from "../src/lib/rate-limit";
 
 test("admin tokens expire, reject tampering and invalidate on secret rotation", () => {
   const now = 1_000_000;
@@ -36,6 +37,25 @@ test("browser API-key preflight permits and exposes the expected headers", () =>
   assert.match(response.headers.get("Access-Control-Allow-Headers")!, /X-API-Key/);
   assert.match(response.headers.get("Access-Control-Allow-Methods")!, /POST/);
   assert.match(response.headers.get("Access-Control-Expose-Headers")!, /X-RateLimit-Remaining/);
+});
+
+test("in-memory rate limiting evicts old identities while retaining recently used ones", async () => {
+  const prefix = `fallback-${crypto.randomUUID()}`;
+  const oldest = `${prefix}:oldest`;
+  const active = `${prefix}:active`;
+
+  assert.equal((await checkKey(oldest, 1)).success, true);
+  assert.equal((await checkKey(active, 1)).success, true);
+  assert.equal((await checkKey(active, 1)).success, false);
+
+  for (let index = 0; index < 4095; index += 1) {
+    await checkKey(`${prefix}:${index}`, 1);
+  }
+
+  assert.equal((await checkKey(active, 1)).success, false);
+  assert.equal((await checkKey(`${prefix}:overflow`, 1)).success, true);
+  assert.equal((await checkKey(active, 1)).success, false);
+  assert.equal((await checkKey(oldest, 1)).success, true);
 });
 
 test("GraphQL variables, defaults, aliases and field projection work", () => {

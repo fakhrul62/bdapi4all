@@ -1,5 +1,9 @@
+"use client";
+
 import { useEffect, useState, useCallback, useRef } from "react";
-import { BdApiClient, type QueryParams } from "./index";
+import { BdApiClient, type QueryParams } from "./index.js";
+
+const sharedClient = new BdApiClient();
 
 type State<T> = { data: T | null; loading: boolean; error: Error | null };
 
@@ -21,9 +25,7 @@ export function useBdApi<T>(
 
   useEffect(() => {
     let cancelled = false;
-    const client = new BdApiClient();
-
-    fetcherRef.current(client)
+    fetcherRef.current(sharedClient)
       .then((result) => {
         if (!cancelled) {
           setState({ data: result, loading: false, error: null });
