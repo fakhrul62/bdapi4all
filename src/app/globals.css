@@ -330,6 +330,12 @@
     }
   }
 
+  @media (max-width: 639px) {
+    .home-hero .home-rise {
+      animation: none;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .home-hero-grid::before,
     .home-hero-grid::after,
