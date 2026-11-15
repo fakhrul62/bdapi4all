@@ -18,6 +18,7 @@ export async function handleApi<T>(
   const pathname = new URL(request.url).pathname;
   const ip = getClientIp(request);
   const requestId = createRequestId(request);
+  let remaining: number | undefined;
   let apiKey: Awaited<ReturnType<typeof verifyApiKey>> = null;
 
   try {
@@ -26,10 +27,12 @@ export async function handleApi<T>(
       ? await checkKey(`key:${apiKey.apiKeyId}`, apiKey.rateLimit)
       : await checkRateLimit(request);
 
+    remaining = limit.remaining;
     if (!limit.success) {
       const response = errorResponse("RATE_LIMITED", "Rate limit exceeded.", 429, {
         responseTimeMs: Date.now() - startedAt,
         rateLimitRemaining: 0,
+        cacheControl: "private, no-store",
         requestId,
         headers: {
           "Retry-After": String(limit.retryAfter),
@@ -53,12 +56,13 @@ export async function handleApi<T>(
     const response = result instanceof Response ? result : successResponse(result.data, {
       responseTimeMs: Date.now() - startedAt,
       rateLimitRemaining: limit.remaining,
-      cacheControl: result.cacheControl,
+      // Redis caches the shared payload. Quota and request IDs belong to this call.
+      cacheControl: "private, no-store",
       meta: result.meta,
       requestId,
     });
     if (result instanceof Response) {
-      baseHeaders({ responseTimeMs: Date.now() - startedAt, rateLimitRemaining: limit.remaining, requestId }).forEach((value, key) => response.headers.set(key, value));
+      baseHeaders({ responseTimeMs: Date.now() - startedAt, rateLimitRemaining: limit.remaining, cacheControl: "private, no-store", requestId: result.headers.get("X-Request-ID") ?? requestId }).forEach((value, key) => response.headers.set(key, value));
     }
     logApiUsage({
       endpoint: pathname,
@@ -77,6 +81,8 @@ export async function handleApi<T>(
         .join("; ");
       const response = errorResponse("INVALID_PARAMETER", message, 422, {
         responseTimeMs,
+        rateLimitRemaining: remaining,
+        cacheControl: "private, no-store",
         requestId,
       });
       logApiUsage({ endpoint: pathname, ip, responseTimeMs, statusCode: 422, apiKeyId: apiKey?.apiKeyId ?? null });
@@ -85,6 +91,8 @@ export async function handleApi<T>(
 
     if (error instanceof Response) {
       logApiUsage({ endpoint: pathname, ip, responseTimeMs, statusCode: error.status, apiKeyId: apiKey?.apiKeyId ?? null });
+      baseHeaders({ responseTimeMs, rateLimitRemaining: remaining, cacheControl: "private, no-store", requestId: error.headers.get("X-Request-ID") ?? requestId })
+        .forEach((value, key) => error.headers.set(key, value));
       return error;
     }
 
@@ -92,7 +100,7 @@ export async function handleApi<T>(
       "SERVER_ERROR",
       "An unexpected server error occurred.",
       500,
-      { responseTimeMs, requestId },
+      { responseTimeMs, rateLimitRemaining: remaining, cacheControl: "private, no-store", requestId },
     );
     logApiUsage({ endpoint: pathname, ip, responseTimeMs, statusCode: 500, apiKeyId: apiKey?.apiKeyId ?? null });
     return response;

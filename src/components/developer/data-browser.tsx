@@ -5,27 +5,31 @@ import { Search, Loader2, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CopyButton } from "@/components/ui/copy-button";
 
-type GeoRow = { id: number; name_en: string; name_bn: string; division_id?: number; district_id?: number; upazila_id?: number };
-function useRows(path: string, revision: number) {
+import type { Area } from "@/lib/area-types";
+
+const emptyArea: Area = { divisions: [], districts: [], upazilas: [], unions: [] };
+
+function useArea(path: string, revision: number) {
   const key = `${path}:${revision}`;
-  const [result, setResult] = useState<{ key: string; rows: GeoRow[]; error: string }>({ key: "", rows: [], error: "" });
+  const [result, setResult] = useState({ key: "", area: emptyArea, error: "" });
   useEffect(() => {
-    if (!path) return;
     const controller = new AbortController();
     async function load() {
       try {
-        const response = await fetch(`/api/v1${path}`, { signal: controller.signal });
+        const response = await fetch(path, { signal: controller.signal });
         const payload = await response.json();
         if (!response.ok || !payload.success) throw new Error(payload.error?.message || "Could not load geography data.");
-        if (!controller.signal.aborted) setResult({ key, rows: payload.data ?? [], error: "" });
+        if (!controller.signal.aborted) setResult({ key, area: payload.data as Area, error: "" });
       } catch (error) {
-        if (!controller.signal.aborted) setResult({ key, rows: [], error: error instanceof Error ? error.message : "Could not load data." });
+        if (!controller.signal.aborted) setResult({ key, area: emptyArea, error: error instanceof Error ? error.message : "Could not load data." });
       }
     }
     void load();
     return () => controller.abort();
   }, [path, key]);
-  return { rows: path && result.key === key ? result.rows : [], error: path && result.key === key ? result.error : "", loading: Boolean(path && result.key !== key) };
+  return result.key === key
+    ? { ...result, loading: false }
+    : { area: emptyArea, error: "", loading: true };
 }
 
 export function DataBrowser() {
@@ -35,24 +39,23 @@ export function DataBrowser() {
   const [query, setQuery] = useState("");
   const [revision, setRevision] = useState(0);
   const [page, setPage] = useState(1);
-  const divisions = useRows("/divisions", revision);
-  const districts = useRows(`/districts?division_id=${divisionId}`, revision);
-  const selectedDistrict = districts.rows.find(row => String(row.id) === districtId) ?? districts.rows[0];
-  const upazilas = useRows(selectedDistrict ? `/upazilas?district_id=${selectedDistrict.id}` : "", revision);
-  const selectedUpazila = upazilas.rows.find(row => String(row.id) === upazilaId) ?? upazilas.rows[0];
-  const unions = useRows(selectedUpazila ? `/unions?upazila_id=${selectedUpazila.id}` : "", revision);
-  const loading = [divisions, districts, upazilas, unions].some(result => result.loading);
-  const error = [divisions, districts, upazilas, unions].find(result => result.error)?.error;
+  const params = new URLSearchParams({ division: divisionId });
+  if (districtId) params.set("district", districtId);
+  if (upazilaId) params.set("upazila", upazilaId);
+  const { area, loading, error } = useArea(`/api/data/area?${params}`, revision);
+  const { divisions, districts, upazilas, unions } = area;
+  const selectedDistrict = districts.find(row => String(row.id) === districtId) ?? districts[0];
+  const selectedUpazila = upazilas.find(row => String(row.id) === upazilaId) ?? upazilas[0];
   const rows = useMemo(() => {
     const all = [
-      ...divisions.rows.map(row => ({ ...row, type: "division", api: `/api/v1/divisions/${row.id}` })),
-      ...districts.rows.map(row => ({ ...row, type: "district", api: `/api/v1/districts/${row.id}` })),
-      ...upazilas.rows.map(row => ({ ...row, type: "upazila", api: `/api/v1/upazilas/${row.id}` })),
-      ...unions.rows.map(row => ({ ...row, type: "union", api: `/api/v1/unions?upazila_id=${row.upazila_id}` })),
+      ...divisions.map(row => ({ ...row, type: "division", api: `/api/v1/divisions/${row.id}` })),
+      ...districts.map(row => ({ ...row, type: "district", api: `/api/v1/districts/${row.id}` })),
+      ...upazilas.map(row => ({ ...row, type: "upazila", api: `/api/v1/upazilas/${row.id}` })),
+      ...unions.map((row, index) => ({ ...row, type: "union", api: `/api/v1/unions?upazila_id=${row.upazila_id}&page=${Math.floor(index / 100) + 1}&limit=100` })),
     ];
     const term = query.trim().toLowerCase();
     return all.filter(row => `${row.name_en} ${row.name_bn} ${row.id} ${row.type}`.toLowerCase().includes(term));
-  }, [divisions.rows, districts.rows, upazilas.rows, unions.rows, query]);
+  }, [divisions, districts, upazilas, unions, query]);
   const pageCount = Math.max(1, Math.ceil(rows.length / 50));
   const currentPage = Math.min(page, pageCount);
   const start = (currentPage - 1) * 50;
@@ -60,9 +63,9 @@ export function DataBrowser() {
   return <div className="space-y-5">
     <p className="flex items-center gap-2 text-sm text-muted-foreground"><MapPin className="size-4 shrink-0 text-primary" />Choose a division, then a district and upazila. Search filters the loaded area.</p>
     <div className="grid gap-4 rounded-xl border border-border/70 bg-card p-5 sm:grid-cols-2 lg:grid-cols-4">
-      <label className="block"><span className="mb-2 block text-sm font-medium">Division</span><select value={divisionId} disabled={divisions.loading} onChange={event => { setDivisionId(event.target.value); setDistrictId(""); setUpazilaId(""); setPage(1); }} className={inputClass}>{!divisions.rows.length && <option>Loading…</option>}{divisions.rows.map(row => <option key={row.id} value={row.id}>{row.name_en} ({row.id})</option>)}</select></label>
-      <label className="block"><span className="mb-2 block text-sm font-medium">District</span><select value={selectedDistrict?.id ?? ""} disabled={districts.loading || !districts.rows.length} onChange={event => { setDistrictId(event.target.value); setUpazilaId(""); setPage(1); }} className={inputClass}>{!districts.rows.length && <option value="">{districts.loading ? "Loading…" : "No districts"}</option>}{districts.rows.map(row => <option key={row.id} value={row.id}>{row.name_en} ({row.id})</option>)}</select></label>
-      <label className="block"><span className="mb-2 block text-sm font-medium">Upazila</span><select value={selectedUpazila?.id ?? ""} disabled={upazilas.loading || !upazilas.rows.length} onChange={event => { setUpazilaId(event.target.value); setPage(1); }} className={inputClass}>{!upazilas.rows.length && <option value="">{upazilas.loading ? "Loading…" : "No upazilas"}</option>}{upazilas.rows.map(row => <option key={row.id} value={row.id}>{row.name_en} ({row.id})</option>)}</select></label>
+      <label className="block"><span className="mb-2 block text-sm font-medium">Division</span><select value={divisions.find(row => String(row.id) === divisionId)?.id ?? divisions[0]?.id ?? ""} disabled={loading} onChange={event => { setDivisionId(event.target.value); setDistrictId(""); setUpazilaId(""); setPage(1); }} className={inputClass}>{!divisions.length && <option>Loading…</option>}{divisions.map(row => <option key={row.id} value={row.id}>{row.name_en} ({row.id})</option>)}</select></label>
+      <label className="block"><span className="mb-2 block text-sm font-medium">District</span><select value={selectedDistrict?.id ?? ""} disabled={loading || !districts.length} onChange={event => { setDistrictId(event.target.value); setUpazilaId(""); setPage(1); }} className={inputClass}>{!districts.length && <option value="">{loading ? "Loading…" : "No districts"}</option>}{districts.map(row => <option key={row.id} value={row.id}>{row.name_en} ({row.id})</option>)}</select></label>
+      <label className="block"><span className="mb-2 block text-sm font-medium">Upazila</span><select value={selectedUpazila?.id ?? ""} disabled={loading || !upazilas.length} onChange={event => { setUpazilaId(event.target.value); setPage(1); }} className={inputClass}>{!upazilas.length && <option value="">{loading ? "Loading…" : "No upazilas"}</option>}{upazilas.map(row => <option key={row.id} value={row.id}>{row.name_en} ({row.id})</option>)}</select></label>
       <label className="block"><span className="mb-2 block text-sm font-medium">Search this area</span><div className="flex h-11 items-center gap-2 rounded-md border border-input bg-background px-3 focus-within:border-primary"><Search className="size-4 shrink-0 text-muted-foreground" /><input value={query} onChange={event => { setQuery(event.target.value); setPage(1); }} placeholder="Name, Bengali, ID…" className="min-w-0 flex-1 bg-transparent text-sm outline-none" /></div></label>
     </div>
     {error && <div role="alert" className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-destructive/30 bg-destructive/5 p-4 text-sm"><span>{error}</span><Button variant="outline" size="sm" onClick={() => setRevision(revision + 1)}>Retry loading</Button></div>}
