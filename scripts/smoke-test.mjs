@@ -5,7 +5,7 @@ for (let attempt = 0; attempt < 30; attempt++) {
   if (attempt === 29) throw new Error("Production server did not become healthy.");
   await new Promise((resolve) => setTimeout(resolve, 1000));
 }
-for (const path of ["/", "/docs", "/playground", "/dashboard", "/openapi.json", "/api/v1/health", "/api/v1/divisions", "/api/v1/export?category=divisions&format=csv"]) {
+for (const path of ["/", "/docs", "/playground", "/dashboard", "/openapi.json", "/api/v1/health", "/api/data/area", "/api/v1/divisions", "/api/v1/export?category=divisions&format=csv"]) {
   const response = await fetch(base + path);
   assert.equal(response.status, 200, path);
   console.log(`PASS ${path}`);

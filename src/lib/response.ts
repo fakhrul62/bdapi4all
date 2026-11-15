@@ -39,7 +39,9 @@ export function baseHeaders(init?: ApiResponseInit) {
   headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization, X-API-Key, X-Request-ID");
   headers.set("Access-Control-Expose-Headers", "X-Request-ID, X-RateLimit-Remaining, X-Response-Time, Retry-After, Content-Disposition");
   headers.set("X-Response-Time", `${init?.responseTimeMs ?? 0}ms`);
-  headers.set("X-RateLimit-Remaining", String(init?.rateLimitRemaining ?? 100));
+  if (init?.rateLimitRemaining !== undefined) {
+    headers.set("X-RateLimit-Remaining", String(init.rateLimitRemaining));
+  }
   headers.set("X-Request-ID", init?.requestId ?? headers.get("X-Request-ID") ?? randomUUID());
 
   if (init?.cacheControl) {

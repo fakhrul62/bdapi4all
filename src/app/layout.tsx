@@ -10,6 +10,8 @@ const inter = Inter({
 
 const outfit = Outfit({
   variable: "--font-outfit",
+  preload: false,
+  display: "optional",
   subsets: ["latin"],
 });
 
